@@ -1,0 +1,1 @@
+Aggiungere a ciascun file la stima di lettura per ciascuna tacca corrispondente alla ghiera del dinamometro. Cinzia suggerisce di leggere fino ad una precisione pari ad un decimo di tacca di lettura. ATTTENZIONE ai giri totali compiuti
