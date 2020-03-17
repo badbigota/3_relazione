@@ -12,7 +12,7 @@ int main()
 {
     string dir_ac, sub_dir, alto_basso;
     double t;
-    vector<double> media_1_acq;
+    vector<double> media_1_acq, dstd_2_acq;
 
     cout << "Inserire le cartella che vuoi leggere (1ac / 2ac): ";
     cin >> dir_ac;
@@ -30,7 +30,7 @@ int main()
             vector<double> primo;  // creo un vettore dove immagazzinare i 3 dati per ogni foglio e faccio fare la media con libreria
 
             ifstream fin("../" + dir_ac + "/" + sub_dir + "/" + numero + ".txt");
-            if (!fin)//controllo lettura
+            if (!fin) //controllo lettura
             {
                 cout << "Errore di lettura" << endl;
                 return 1;
@@ -41,8 +41,8 @@ int main()
                 primo.push_back(t);
             }
 
-            media_vett = media(primo);
             media_1_acq.push_back(media_vett);
+            dstd_2_acq.push_back(dstd_media(primo));
         }
 
         for (auto d : media_1_acq)
@@ -53,7 +53,7 @@ int main()
     if (dir_ac == "2ac") //legge 2 acquisizione
     {
         vector<double> temp;
-        vector<double> media_2_acq;
+        vector<double> media_2_acq, dstd_2_acq;
         cout << "Vuoi legge i file di 400 o 1000? (400/1000): ";
         cin >> sub_dir;
 
@@ -75,9 +75,8 @@ int main()
 
         for (int i = 0; i <= temp.size() - 3; i = i + 3)
         {
-
-            double media_vett = media(temp, i, i + 3);
-            media_2_acq.push_back(media_vett);
+            media_2_acq.push_back(media(temp, i, i + 3));
+            dstd_2_acq.push_back(dstd_media(temp));
         }
 
         for (auto c : media_2_acq)
