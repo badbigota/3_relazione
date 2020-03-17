@@ -8,92 +8,83 @@
 
 using namespace std;
 
-
-
 int main()
 {
-string fread,fread1,fread2;
-double t;
-vector <double> media_1_acq;
+    string dir_ac, sub_dir, alto_basso;
+    double t;
+    vector<double> media_1_acq;
 
-	cout << "Inserire le cartella che vuoi leggere"<<endl;
-	cin >> fread;
-    if (fread == "1_acquisizione"){
+    cout << "Inserire le cartella che vuoi leggere (1ac / 2ac): ";
+    cin >> dir_ac;
+    if (dir_ac == "1ac") //legge 1 acquisizione
+    {
 
-        cout << "Vuoi legge i file di Allungmento_1 o Accorciamento_2?"<<endl;
-        cin >> fread1;
-        
+        cout << "Vuoi legge i file di Allungamento o Accorciamento? (all / acc): ";
+        cin >> sub_dir;
 
-
-        for (int i=200;i<1300;i=i+100) {
+        for (int i = 200; i < 1300; i = i + 100)
+        {
             string numero;
             double media_vett;
-            //trasformo (i) in una stringa chiamata numero
-            numero=to_string(i);
+            numero = to_string(i); //trasformo (i) in una stringa chiamata numero
+            vector<double> primo;  // creo un vettore dove immagazzinare i 3 dati per ogni foglio e faccio fare la media con libreria
 
-            // creo un vettore dove immagazzinare i 3 dati per ogni foglio e faccio fare la media con libreria
-            vector <double> primo;
-	      
-           ifstream fin("../"+ fread +"/" + fread1 + "/" + numero + ".txt");
-	       
-           while(fin>>t) {
-               primo.push_back(t);
-           }
+            ifstream fin("../" + dir_ac + "/" + sub_dir + "/" + numero + ".txt");
+            if (!fin)//controllo lettura
+            {
+                cout << "Errore di lettura" << endl;
+                return 1;
+            }
 
-       
-           media_vett= media( primo,0,0,"");
-           media_1_acq.push_back(media_vett);
-           
-     
-            if(!fin){
-            cout<<"Errore di lettura"<<endl;
-            return 1;
-            }   
+            while (fin >> t)
+            {
+                primo.push_back(t);
+            }
+
+            media_vett = media(primo);
+            media_1_acq.push_back(media_vett);
+        }
+
+        for (auto d : media_1_acq)
+        {
+            cout << d << endl;
         }
     }
-    if (fread== "2_acquisizione"){
-        vector <double> temp(3);
-        vector <double> media_2_acq;
-        cout << "Vuoi legge i file di 400 o 1000?"<<endl;
-        cin >> fread1;
-       
-        cout<< "Vuoi leggere i file dall'alto o dal basso?"<<endl;
-        cin >> fread2;
+    if (dir_ac == "2ac") //legge 2 acquisizione
+    {
+        vector<double> temp;
+        vector<double> media_2_acq;
+        cout << "Vuoi legge i file di 400 o 1000? (400/1000): ";
+        cin >> sub_dir;
 
-        ifstream fin( "../"+ fread +"/" + fread1 + "/" + fread1 + "_" + fread2 + ".txt" );
-        
-        int temporanea=0;
-        while(fin>>t){
-                temp.push_back(t);
-                temporanea++;
+        cout << "Vuoi leggere i file dall'alto o dal basso? (alto / basso): ";
+        cin >> alto_basso;
 
-                /*if(temporanea==24)
-                        break;*/
-                }
+        ifstream fin("../" + dir_ac + "/" + sub_dir + "/" + sub_dir + "_" + alto_basso + ".txt");
 
-    for(int i=0;i<=temp.size();i=i+3){
-       
-        double media_vett=media(temp,i,i+3,"");
-        media_2_acq.push_back(media_vett);
-    }
-
-    for(auto c: media_2_acq){
-        cout<<c<<endl;
-     }
-     cout<<endl;   
-        
-
-
-        if(!fin){
-            cout<<"Errore di lettura"<<endl;
+        if (!fin)
+        {
+            cout << "Errore di lettura" << endl;
             return 1;
         }
 
+        while (fin >> t)
+        {
+            temp.push_back(t);
+        }
+
+        for (int i = 0; i <= temp.size() - 3; i = i + 3)
+        {
+
+            double media_vett = media(temp, i, i + 3);
+            media_2_acq.push_back(media_vett);
+        }
+
+        for (auto c : media_2_acq)
+        {
+            cout << c << endl;
+        }
     }
 
-
-    
-
- return 0;
-    
+    return 0;
 }
