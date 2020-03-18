@@ -3,10 +3,10 @@
 #include <fstream>
 #include <string>
 #include <vector>
-
 #include "statistica.h"
-
 using namespace std;
+
+double kgpeso_to_newton(double kg_peso);
 
 int main()
 {
@@ -16,10 +16,12 @@ int main()
     string numero;
     double media_vett;
     vector<double> dati_file; // creo un vettore dove immagazzinare i 3 dati per ogni foglio e faccio fare la media con libreria
-    vector<double> dinamometro;
-    for (int i = 0; i < 1600; i = i + 100)
+                              // vector<double> forza_newton;
+    vector<double> delta_forza_newton;
+    for (int i = 200; i < 1300; i = i + 100)
     {
-        dinamometro.push_back(i * 4);
+        //forza_newton.push_back(kgpeso_to_newton(i*4/1000)); //Automaticamente converte in Newton i grammi peso
+        delta_forza_newton.push_back(kgpeso_to_newton((i - 200) * 4 / 1000)); //Delta_F per l'asse x
     }
 
     cout << "Inserire le cartella che vuoi leggere (1ac / 2ac): ";
@@ -41,21 +43,36 @@ int main()
             }
             while (fin >> t)
             {
-                dati_file.push_back(t);
+                dati_file.push_back(t * 10); //Vengono convertiti tutti in micron. I dati sono presi in 1e-5m
             }
             media_1_acq.push_back(media(dati_file));
             dstd_1_acq.push_back(dstd_media(dati_file));
         }
-        ofstream fout("grafico.txt");
+        for (auto d : dstd_1_acq) //Se l'errore è più piccolo della distrib triangolare, sostituire la dev std con quella della triangolare. Previene avere errori nulli
+        {
+            if (d < sigma_dist_tri(10, 10))
+            {
+                d = sigma_dist_tri(10, 10);
+            }
+        }
 
+        //Output dati grafico
+        ofstream fout("grafico_" + sub_dir + ".txt");
+        if (!fout)
+        {
+            cout << "Errore scrittura";
+            return 1;
+        }
         for (int i = 0; i < media_1_acq.size(); i++)
         {
-            cout << dinamometro[i] << "\t" << media_1_acq[i] << "\t" << dstd_1_acq[i] << endl;
-            fout << "#Forza[g_peso]\tDelta_x[1e-6m]\tDstd[1e-6m]" << endl; //Stampa descrizione colonne per rendere migliore la lettura del file all'utilizzatore finale
-            fout << dinamometro[i] << "\t" << media_1_acq[i] << "\t" << dstd_1_acq[i] << endl;
+            cout << delta_forza_newton[i] << "\t" << media_1_acq[i] << "\t" << dstd_1_acq[i] << endl;
+            fout << "#DeltaForza[N]\tDelta_x[1e-6m]\tDstd[1e-6m]" << endl; //Stampa descrizione colonne per rendere migliore la lettura del file all'utilizzatore finale
+            fout << delta_forza_newton[i] << "\t" << media_1_acq[i] << "\t" << dstd_1_acq[i] << endl;
         }
-        cout << "Coeff angolare: " << b_angolare(dinamometro, media_1_acq) << "+-" << sigma_b(dinamometro, media_1_acq) << endl;
-        cout << "Intercetta: " << a_intercetta(dinamometro, media_1_acq) << "+-" << sigma_a(dinamometro, media_1_acq) << endl;
+
+        //Primo approccio calcolo di K (tramite interpolazione)
+        cout << "Coeff ang:\t" << b_angolare(delta_forza_newton, media_1_acq) << "+/-" << sigma_b(delta_forza_newton, media_1_acq) << endl;
+        cout << "Intercetta:\t" << a_intercetta(delta_forza_newton, media_1_acq) << "+/-" << sigma_a(delta_forza_newton, media_1_acq) << endl;
     }
 
     if (dir_ac == "2ac") //legge 2 acquisizione QUasi sicuramente si può muovere in un altro file
@@ -94,4 +111,9 @@ int main()
     }
 
     return 0;
+}
+
+double kgpeso_to_newton(double kg_peso)
+{
+    return 9.806 * kg_peso;
 }
