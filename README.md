@@ -17,11 +17,8 @@ Contiene la maggior parte del codice. Si occupa di:
 
 
 - [x] Stimare coeff angolare
-- [ ] Compatibilità fra coeff angolari primo metodo [^1]
+- [ ] Compatibilità fra coeff angolari primo metodo (da prendere in 2 file diversi)
 
-
-
-[^1]: Sono da prendere in 2 file output diversi
 
 
 **Analisi Secondo Metodo**
