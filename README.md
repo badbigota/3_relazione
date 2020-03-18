@@ -8,19 +8,19 @@ Tutti i file presenti sono indispensabili per il funzionamento del codice scritt
 Contiene la maggior parte del codice. Si occupa di:
 - [x] Leggere i dati da file
 - [x] Stampare per i grafici in gnuplot
-- [] Stampare dev std nei grafici
+- [ ] Stampare dev std nei grafici
 
 
 **Analisi Primo Metodo**
 
 
-- [] Stimare coeff angolare
-- [] Compatibilità fra coeff angolari primo metodo
+- [ ] Stimare coeff angolare
+- [ ] Compatibilità fra coeff angolari primo metodo
 
 
 **Analisi Secondo Metodo**
 
 
-- [] Generare set di {k_i} consecutivi
-- [] Media e dev std con {k_i} *consecutivi*
-- [] Media e dev std con {k_i} *non consecutivi*
+- [ ] Generare set di {k_i} consecutivi
+- [ ] Media e dev std con {k_i} *consecutivi*
+- [ ] Media e dev std con {k_i} *non consecutivi*
