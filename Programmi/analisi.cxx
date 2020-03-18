@@ -12,7 +12,12 @@ int main()
 {
     string dir_ac, sub_dir, alto_basso;
     double t;
-    vector<double> media_1_acq, dstd_2_acq;
+    vector<double> media_1_acq, dstd_1_acq;
+    vector<double> dinamometro;
+    for (int i = 0; i < 1600; i = i + 100)
+    {
+        dinamometro.push_back(i * 4);
+    }
 
     cout << "Inserire le cartella che vuoi leggere (1ac / 2ac): ";
     cin >> dir_ac;
@@ -41,14 +46,18 @@ int main()
                 primo.push_back(t);
             }
 
-            media_1_acq.push_back(media_vett);
-            dstd_2_acq.push_back(dstd_media(primo));
+            media_1_acq.push_back(media(primo));
+            dstd_1_acq.push_back(dstd_media(primo));
         }
+        ofstream fout("grafico.txt");
 
-        for (auto d : media_1_acq)
+        for (int i = 0; i < media_1_acq.size(); i++)
         {
-            cout << d << endl;
+            cout << dinamometro[i] << "\t" << media_1_acq[i] << "\t" << dstd_1_acq[i] << endl;
+            fout << dinamometro[i] << "\t" << media_1_acq[i] << "\t" << dstd_1_acq[i] << endl;
         }
+        cout << "Coeff angolare: " << b_angolare(dinamometro, media_1_acq) << "+-" << sigma_b(dinamometro, media_1_acq) << endl;
+        cout << "Intercetta: " << a_intercetta(dinamometro, media_1_acq) << "+-" << sigma_a(dinamometro, media_1_acq) << endl;
     }
     if (dir_ac == "2ac") //legge 2 acquisizione
     {
@@ -76,7 +85,7 @@ int main()
         for (int i = 0; i <= temp.size() - 3; i = i + 3)
         {
             media_2_acq.push_back(media(temp, i, i + 3));
-            dstd_2_acq.push_back(dstd_media(temp));
+            dstd_2_acq.push_back(dstd_media(temp, i, i + 3));
         }
 
         for (auto c : media_2_acq)
