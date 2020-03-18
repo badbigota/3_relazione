@@ -9,20 +9,26 @@ Nelle cartelle **1ac** e **2ac** sono contenuti tutti i dati grezzi elaborati da
 Contiene la maggior parte del codice. Si occupa di:
 - [x] Leggere i dati da file
 - [x] Stampare per i grafici in gnuplot
-- [ ] Stampare dev std nei grafici
+- [x] Stampare dev std nei grafici
+    - [x] Sostituire dev std con distrib triangolare per evitare errori nulli
 
 
 **Analisi Primo Metodo**
 
 
-- [ ] Stimare coeff angolare
-- [ ] Compatibilità fra coeff angolari primo metodo
+- [x] Stimare coeff angolare
+- [ ] Compatibilità fra coeff angolari primo metodo [^1]
+
+
+
+[^1]: Sono da prendere in 2 file output diversi
 
 
 **Analisi Secondo Metodo**
 
 
 - [ ] Generare set di {k_i} consecutivi
+- [ ] Generare set di {k_i} *non consecutivi*
 - [ ] Media e dev std con {k_i} *consecutivi*
 - [ ] Media e dev std con {k_i} *non consecutivi*
 
