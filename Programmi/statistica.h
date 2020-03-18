@@ -465,3 +465,13 @@ double errore_v_vero(vector<double> errori)
     }
     return (1 / sqrt(sum));
 }
+
+//Errore distribuzione triangolare
+double sigma_dist_tri(double ptl, double coeff_aff){
+    return abs(2*ptl/coeff_aff)/sqrt(24);
+}
+
+//Errore distribuzione uniforme
+double sigma_dist_uni(double ptl, double coeff_aff){
+    return abs(2*ptl/coeff_aff)/sqrt(12);
+}
