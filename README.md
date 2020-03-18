@@ -1,8 +1,9 @@
 # Analisi dati 3 Relazione
-Tutti i file presenti sono indispensabili per il funzionamento del codice scritto. Nelle cartelle **1ac** e **2ac** sono contenuti tutti i dati grezzi elaborati dai vari script.
+Tutti i file presenti sono indispensabili per il funzionamento del codice scritto.  
+Nelle cartelle **1ac** e **2ac** sono contenuti tutti i dati grezzi elaborati dai vari script.
 
 
-**Analisi.cxx**
+## Analisi.cxx
 
 
 Contiene la maggior parte del codice. Si occupa di:
@@ -24,3 +25,8 @@ Contiene la maggior parte del codice. Si occupa di:
 - [ ] Generare set di {k_i} consecutivi
 - [ ] Media e dev std con {k_i} *consecutivi*
 - [ ] Media e dev std con {k_i} *non consecutivi*
+
+## Analisi2.cxx
+
+
+Ancora sconosciuta.  
