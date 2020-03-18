@@ -16,7 +16,7 @@ Contiene la maggior parte del codice. Si occupa di:
 **Analisi Primo Metodo**
 
 
-- [x] Stimare coeff angolare
+- [x] Stimare coeff angolare Chi quadro
 - [ ] Compatibilità fra coeff angolari primo metodo (da prendere in 2 file diversi)
 
 
