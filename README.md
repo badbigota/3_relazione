@@ -14,6 +14,9 @@ Contiene la maggior parte del codice. Si occupa di:
 - [ ] Verificare ipotesi di Chi quadro (errori % su asse x e y)
 
 
+> Delta x assunto come 1/20 di 100g_peso cioè errore massimo in dinamometro
+
+
 **Analisi Primo Metodo**
 
 
