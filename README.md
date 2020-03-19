@@ -11,23 +11,25 @@ Contiene la maggior parte del codice. Si occupa di:
 - [x] Stampare per i grafici in gnuplot
 - [x] Stampare dev std nei grafici
     - [x] Sostituire dev std con distrib triangolare per evitare errori nulli
+- [ ] Verificare ipotesi di Chi quadro (errori % su asse x e y)
 
 
 **Analisi Primo Metodo**
 
 
 - [x] Stimare coeff angolare Chi quadro
-- [ ] Compatibilità fra coeff angolari primo metodo (da prendere in 2 file diversi)
+- [ ] Compatibilità fra coeff angolari primo metodo (allungmaneto e accorciamento) (da prendere in 2 file diversi)
 
 
 
 **Analisi Secondo Metodo**
 
 
-- [ ] Generare set di {k_i} consecutivi
-- [ ] Generare set di {k_i} *non consecutivi*
-- [ ] Media e dev std con {k_i} *consecutivi*
-- [ ] Media e dev std con {k_i} *non consecutivi*
+- [x] Generare set di {k_i} consecutivi
+- [x] Generare set di {k_i} *non consecutivi*
+- [x] Media e dev std con {k_i} *consecutivi*
+- [x] Media e dev std con {k_i} *non consecutivi*
+- [ ] Compatibilità fra {k_i} *consecutivi* e {k_i} *non consecutivi*
 
 ## Analisi2.cxx
 
