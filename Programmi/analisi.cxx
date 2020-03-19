@@ -72,11 +72,28 @@ int main()
         cout << "Intercetta:\t" << a_intercetta(delta_forza_newton, media_1_acq) << "+/-" << sigma_a(delta_forza_newton, media_1_acq) << endl;
 
         //Secondo approccio sbagliato (campione K consecutivi)
+        vector<double> delta_allungamento;
+        vector<double> k_consecutivi;
+        vector<double> k_non_consecutivi;
+        for (int i = 1; i < media_1_acq.size(); i++) //Calcola ogni allungamento di tratto in tratto
+        {
+            delta_allungamento.push_back(media_1_acq[i] - media_1_acq[i - 1]);
+        }
+        for (int i = 0; i < delta_allungamento.size(); i++) //Calcola tutti i K
+        {
+            k_consecutivi.push_back(delta_allungamento[i] / kgpeso_to_newton(0.4));
+        }
+        cout << "K consec:\t" << media(k_consecutivi) << "+/-" << dstd_media(k_consecutivi) << endl;
 
         //Terzo approccio corretto (campione K non consecutivi)
+        for (int i = 0; i < k_consecutivi.size(); i = i + 2) //Prende i K in posizioni pari
+        {
+            k_non_consecutivi.push_back(k_consecutivi[i]);
+        }
+        cout << "K NON consec:\t" << media(k_non_consecutivi) << "+/-" << dstd_media(k_non_consecutivi) << endl;
     }
 
-    if (dir_ac == "2ac") //legge 2 acquisizione QUasi sicuramente si può muovere in un altro file
+    if (dir_ac == "2ac") //legge 2 acquisizione Quasi sicuramente si può muovere in un altro file
     {
         vector<double> temp;
         vector<double> media_2_acq, dstd_2_acq;
