@@ -192,6 +192,76 @@ double ampiezza_int(vector<double> dati, int num_int)
     return ((max - min) / num_int);
 }
 
+//DELTA ERRORI DIVERSI
+
+//delta
+double delta_d(vector<double> dati_x, vector<double> errori_y)
+{
+    double delta_d_ = 0;
+    double sum_1 = 0, sum_2 = 0;
+    for (int i = 0; i < dati_x.size(); i++)
+    {
+        sum_1 = sum_1 + (1 / pow(errori_y[i], 2));
+        sum_2 = sum_2 + (dati_x[i] / pow(errori_y[i], 2));
+    }
+    delta_d_ = sum_1 * sum_2 - pow(sum_2, 2);
+    return delta_d_;
+}
+
+//a intercetta
+double a_intercetta_d(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
+{
+    double a_intercetta_d_ = 0;
+    double sum_1 = 0, sum_2 = 0, sum_3 = 0, sum_4 = 0;
+    for (int i = 0; i < dati_x.size(); i++)
+    {
+        sum_1 = sum_1 + pow((dati_x[i] / errori_y[i]), 2);
+        sum_2 = sum_2 + (dati_y[i] / pow(errori_y[i], 2));
+        sum_3 = sum_3 + (dati_x[i] / pow(errori_y[i], 2));
+        sum_4 = sum_4 + ((dati_x[i] * dati_y[i]) / pow(errori_y[i], 2));
+    }
+    a_intercetta_d_ = (1 / delta_d(dati_x, errori_y)) * (sum_1 * sum_2 - sum_3 * sum_4);
+    return a_intercetta_d_;
+}
+
+//b angolare
+double b_angolare_d(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
+{
+    double b_angolare_d_ = 0;
+    double sum_1 = 0, sum_2 = 0, sum_3 = 0, sum_4 = 0;
+    for (int i = 0; i < dati_x.size(); i++)
+    {
+        sum_1 = sum_1 + (1 / pow(errori_y[i], 2));
+        sum_2 = sum_2 + ((dati_x[i] * dati_y[i]) / (pow(errori_y[i], 2)));
+        sum_3 = sum_3 + ((dati_x[i]) / (pow(errori_y[i], 2)));
+        sum_4 = sum_4 + (dati_y[i] / pow(errori_y[i], 2));
+    }
+    b_angolare_d_ = (1 / delta_d(dati_x, errori_y)) * (sum_1 * sum_2 - sum_3 * sum_4);
+    return b_angolare_d_;
+}
+
+//sigma a
+double sigma_a_d(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
+{
+    double sum = 0;
+    for (int i = 0; i < dati_x.size(); i++)
+    {
+        sum = sum + pow((dati_x[i] / errori_y[i]), 2);
+    }
+    return sqrt((1 / delta_d(dati_x, errori_y)) * sum);
+}
+
+//sigma b
+double sigma_b_d(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
+{
+    double sum = 0;
+    for (int i = 0; i < dati_x.size(); i++)
+    {
+        sum = sum + (1 / pow(errori_y[i], 2));
+    }
+    return sqrt((1 / delta_d(dati_x, errori_y)) * sum);
+}
+
 //Delta (chi-quadro)
 double delta(vector<double> dati_x, int inizio = 0, int fine = 0, string log = "")
 {
@@ -394,47 +464,6 @@ double sigma_a(vector<double> dati_x, vector<double> dati_y, int inizio = 0, int
         }
     }
 
-    return sigma_a_;
-}
-
-//delta_diversi
-double delta_diversi(vector<double> dati_x, vector<double> errori_y)
-{
-    double delta_diversi_;
-    double sum_1, sum_2;
-    for (int i = 0; i < dati_x.size(); i++)
-    {
-        sum_1 = sum_1 + (dati_x[i] / pow(errori_y[i], 2));
-    }
-    for (int i = 0; i < errori_y.size(); i++)
-    {
-        sum_2 = sum_2 + (1 / pow(errori_y[i], 2));
-    }
-    delta_diversi_ = sum_1 * sum_2 - pow(sum_1, 2);
-    return delta_diversi_;
-}
-
-//a-i
-double a_i(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y, int i)
-{
-    double a_i_;
-    double sum = 0;
-    for (int i = 0; i < dati_x.size(); i++)
-    {
-        sum = sum + (dati_x[i] / pow(errori_y[i], 2));
-    }
-    a_i_ = (1 / delta_diversi(dati_x, errori_y)) * ((1 / pow(errori_y[i], 2)) * sum - (dati_x[i] / (errori_y[i], 2)) * sum);
-    return a_i_;
-}
-
-//Sigma a con errori tutti diversi
-double sigma_a(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
-{
-    double sigma_a_ = 0;
-    for (int i = 0; i < dati_x.size(); i++)
-    {
-        sigma_a_ = sigma_a_ + a_i(dati_x, dati_y, errori_y, i) * dati_y[i];
-    }
     return sigma_a_;
 }
 

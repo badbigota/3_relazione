@@ -71,6 +71,12 @@ int main()
         cout << "Coeff ang:\t" << b_angolare(delta_forza_newton, media_1_acq) << "+/-" << sigma_b(delta_forza_newton, media_1_acq) << endl;
         cout << "Intercetta:\t" << a_intercetta(delta_forza_newton, media_1_acq) << "+/-" << sigma_a(delta_forza_newton, media_1_acq) << endl;
 
+        //TEMPORANEA MODIFICA PER VEDERE SE HO FATTO PUTTANATE SONO PUTTANATE E NON FUNZIONA UN CAZZO
+        cout << "Coeff ang:\t" << b_angolare_d(delta_forza_newton, media_1_acq, dstd_1_acq) << "+/-" << sigma_b_d(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
+        cout << "Intercetta:\t" << a_intercetta_d(delta_forza_newton, media_1_acq, dstd_1_acq) << "+/-" << sigma_a_d(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
+
+        //FINE CAZZATE
+
         //Secondo approccio sbagliato (campione K consecutivi)
         vector<double> delta_allungamento;
         vector<double> k_consecutivi;
