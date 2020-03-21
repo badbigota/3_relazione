@@ -358,7 +358,7 @@ double sigma_y_posteriori(vector<double> dati_x, vector<double> dati_y, int iniz
     return sigma_y;
 }
 
-//Errore su coeff. a (intercetta)
+//Errore su coeff. a con sigma X tutti uguali (intercetta)
 double sigma_a(vector<double> dati_x, vector<double> dati_y, int inizio = 0, int fine = 0, string log = "")
 {
     double sigma_a_;
@@ -397,7 +397,48 @@ double sigma_a(vector<double> dati_x, vector<double> dati_y, int inizio = 0, int
     return sigma_a_;
 }
 
-//Errore su coeff. b (coeff. angolare)
+//delta_diversi
+double delta_diversi(vector<double> dati_x, vector<double> errori_y)
+{
+    double delta_diversi_;
+    double sum_1, sum_2;
+    for (int i = 0; i < dati_x.size(); i++)
+    {
+        sum_1 = sum_1 + (dati_x[i] / pow(errori_y[i], 2));
+    }
+    for (int i = 0; i < errori_y.size(); i++)
+    {
+        sum_2 = sum_2 + (1 / pow(errori_y[i], 2));
+    }
+    delta_diversi_ = sum_1 * sum_2 - pow(sum_1, 2);
+    return delta_diversi_;
+}
+
+//a-i
+double a_i(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y, int i)
+{
+    double a_i_;
+    double sum = 0;
+    for (int i = 0; i < dati_x.size(); i++)
+    {
+        sum = sum + (dati_x[i] / pow(errori_y[i], 2));
+    }
+    a_i_ = (1 / delta_diversi(dati_x, errori_y)) * ((1 / pow(errori_y[i], 2)) * sum - (dati_x[i] / (errori_y[i], 2)) * sum);
+    return a_i_;
+}
+
+//Sigma a con errori tutti diversi
+double sigma_a(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
+{
+    double sigma_a_ = 0;
+    for (int i = 0; i < dati_x.size(); i++)
+    {
+        sigma_a_ = sigma_a_ + a_i(dati_x, dati_y, errori_y, i) * dati_y[i];
+    }
+    return sigma_a_;
+}
+
+//Errore su coeff. b con sigma Y tutti uguali(coeff. angolare)
 double sigma_b(vector<double> dati_x, vector<double> dati_y, int inizio = 0, int fine = 0, string log = "")
 {
     double sigma_b_p;
@@ -467,11 +508,13 @@ double errore_v_vero(vector<double> errori)
 }
 
 //Errore distribuzione triangolare
-double sigma_dist_tri(double ptl, double coeff_aff){
-    return abs(2*ptl/coeff_aff)/sqrt(24);
+double sigma_dist_tri(double ptl, double coeff_aff)
+{
+    return abs(2 * ptl / coeff_aff) / sqrt(24);
 }
 
 //Errore distribuzione uniforme
-double sigma_dist_uni(double ptl, double coeff_aff){
-    return abs(2*ptl/coeff_aff)/sqrt(12);
+double sigma_dist_uni(double ptl, double coeff_aff)
+{
+    return abs(2 * ptl / coeff_aff) / sqrt(12);
 }
