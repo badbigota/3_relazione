@@ -192,24 +192,27 @@ double ampiezza_int(vector<double> dati, int num_int)
     return ((max - min) / num_int);
 }
 
-//DELTA ERRORI DIVERSI
+/*
+INIZIO CHI QUADRO CON ERRORI TUTTI DIFFERENTI tramite function overloading
+*/
 
-//delta
-double delta_d(vector<double> dati_x, vector<double> errori_y)
+//Calcolo di Delta con errori tutti diversi
+double delta(vector<double> dati_x, vector<double> errori_y)
 {
     double delta_d_ = 0;
-    double sum_1 = 0, sum_2 = 0;
+    double sum_1 = 0, sum_2 = 0, sum_3 = 0;
     for (int i = 0; i < dati_x.size(); i++)
     {
         sum_1 = sum_1 + (1 / pow(errori_y[i], 2));
-        sum_2 = sum_2 + (dati_x[i] / pow(errori_y[i], 2));
+        sum_2 = sum_2 + (pow(dati_x[i], 2) / pow(errori_y[i], 2));
+        sum_3 = sum_3 + (dati_x[i] / pow(errori_y[i], 2));
     }
-    delta_d_ = sum_1 * sum_2 - pow(sum_2, 2);
+    delta_d_ = sum_1 * sum_2 - pow(sum_3, 2);
     return delta_d_;
 }
 
-//a intercetta
-double a_intercetta_d(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
+//Coeff. a di y=a+bx con errori tutti diversi (intercetta)
+double a_intercetta(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
 {
     double a_intercetta_d_ = 0;
     double sum_1 = 0, sum_2 = 0, sum_3 = 0, sum_4 = 0;
@@ -220,12 +223,12 @@ double a_intercetta_d(vector<double> dati_x, vector<double> dati_y, vector<doubl
         sum_3 = sum_3 + (dati_x[i] / pow(errori_y[i], 2));
         sum_4 = sum_4 + ((dati_x[i] * dati_y[i]) / pow(errori_y[i], 2));
     }
-    a_intercetta_d_ = (1 / delta_d(dati_x, errori_y)) * (sum_1 * sum_2 - sum_3 * sum_4);
+    a_intercetta_d_ = (1 / delta(dati_x, errori_y)) * (sum_1 * sum_2 - sum_3 * sum_4);
     return a_intercetta_d_;
 }
 
-//b angolare
-double b_angolare_d(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
+//Coeff. b di y=a+bx con errori tutti diversi (coeff. ang.)
+double b_angolare(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
 {
     double b_angolare_d_ = 0;
     double sum_1 = 0, sum_2 = 0, sum_3 = 0, sum_4 = 0;
@@ -236,31 +239,35 @@ double b_angolare_d(vector<double> dati_x, vector<double> dati_y, vector<double>
         sum_3 = sum_3 + ((dati_x[i]) / (pow(errori_y[i], 2)));
         sum_4 = sum_4 + (dati_y[i] / pow(errori_y[i], 2));
     }
-    b_angolare_d_ = (1 / delta_d(dati_x, errori_y)) * (sum_1 * sum_2 - sum_3 * sum_4);
+    b_angolare_d_ = (1 / delta(dati_x, errori_y)) * (sum_1 * sum_2 - sum_3 * sum_4);
     return b_angolare_d_;
 }
 
-//sigma a
-double sigma_a_d(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
+//Errore su coeff. a di y=a+bx con errori tutti diversi (intercetta)
+double sigma_a(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
 {
     double sum = 0;
     for (int i = 0; i < dati_x.size(); i++)
     {
         sum = sum + pow((dati_x[i] / errori_y[i]), 2);
     }
-    return sqrt((1 / delta_d(dati_x, errori_y)) * sum);
+    return sqrt((1 / delta(dati_x, errori_y)) * sum);
 }
 
-//sigma b
-double sigma_b_d(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
+//Errore su coeff. b di y=a+bx con errori tutti diversi (coeff. ang.)
+double sigma_b(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
 {
     double sum = 0;
     for (int i = 0; i < dati_x.size(); i++)
     {
         sum = sum + (1 / pow(errori_y[i], 2));
     }
-    return sqrt((1 / delta_d(dati_x, errori_y)) * sum);
+    return sqrt((1 / delta(dati_x, errori_y)) * sum);
 }
+
+/*
+INIZIO CHI QUADRO CON ERRORI ERRORI UGUALI
+*/
 
 //Delta (chi-quadro)
 double delta(vector<double> dati_x, int inizio = 0, int fine = 0, string log = "")
@@ -428,7 +435,7 @@ double sigma_y_posteriori(vector<double> dati_x, vector<double> dati_y, int iniz
     return sigma_y;
 }
 
-//Errore su coeff. a con sigma X tutti uguali (intercetta)
+//Errore su coeff. a di y=a+bx con sigma y a posteriori (intercetta)
 double sigma_a(vector<double> dati_x, vector<double> dati_y, int inizio = 0, int fine = 0, string log = "")
 {
     double sigma_a_;
@@ -467,7 +474,7 @@ double sigma_a(vector<double> dati_x, vector<double> dati_y, int inizio = 0, int
     return sigma_a_;
 }
 
-//Errore su coeff. b con sigma Y tutti uguali(coeff. angolare)
+//Errore su coeff. b con sigma y a posteriori(coeff. angolare)
 double sigma_b(vector<double> dati_x, vector<double> dati_y, int inizio = 0, int fine = 0, string log = "")
 {
     double sigma_b_p;
