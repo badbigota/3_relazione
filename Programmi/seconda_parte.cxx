@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include "statistica.h"
@@ -12,6 +13,8 @@ struct estensimetri
 	double diametro;
 	vector<double> allungamento;
 	vector<double> accorciamento;
+	vector<double> err_all;
+	vector<double> err_acc;
 };
 
 int main()
@@ -51,17 +54,27 @@ int main()
 		cout << "Errore scrittura su file";
 		return 1;
 	}
+	fout << fixed << setprecision(3);
+
 	for (int i = 0; i < 9; i++)
+		fout << "Estensimetro " << est[i].n_est << "\t\t";
+	fout << endl;
+	for (int i = 0; i < 9; i++)
+		fout << est[i].lunghezza << "\t" << est[i].diametro << "\t\t";
+	fout << endl
+		 << setprecision(5);
+	for (int j = 0; j < 10; j++)
 	{
-		fout << "Estensimetro " << est[i].n_est << endl
-			 << est[i].lunghezza << endl
-			 << est[i].diametro << endl;
-		for (int j = 0; j < 10; j++)
+		for (int i = 0; i < 9; i++)
 		{
-			fout << est[i].allungamento[j] << endl
-				 << est[i].accorciamento[j] << endl;
+			fout << est[i].allungamento[j] << "\t" << est[i].accorciamento[j] << "\t";
+			if (!((i == 2) && (j == 0)))
+				fout << "\t";
 		}
 		fout << endl;
 	}
+
+	sigma_dist_uni(10, 10);
+
 	return 0;
 }

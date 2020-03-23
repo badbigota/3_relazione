@@ -19,7 +19,7 @@ Contiene la maggior parte del codice. Si occupa di:
 
 
 
-## Analisi_2ac.cxx
+## 2ac ovvero 2ac_2metodo.cxx
 Analizza le misure ripetute (secondo video). Ci sono due metodi, entrambi vengono impiegati per vedere quale è meglio. Dovrebbe dare errore maggiore di analisi_1ac. Citare isteresi meccanica perchè in tendenza le misure di x aumentano con il numero consecutivo di esecuzione.
 - [x] Legge da file le misure
 - [x] Genera le medie e dev std per ciascuna misura (T, M, F) e le archivia in vettore per 400 e 1000, per all e acc
