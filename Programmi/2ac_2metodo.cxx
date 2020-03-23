@@ -25,10 +25,6 @@ vector<container> campioni(4);
 vector<double> media_vett = {0, 0, 0, 0};
 vector<double> sigma_media_vett = {0, 0, 0, 0};
 
-//calcolo delta forza in newton
-double delta_forza_N_400 = kgpeso_to_newton(((400 - 200) * 4) / 1000);
-double delta_forza_N_1000 = kgpeso_to_newton(((1000 - 200) * 4) / 1000);
-
 int main()
 {
     double t;
@@ -92,9 +88,8 @@ int main()
         }
     }
 
-
-    vector <double> k;
-    vector <double> sigma_k;
+    vector<double> k;
+    vector<double> sigma_k;
 
     //media ponderata valori di k alto e errore con errore media ponderata
     double media_ponderata_k_alto = media_ponderata(k_alto, sigma_k_alto); //valori k
@@ -110,17 +105,11 @@ int main()
     double sigma_media_ponderata_k_basso = errore_media_ponderata(sigma_k_basso);
     sigma_k.push_back(sigma_media_ponderata_k_basso);
 
-
-
-
     //media ponderata delle medie ponderate
     double valore_k = media_ponderata(k, sigma_k);
-
-    cout << valore_k << endl;
-
     double sigma_valore_k = errore_media_ponderata(sigma_k);
 
-    cout << sigma_valore_k << endl;
+    cout << valore_k << " +/- " << sigma_valore_k << " micron/Newton" << endl;
 
     return 0;
 }
