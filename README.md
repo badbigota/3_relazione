@@ -19,23 +19,24 @@ Contiene la maggior parte del codice. Si occupa di:
 
 
 
-## 2ac ovvero 2ac_2metodo.cxx
+## Analisi_2ac.cxx
 Analizza le misure ripetute (secondo video). Ci sono due metodi, entrambi vengono impiegati per vedere quale è meglio. Dovrebbe dare errore maggiore di analisi_1ac. Citare isteresi meccanica perchè in tendenza le misure di x aumentano con il numero consecutivo di esecuzione.
 - [x] Legge da file le misure
 - [x] Genera le medie e dev std per ciascuna misura (T, M, F) e le archivia in vettore per 400 e 1000, per all e acc
 - [ ] Genera media fra gli 8/9 punti (ciascuno era 3 misure) e relativo errore **non è media pondeerata ed errore ponderato, ma semplicemeente media e dev su media da campione di punti**
 
 
-**Prima via Chi Quadro**
+**Prima via campioncini di K all e acc**
+- [x] Media dei puntini per ottenere i punti
+- [x] Media dei punti e dev std per ottenere 4 x
+- [x] Calcolo K con formula per ciascuno degli x ottenuti e propagazione errore
+- [x] Ponderata fra i 2 K bassi e i 2 K alti
+- [x] Ponderata fra i 2 K ottenuti
+
+
+**Seconda via Chi Quadro (non funziona ancora)**
 - [ ] Genera Chi fra i due punti in acc di 400-1000 e Chi con all 400-1000
 - [ ] Media ponderata fra i 2 coeff. ang. ottenuti genera un solo coeff. ang.
-
-
-**Seconda via di campioncini di K all e acc**
-- [ ] Genera K 400/1000 e all/acc, attenzione a propagazione
-- [ ] Media di K all e K acc
-- [ ] Media fra K all e acc e genera K con errore tramite ponderata
-
 
 
 ## Seconda parte Young
