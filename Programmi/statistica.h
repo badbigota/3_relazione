@@ -266,7 +266,7 @@ double sigma_b(vector<double> dati_x, vector<double> dati_y, vector<double> erro
 }
 
 /*
-INIZIO CHI QUADRO CON ERRORI ERRORI UGUALI
+INIZIO CHI QUADRO CON ERRORI ERRORI ASSENTI< VIENE USATA LA SIGMA POSTERIORI
 */
 
 //Delta (chi-quadro)
