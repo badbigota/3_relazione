@@ -533,7 +533,7 @@ double media_ponderata(vector<double> valori, vector<double> errori, int inizio 
 }
 
 //Errore medio (media ponderata)
-double errore_v_vero(vector<double> errori)
+double errore_media_ponderata(vector<double> errori)
 {
     double sum = 0;
     for (auto d : errori)
