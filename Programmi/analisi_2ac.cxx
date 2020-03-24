@@ -110,10 +110,6 @@ int main()
     cout << valore_k << " +/- " << sigma_valore_k << " micron/Newton" << endl;
 
     //SECONDO METODO CALCOLO DI K con 2 chi quadri fra tutti gli 8 punti
-    //
-    //
-    //
-    //
 
     vector<double> chi_basso; //ho messo nel vettore 8 punti di 400basso
     vector<double> chi_alto;
@@ -122,42 +118,43 @@ int main()
     vector<double> sigma_chi_alto;
     vector<double> delta_forza_newton; //Unico vettore che serve per entrambe le esperienze
 
-    for (int i = 0;i < campioni[0].media_2_acq.size(); i++)
+    for (int i = 0; i < campioni[1].media_2_acq.size(); i++)
     {
         chi_alto.push_back(campioni[1].media_2_acq[i]); //400alto
         chi_alto.push_back(campioni[3].media_2_acq[i]); //1000alto
         sigma_chi_alto.push_back(campioni[1].dstd_2_acq[i]);
         sigma_chi_alto.push_back(campioni[3].dstd_2_acq[i]);
-        
     }
-    for(int i=0; i< campioni[0].media_2_acq.size();i++){
+    for (int i = 0; i < campioni[0].media_2_acq.size(); i++)
+    {
         delta_forza_newton.push_back(kgpeso_to_newton((200) * 4 / 1000));
         delta_forza_newton.push_back(kgpeso_to_newton((800) * 4 / 1000));
     }
+    delta_forza_newton.pop_back();
+
     for (int i = 0; i < campioni[0].media_2_acq.size(); i++)
     {
         chi_basso.push_back(campioni[0].media_2_acq[i]);      //ho messo nel vettore 400basso
         chi_basso.push_back(campioni[2].media_2_acq[i]);      //1000basso
         sigma_chi_basso.push_back(campioni[0].dstd_2_acq[i]); //la stessa cosa per gli errori
         sigma_chi_basso.push_back(campioni[2].dstd_2_acq[i]);
-
     }
 
-    cout << "Angolare Basso: " << b_angolare(delta_forza_newton, chi_basso, sigma_chi_basso) << " +/- " << sigma_b(delta_forza_newton, chi_basso, sigma_chi_basso) << endl;
-    cout << "Intercetta Basso: " << a_intercetta(delta_forza_newton, chi_basso, sigma_chi_basso) << " +/- " << sigma_a(delta_forza_newton, chi_basso, sigma_chi_basso) << endl;
+    cout << "Angolare Basso:\t" << b_angolare(delta_forza_newton, chi_basso, sigma_chi_basso) << " +/- " << sigma_b(delta_forza_newton, chi_basso, sigma_chi_basso) << endl;
+    cout << "Intercetta Basso:\t" << a_intercetta(delta_forza_newton, chi_basso, sigma_chi_basso) << " +/- " << sigma_a(delta_forza_newton, chi_basso, sigma_chi_basso) << endl;
 
-    cout << "Angolare Alto" << b_angolare(delta_forza_newton, chi_alto, sigma_chi_alto) << "+/-" << sigma_b(delta_forza_newton, chi_alto, sigma_chi_alto) << endl;
-    cout << "Intercetta Alto: " << a_intercetta(delta_forza_newton, chi_alto, sigma_chi_alto) << "+/-" << sigma_a(delta_forza_newton, chi_alto, sigma_chi_alto) << endl;
-    
+    cout << "Angolare Alto:\t" << b_angolare(delta_forza_newton, chi_alto, sigma_chi_alto) << " +/- " << sigma_b(delta_forza_newton, chi_alto, sigma_chi_alto) << endl;
+    cout << "Intercetta Alto:\t" << a_intercetta(delta_forza_newton, chi_alto, sigma_chi_alto) << " +/- " << sigma_a(delta_forza_newton, chi_alto, sigma_chi_alto) << endl;
+
     vector<double> chi;
     chi.push_back(b_angolare(delta_forza_newton, chi_basso, sigma_chi_basso));
     chi.push_back(b_angolare(delta_forza_newton, chi_alto, sigma_chi_alto));
-    
+
     vector<double> sigma_chi;
     sigma_chi.push_back(sigma_b(delta_forza_newton, chi_basso, sigma_chi_basso));
     sigma_chi.push_back(sigma_b(delta_forza_newton, chi_alto, sigma_chi_alto));
-    
-    cout << "K con chi quadro tramite intepolazione 8 punti: " << media_ponderata(chi, sigma_chi) << "+/- " << errore_media_ponderata(sigma_chi) << endl;
+
+    cout << "K con chi quadro tramite intepolazione 8 punti:\t" << media_ponderata(chi, sigma_chi) << " +/- " << errore_media_ponderata(sigma_chi) << endl;
 
     return 0;
 }
