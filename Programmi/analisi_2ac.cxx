@@ -109,6 +109,8 @@ int main()
 
     cout << valore_k << " +/- " << sigma_valore_k << " micron/Newton" << endl;
 
+    
+
     //SECONDO METODO CALCOLO DI K con 2 chi quadri fra tutti gli 8 punti
 
     vector<double> chi_basso; //ho messo nel vettore 8 punti di 400basso
