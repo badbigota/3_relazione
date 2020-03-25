@@ -546,11 +546,11 @@ double errore_media_ponderata(vector<double> errori)
 //Errore distribuzione triangolare
 double sigma_dist_tri(double ptl, double coeff_aff)
 {
-    return abs(2 * ptl / coeff_aff) / sqrt(24);
+    return abs(ptl / coeff_aff) / sqrt(24);//ptl con il coeff aff è doppio di err max 
 }
 
 //Errore distribuzione uniforme
 double sigma_dist_uni(double ptl, double coeff_aff)
 {
-    return abs(2 * ptl / coeff_aff) / sqrt(12);
+    return abs(ptl / coeff_aff) / sqrt(12);//ptl con il suo coeff aff è il doppio di err max
 }
