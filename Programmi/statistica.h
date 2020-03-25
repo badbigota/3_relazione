@@ -205,9 +205,9 @@ double delta(vector<double> dati_x, vector<double> errori_y)
     {
         sum_1 = sum_1 + (1 / pow(errori_y[i], 2));
         sum_2 = sum_2 + (pow(dati_x[i], 2) / pow(errori_y[i], 2));
-        sum_3 = sum_3 + (dati_x[i] / pow(errori_y[i], 2));
+        sum_3 = sum_3 + pow((dati_x[i] / pow(errori_y[i], 2)), 2);
     }
-    delta_d_ = sum_1 * sum_2 - pow(sum_3, 2);
+    delta_d_ = sum_1 * sum_2 - sum_3;
     return delta_d_;
 }
 
@@ -242,6 +242,27 @@ double b_angolare(vector<double> dati_x, vector<double> dati_y, vector<double> e
     b_angolare_d_ = (1 / delta(dati_x, errori_y)) * (sum_1 * sum_2 - sum_3 * sum_4);
     return b_angolare_d_;
 }
+//Errore in tercetta se tutti i sigma sono uguali
+double sigma_a_y_uguali(vector<double> dati_x, vector<double> dati_y, double err_y)
+{
+
+    double sum1 = 0, sum2 = 0, sum = 0;
+    for (int i = 0; i < dati_x.size(); i++)
+    {
+
+        sum1 = sum1 + pow(dati_x[i], 2);
+    }
+
+    return err_y * sqrt(sum1 / delta(dati_x));
+}
+
+//Errore coeff. ang. se tutti i sigma y sono uguali
+double sigma_b_y_uguali(vector<double> dati_x, vector<double> dati_y, double err_y)
+{
+    double delta_ = delta(dati_x);
+    double size = dati_x.size();
+    return err_y * sqrt(size / delta_);
+}
 
 //Errore su coeff. a di y=a+bx con errori tutti diversi (intercetta)
 double sigma_a(vector<double> dati_x, vector<double> dati_y, vector<double> errori_y)
@@ -249,7 +270,7 @@ double sigma_a(vector<double> dati_x, vector<double> dati_y, vector<double> erro
     double sum = 0;
     for (int i = 0; i < dati_x.size(); i++)
     {
-        sum = sum + pow((dati_x[i] / errori_y[i]), 2);
+        sum = sum + (pow(dati_x[i], 2) / pow(errori_y[i], 2)); //ho cambiato FABIO
     }
     return sqrt((1 / delta(dati_x, errori_y)) * sum);
 }
@@ -269,7 +290,7 @@ double sigma_b(vector<double> dati_x, vector<double> dati_y, vector<double> erro
 INIZIO CHI QUADRO CON ERRORI ERRORI ASSENTI< VIENE USATA LA SIGMA POSTERIORI
 */
 
-//Delta (chi-quadro)
+//Delta (chi-quadro) [errori tutti uguali o del tutto assenti]
 double delta(vector<double> dati_x, int inizio = 0, int fine = 0, string log = "")
 {
     double delta_;
@@ -307,7 +328,7 @@ double delta(vector<double> dati_x, int inizio = 0, int fine = 0, string log = "
     return delta_;
 }
 
-//Coefficiente a di y=a+bx (intercetta)
+//Coefficiente a di y=a+bx (intercetta) 
 double a_intercetta(vector<double> dati_x, vector<double> dati_y, int inizio = 0, int fine = 0, string log = "")
 {
     double coeff_a;
@@ -546,11 +567,11 @@ double errore_media_ponderata(vector<double> errori)
 //Errore distribuzione triangolare
 double sigma_dist_tri(double ptl, double coeff_aff)
 {
-    return abs(ptl / coeff_aff) / sqrt(24);//ptl con il coeff aff è doppio di err max 
+    return abs(ptl / coeff_aff) / sqrt(24); //ptl con il coeff aff è doppio di err max
 }
 
 //Errore distribuzione uniforme
 double sigma_dist_uni(double ptl, double coeff_aff)
 {
-    return abs(ptl / coeff_aff) / sqrt(12);//ptl con il suo coeff aff è il doppio di err max
+    return abs(ptl / coeff_aff) / sqrt(12); //ptl con il suo coeff aff è il doppio di err max
 }
