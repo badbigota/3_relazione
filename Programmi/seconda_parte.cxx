@@ -12,8 +12,7 @@ struct estensimetri
 	int n_est;
 	double lunghezza;
 	double diametro;
-	double err_lunghezza = 2;
-	; //in mm
+	double err_lunghezza = 2; //in mm
 	double err_diametro_perce = 0.01;
 	double err_diametro;
 	double sezione;
@@ -29,6 +28,10 @@ struct estensimetri
 	double err_k_medio;
 	vector<double> allungamento;  //Contengono i dati grezzi dell'estensimetro
 	vector<double> accorciamento; //
+	vector<double> k_no_cons_all;
+	vector<double> k_no_cons_acc;
+	vector<double> err_k_no_cons_all;
+	vector<double> err_k_no_cons_acc;
 };
 
 int main()
@@ -49,6 +52,18 @@ int main()
 	vector<double> err_rapporto;
 	vector<double> err_prodotto;
 	vector<double> diametro_quadrato;
+	vector<double> young1;
+	vector<double> err_young1;
+	vector<double> young2;
+	vector<double> err_young2;
+	vector<double> young_i;
+	vector<double> err_young_i;
+	vector<double> k_all_3metodo;
+	vector<double> k_acc_3metodo;
+	vector<double> err_k_all_3metodo;
+	vector<double> err_k_acc_3metodo;
+	vector<double> young3;
+	vector<double> err_young3;
 
 	ifstream fin("set_dati.txt");
 	if (!fin)
@@ -122,7 +137,7 @@ int main()
 		est[i].err_k_medio = errore_media_ponderata(err_k_alto_basso);
 		est[i].sezione = M_PI * pow(((est[i].diametro) / 2), 2);
 
-		ofstream gout("../Grafici_2/est_" + to_string(est[i].n_est) + ".txt");   //STAMPA PER FARE PLOT E RIEPILOGO
+		ofstream gout("../Grafici_2/est_" + to_string(est[i].n_est) + ".txt");	 //STAMPA PER FARE PLOT E RIEPILOGO
 		ofstream hout("../Latex/riepilogo_" + to_string(est[i].n_est) + ".txt"); //RIEPILOGO PER LATEX
 
 		hout << "Numero:\t" << est[i].n_est << endl;
@@ -195,5 +210,51 @@ int main()
 		pcost << diametro_quadrato[o] << "\t" << prodotto[o] << "\t" << err_prodotto[o] << endl;
 	}
 
+	//CALCOLO E
+	//ofstream eout1("../CalcoloE/primo_metodo.txt");
+	//ofstream eout2("../CalcoloE/secondo_metodo.txt");
+	//ofstream eout3("../CalcoloE/terzo_metodo.txt");
+//
+	//Primo Metodo
+	//for(int i=0;i<10;i++)
+	//{
+	//	young_i.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].coeff_ango_all*1e-6));
+	//	young_i.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].coeff_ango_acc*1e-6));
+	//	err_young_i.push_back(young_i[0]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_coeff_ango_all/est[i].coeff_ango_all),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
+	//	err_young_i.push_back(young_i[1]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_coeff_ango_acc/est[i].coeff_ango_acc),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
+	//	young1.push_back(media_ponderata(young_i,err_young_i));
+	//	err_young1.push_back(errore_media_ponderata(err_young_i));
+	//	young_i.pop_back();
+	//	young_i.pop_back();
+	//	err_young_i.pop_back();
+	//	err_young_i.pop_back();
+	//}
+	////Secondo Metodo
+	//for(int i=0;i<9;i++)
+	//{
+	//	young2.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].k_medio*1e-6));
+	//	err_young2.push_back(young2[i]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_k_medio/est[i].k_medio),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
+	//}
+	//for(int i=0;i<9;i++){
+	//	eout1<<young1[i]<<" +/- "<<err_young1[i]<<endl;
+	//	eout2<<young2[i]<<" +/- "<<err_young2[i]<<endl;
+	//}
+	////Terzo Metodo
+	//for(int i=0;i<9;i++){
+	//	for(int j=0;j<5;j++){
+	//		est[i].k_no_cons_all.push_back((est[i].allungamento[2*j]-est[i].allungamento[2*j+1])/(400*9.806));
+	//		est[i].k_no_cons_acc.push_back((est[i].accorciamento[2*j]-est[i].accorciamento[2*j+1])/(400*9.806));
+	//		//errori per propagazione
+	//	}
+	//	k_all_3metodo.push_back(media_ponderata(est[i].k_no_cons_all,est[i].err_k_no_cons_all));
+	//	k_acc_3metodo.push_back(media_ponderata(est[i].k_no_cons_acc,est[i].err_k_no_cons_acc));
+	//	//err_k_all_3metodo.push_back(est[i].err_k_no_cons_all/sqrt(5));
+	//	//err_k_acc_3metodo.push_back(est[i].err_k_no_cons_acc/sqrt(5));
+	//	
+	//}
+
+
 	return 0;
 }
+
+
