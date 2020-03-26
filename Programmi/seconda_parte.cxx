@@ -10,8 +10,12 @@ using namespace std;
 struct estensimetri
 {
 	int n_est;
-	int lunghezza;
+	double lunghezza;
 	double diametro;
+	double err_lunghezza = 2;
+	; //in mm
+	double err_diametro_perce = 0.01;
+	double err_diametro;
 	double sezione;
 	double intercetta_all;
 	double coeff_ango_all;
@@ -40,6 +44,11 @@ int main()
 	vector<double> reciproco_sezione;
 	vector<double> k_medio_s;
 	vector<double> err_k_medio_s;
+	vector<double> rapporto;
+	vector<double> prodotto;
+	vector<double> err_rapporto;
+	vector<double> err_prodotto;
+	vector<double> diametro_quadrato;
 
 	ifstream fin("set_dati.txt");
 	if (!fin)
@@ -96,6 +105,7 @@ int main()
 		est[i].err_coeff_ango_all = sigma_b_y_uguali(delta_f, errori[0]); //
 		est[i].err_intercetta_acc = sigma_a_y_uguali(delta_f, errori[0]); //attenzione al double
 		est[i].err_coeff_ango_acc = sigma_b_y_uguali(delta_f, errori[0]); //
+		est[i].err_diametro = 0;										  //completare
 	}
 
 	for (int i = 0; i < est.size(); i++) //scorro vettore est
@@ -112,8 +122,8 @@ int main()
 		est[i].err_k_medio = errore_media_ponderata(err_k_alto_basso);
 		est[i].sezione = M_PI * pow(((est[i].diametro) / 2), 2);
 
-		ofstream gout("../Grafici_2/est_" + to_string(est[i].n_est) + ".txt");   //RIEPILOGO PER LATEX
-		ofstream hout("../Latex/riepilogo_" + to_string(est[i].n_est) + ".txt"); //STAMPA PER FARE PLOT E RIEPILOGO
+		ofstream gout("../Grafici_2/est_" + to_string(est[i].n_est) + ".txt");   //STAMPA PER FARE PLOT E RIEPILOGO
+		ofstream hout("../Latex/riepilogo_" + to_string(est[i].n_est) + ".txt"); //RIEPILOGO PER LATEX
 
 		hout << "Numero:\t" << est[i].n_est << endl;
 		hout << "Diametro:\t" << est[i].diametro << endl;
@@ -136,39 +146,53 @@ int main()
 
 		if (est[i].diametro == 0.279) //se stesso diametro plotta la lunghezza
 		{
-			lunghezza_l.push_back(est[i].lunghezza);
+			lunghezza_l.push_back(est[i].lunghezza * 1e3); //convertito in micron
 			k_medio_l.push_back(est[i].k_medio);
 			err_k_medio_l.push_back(est[i].err_k_medio);
+			rapporto.push_back(est[i].k_medio / (est[i].lunghezza * 1e3));
+			err_rapporto.push_back(sqrt(pow((est[i].err_k_medio / (est[i].lunghezza * 1e3)), 2) + pow(((est[i].k_medio * (est[i].err_lunghezza * 1e3)) / pow((est[i].lunghezza * 1e3), 2)), 2)));
+			//MANCA DEFINIRE IN STRUTTURA ERRORE SU LUNGHEZZA E DIAMETRO
 		}
 
 		if (est[i].lunghezza == 950) //se stessa lunghezza plotta il reciproco della sezione
 		{
-			reciproco_sezione.push_back(1 / est[i].sezione);
+			reciproco_sezione.push_back(1 / (est[i].sezione * 1e3));
+			diametro_quadrato.push_back(est[i].diametro * est[i].diametro * 1e6); //diametro quadrato in micron
 			k_medio_s.push_back(est[i].k_medio);
 			err_k_medio_s.push_back(est[i].err_k_medio);
+			prodotto.push_back(est[i].k_medio * pow((est[i].diametro * 1e3), 2));
+			err_prodotto.push_back(sqrt(pow(pow((est[i].diametro * 1e3), 2) * est[i].err_k_medio, 2) + (pow((2 * est[i].k_medio * (est[i].diametro * 1e3)), 2) * pow((est[i].err_diametro * 1e3), 2))));
 		}
 	}
 
+	//STAMPA VERIFICA LEGGE YOUNG
 	ofstream scost("../Grafici_2/a_sez_cost.txt");
 	ofstream lcost("../Grafici_2/a_lung_cost.txt");
+	ofstream rcost("../Grafici_2/rapporto.txt");
+	ofstream pcost("../Grafici_2/prodotto.txt");
 	//NON UNIRE I DUE CICLI PERCHÈ HANNO UN RANGE DI ESECUZIONE DIVERSO: 3 Volte e 7 Volte
 	//sez costante
 	cout << "A SEZ COST (lunghezza in asse x)" << endl;
 	cout << "Coeff. ango.\t" << b_angolare(lunghezza_l, k_medio_l) << " +/- " << sigma_b_y_uguali(lunghezza_l, err_k_medio_l[0]) << endl;
 	cout << "Intercetta\t" << a_intercetta(lunghezza_l, k_medio_l) << " +/- " << sigma_a_y_uguali(lunghezza_l, err_k_medio_l[0]) << endl;
 	scost << "#LunghezzaEst[mm]\t#K[micron/Newton]\t#Err[micron/Newton]" << endl;
+	rcost << "#Lunghezza[mm]\t#Rapporto[]\t#Err[]" << endl;
+
 	for (int o = 0; o < lunghezza_l.size(); o++)
 	{
 		scost << lunghezza_l[o] << "\t" << k_medio_l[o] << "\t" << err_k_medio_l[o] << endl;
+		rcost << lunghezza_l[o] << "\t" << rapporto[o] << "\t" << err_rapporto[o] << endl;
 	}
 	//lunghezza costante
 	cout << "A LUNGHEZZA COST (1/sezione su asse x)" << endl;
 	cout << "Coeff. ango.\t" << b_angolare(reciproco_sezione, k_medio_s) << " +/- " << sigma_b_y_uguali(reciproco_sezione, err_k_medio_l[0]) << endl;
 	cout << "Intercetta\t" << a_intercetta(reciproco_sezione, k_medio_s) << " +/- " << sigma_a_y_uguali(reciproco_sezione, err_k_medio_l[0]) << endl;
-	lcost << "#ReciprocoSez[1/mm]\t#K[micron/N]\t#Err[micron/Newton]" << endl;
+	lcost << "#ReciprocoSez[1/micron]\t#K[micron/N]\t#Err[micron/Newton]" << endl;
+	pcost << "#DiametroQuadrato[micron^2]\t#Prodotto[]\t#Err[]" << endl;
 	for (int o = 0; o < reciproco_sezione.size(); o++)
 	{
 		lcost << reciproco_sezione[o] << "\t" << k_medio_s[o] << "\t" << err_k_medio_s[o] << endl;
+		pcost << diametro_quadrato[o] << "\t" << prodotto[o] << "\t" << err_prodotto[o] << endl;
 	}
 
 	return 0;
