@@ -3,7 +3,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "statistica.h"
+#include "statistica1.h"
 using namespace std;
 
 double kgpeso_to_newton(double kg_peso);
@@ -53,7 +53,8 @@ int main()
     }
 
     //Output dati grafico
-    ofstream fout("grafico_" + sub_dir + ".txt");
+    ofstream fout("../Grafici/1ac_all_acc/grafico_" + sub_dir + ".txt");
+    ofstream dout("comp_1ac.txt", ios::app);
     if (!fout)
     {
         cout << "Errore scrittura";
@@ -62,13 +63,15 @@ int main()
     fout << "#DeltaForza[N]\tDelta_x[1e-6m]\tDstd[1e-6m]" << endl; //Stampa descrizione colonne per rendere migliore la lettura del file all'utilizzatore finale
     for (int i = 0; i < media_1_acq.size(); i++)
     {
-        cout << delta_forza_newton[i] << "\t" << media_1_acq[i] << "\t" << dstd_1_acq[i] << endl;
+        //cout << delta_forza_newton[i] << "\t" << media_1_acq[i] << "\t" << dstd_1_acq[i] << endl;
         fout << delta_forza_newton[i] << "\t" << media_1_acq[i] << "\t" << dstd_1_acq[i] << endl;
     }
 
     //Primo approccio calcolo di K (tramite interpolazione)
     cout << "Coeff ang:\t" << b_angolare(delta_forza_newton, media_1_acq, dstd_1_acq) << " +/- " << sigma_b(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
     cout << "Intercetta:\t" << a_intercetta(delta_forza_newton, media_1_acq, dstd_1_acq) << " +/- " << sigma_a(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
+    dout<< b_angolare(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t" << sigma_b(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t"<<a_intercetta(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t" << sigma_a(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
+
 
     //Secondo approccio sbagliato (campione K consecutivi)
     //vector<double> delta_allungamento;
