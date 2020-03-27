@@ -65,7 +65,7 @@ double delta(vector<double> dati_x, vector<double> errori_y)
         sum_2 = sum_2 + (pow(dati_x[i], 2) / pow(errori_y[i], 2));
         sum_3 = sum_3 + (dati_x[i] / pow(errori_y[i], 2));
     }
-    delta_d_ = sum_1 * sum_2 - pow(sum_3,2);
+    delta_d_ = sum_1 * sum_2 - pow(sum_3, 2);
     return delta_d_;
 }
 
