@@ -62,6 +62,8 @@ int main()
 	vector<double> k_acc_3metodo;
 	vector<double> err_k_all_3metodo;
 	vector<double> err_k_acc_3metodo;
+	vector<double> young3_all_acc;
+	vector<double> err_young3_all_acc;
 	vector<double> young3;
 	vector<double> err_young3;
 
@@ -211,47 +213,53 @@ int main()
 	}
 
 	//CALCOLO E
-	//ofstream eout1("../CalcoloE/primo_metodo.txt");
-	//ofstream eout2("../CalcoloE/secondo_metodo.txt");
-	//ofstream eout3("../CalcoloE/terzo_metodo.txt");
-//
+	ofstream eout1("../CalcoloE/primo_metodo.txt");
+	ofstream eout2("../CalcoloE/secondo_metodo.txt");
+	ofstream eout3("../CalcoloE/terzo_metodo.txt");
+
 	//Primo Metodo
-	//for(int i=0;i<10;i++)
-	//{
-	//	young_i.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].coeff_ango_all*1e-6));
-	//	young_i.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].coeff_ango_acc*1e-6));
-	//	err_young_i.push_back(young_i[0]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_coeff_ango_all/est[i].coeff_ango_all),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
-	//	err_young_i.push_back(young_i[1]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_coeff_ango_acc/est[i].coeff_ango_acc),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
-	//	young1.push_back(media_ponderata(young_i,err_young_i));
-	//	err_young1.push_back(errore_media_ponderata(err_young_i));
-	//	young_i.pop_back();
-	//	young_i.pop_back();
-	//	err_young_i.pop_back();
-	//	err_young_i.pop_back();
-	//}
-	////Secondo Metodo
-	//for(int i=0;i<9;i++)
-	//{
-	//	young2.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].k_medio*1e-6));
-	//	err_young2.push_back(young2[i]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_k_medio/est[i].k_medio),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
-	//}
-	//for(int i=0;i<9;i++){
-	//	eout1<<young1[i]<<" +/- "<<err_young1[i]<<endl;
-	//	eout2<<young2[i]<<" +/- "<<err_young2[i]<<endl;
-	//}
-	////Terzo Metodo
-	//for(int i=0;i<9;i++){
-	//	for(int j=0;j<5;j++){
-	//		est[i].k_no_cons_all.push_back((est[i].allungamento[2*j]-est[i].allungamento[2*j+1])/(400*9.806));
-	//		est[i].k_no_cons_acc.push_back((est[i].accorciamento[2*j]-est[i].accorciamento[2*j+1])/(400*9.806));
-	//		//errori per propagazione
-	//	}
-	//	k_all_3metodo.push_back(media_ponderata(est[i].k_no_cons_all,est[i].err_k_no_cons_all));
-	//	k_acc_3metodo.push_back(media_ponderata(est[i].k_no_cons_acc,est[i].err_k_no_cons_acc));
-	//	//err_k_all_3metodo.push_back(est[i].err_k_no_cons_all/sqrt(5));
-	//	//err_k_acc_3metodo.push_back(est[i].err_k_no_cons_acc/sqrt(5));
-	//	
-	//}
+	for(int i=0;i<10;i++)
+	{
+		young_i.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].coeff_ango_all*1e-6));
+		young_i.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].coeff_ango_acc*1e-6));
+		err_young_i.push_back(young_i[0]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_coeff_ango_all/est[i].coeff_ango_all),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
+		err_young_i.push_back(young_i[1]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_coeff_ango_acc/est[i].coeff_ango_acc),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
+		young1.push_back(media_ponderata(young_i,err_young_i));
+		err_young1.push_back(errore_media_ponderata(err_young_i));
+		young_i.pop_back();
+		young_i.pop_back();
+		err_young_i.pop_back();
+		err_young_i.pop_back();
+	}
+	//Secondo Metodo
+	for(int i=0;i<9;i++)
+	{
+		young2.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].k_medio*1e-6));
+		err_young2.push_back(young2[i]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_k_medio/est[i].k_medio),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
+	}
+	for(int i=0;i<9;i++){
+		eout1<<young1[i]<<" +/- "<<err_young1[i]<<endl;
+		eout2<<young2[i]<<" +/- "<<err_young2[i]<<endl;
+	}
+	//Terzo Metodo
+	for(int i=0;i<9;i++){
+		for(int j=0;j<5;j++){
+			est[i].k_no_cons_all.push_back((est[i].allungamento[2*j]-est[i].allungamento[2*j+1])/(400*9.806));
+			est[i].k_no_cons_acc.push_back((est[i].accorciamento[2*j]-est[i].accorciamento[2*j+1])/(400*9.806));
+			est[i].err_k_no_cons_all.push_back(sqrt(pow(est[i].allungamento[2*j],2)+pow(est[i].allungamento[2*j+1],2)));
+			est[i].err_k_no_cons_acc.push_back(sqrt(pow(est[i].accorciamento[2*j],2)+pow(est[i].accorciamento[2*j+1],2)));
+			k_all_3metodo.push_back(media_ponderata(est[i].k_no_cons_all,est[i].err_k_no_cons_all));
+			k_acc_3metodo.push_back(media_ponderata(est[i].k_no_cons_acc,est[i].err_k_no_cons_acc));
+			err_k_all_3metodo.push_back(est[i].err_k_no_cons_all[j]/sqrt(5));
+			err_k_acc_3metodo.push_back(est[i].err_k_no_cons_acc[j]/sqrt(5));
+		}
+		young3_all_acc.push_back(est[i].lunghezza/(k_all_3metodo[i]*est[i].sezione));
+		young3_all_acc.push_back(est[i].lunghezza/(k_acc_3metodo[i]*est[i].sezione));
+		//err_young3_all_acc.push_back();
+		//err_young3_all_acc.push_back();
+		//young3.push_back(media_ponderata(young3_all_acc[i],err_young3_all_acc.[i]));
+		//err_young3.push_back(errore_media_ponderata(err_young3_all_acc.[i]));
+	}
 
 
 	return 0;
