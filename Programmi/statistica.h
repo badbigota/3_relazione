@@ -205,10 +205,48 @@ double delta(vector<double> dati_x, vector<double> errori_y)
     {
         sum_1 = sum_1 + (1 / pow(errori_y[i], 2));
         sum_2 = sum_2 + (pow(dati_x[i], 2) / pow(errori_y[i], 2));
-        sum_3 = sum_3 + pow((dati_x[i] / pow(errori_y[i], 2)), 2);
+        sum_3 = sum_3 + (dati_x[i] / pow(errori_y[i], 2));
     }
-    delta_d_ = sum_1 * sum_2 - sum_3;
+    delta_d_ = sum_1 * sum_2 - pow(sum_3,2);
     return delta_d_;
+}
+
+//Delta (chi-quadro) [errori tutti uguali o del tutto assenti]
+double delta(vector<double> dati_x, int inizio = 0, int fine = 0, string log = "")
+{
+    double delta_;
+    double size = 0;
+    double sum_1 = 0, sum_2 = 0;
+    if (fine == 0)
+    {
+        size = dati_x.size();
+        for (auto d : dati_x)
+        {
+            sum_1 = sum_1 + pow(d, 2);
+            sum_2 = sum_2 + d;
+        }
+        delta_ = size * sum_1 - pow(sum_2, 2);
+        if (log == "verbose")
+        {
+            cout << "Calcolo di delta su tutto il vettore delle ascisse per chi quadro (" << delta_ << ")" << endl;
+        }
+    }
+    else if (fine != 0)
+    {
+        for (int i = inizio; i < fine; i++)
+        {
+            size++;
+            sum_1 = sum_1 + pow(dati_x.at(i), 2);
+            sum_2 = sum_2 + dati_x.at(i);
+        }
+        delta_ = size * sum_1 - pow(sum_2, 2);
+        if (log == "verbose")
+        {
+            cout << "Calcolo di delta su parte del vettore delle ascisse per chi quadro (" << delta_ << ")" << endl;
+        }
+    }
+
+    return delta_;
 }
 
 //Coeff. a di y=a+bx con errori tutti diversi (intercetta)
@@ -290,43 +328,7 @@ double sigma_b(vector<double> dati_x, vector<double> dati_y, vector<double> erro
 INIZIO CHI QUADRO CON ERRORI ERRORI ASSENTI< VIENE USATA LA SIGMA POSTERIORI
 */
 
-//Delta (chi-quadro) [errori tutti uguali o del tutto assenti]
-double delta(vector<double> dati_x, int inizio = 0, int fine = 0, string log = "")
-{
-    double delta_;
-    double size = 0;
-    double sum_1 = 0, sum_2 = 0;
-    if (fine == 0)
-    {
-        size = dati_x.size();
-        for (auto d : dati_x)
-        {
-            sum_1 = sum_1 + pow(d, 2);
-            sum_2 = sum_2 + d;
-        }
-        delta_ = size * sum_1 - pow(sum_2, 2);
-        if (log == "verbose")
-        {
-            cout << "Calcolo di delta su tutto il vettore delle ascisse per chi quadro (" << delta_ << ")" << endl;
-        }
-    }
-    else if (fine != 0)
-    {
-        for (int i = inizio; i < fine; i++)
-        {
-            size++;
-            sum_1 = sum_1 + pow(dati_x.at(i), 2);
-            sum_2 = sum_2 + dati_x.at(i);
-        }
-        delta_ = size * sum_1 - pow(sum_2, 2);
-        if (log == "verbose")
-        {
-            cout << "Calcolo di delta su parte del vettore delle ascisse per chi quadro (" << delta_ << ")" << endl;
-        }
-    }
 
-    return delta_;
-}
 
 //Coefficiente a di y=a+bx (intercetta) 
 double a_intercetta(vector<double> dati_x, vector<double> dati_y, int inizio = 0, int fine = 0, string log = "")
