@@ -63,7 +63,7 @@ double delta(vector<double> dati_x)
     return delta_;
 }
 
-//Errore in tercetta se tutti i sigma sono uguali
+//Errore intercetta se tutti i sigma sono uguali
 double sigma_a_y_uguali(vector<double> dati_x, double err_y)
 {
     double sum1 = 0, sum2 = 0, sum = 0;
