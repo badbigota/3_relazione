@@ -12,7 +12,7 @@ struct estensimetri
 	int n_est;
 	double lunghezza;
 	double diametro;
-	double err_lunghezza = 2; //in mm
+	double err_lunghezza = 2000.0; //in micron
 	double err_diametro_perce = 0.01;
 	double err_diametro;
 	double sezione;
@@ -62,8 +62,6 @@ int main()
 	vector<double> k_acc_3metodo;
 	vector<double> err_k_all_3metodo;
 	vector<double> err_k_acc_3metodo;
-	vector<double> young3_all_acc;
-	vector<double> err_young3_all_acc;
 	vector<double> young3;
 	vector<double> err_young3;
 
@@ -77,7 +75,9 @@ int main()
 	{
 		est[i].n_est = i + 1;
 		fin >> est[i].lunghezza;
+		est[i].lunghezza=est[i].lunghezza*1000.0; //ocnversione in micron
 		fin >> est[i].diametro;
+		est[i].diametro=est[i].diametro*1000.0;//conversione in micron
 	}
 	while (fin >> v)
 	{
@@ -96,11 +96,11 @@ int main()
 
 	for (int j = 0; j < 10; j++)
 	{
-		errori.push_back(sqrt(2) * sigma_dist_uni(10, 1)); //ptl=10 e coeff affid  = 1 con propagazione su diferenza
+		errori.push_back(sqrt(2) * sigma_dist_uni(10.0, 1)); //ptl=10 e coeff affid  = 1 con propagazione su diferenza
 		delta_f.push_back(0.1 * 4 * 9.806 * j);
 	}
 
-	for (int i = 0; i < 9; i++) //scorre il vettore contenete le strutture
+	for (int i = 0; i < est.size(); i++) //scorre il vettore contenete le strutture
 	{
 		vector<double> delta_x_all;
 		vector<double> delta_x_acc;
@@ -114,15 +114,15 @@ int main()
 			delta_x_acc.push_back(est[i].accorciamento[j] - x0_acc);
 		}
 
-		est[i].intercetta_all = a_intercetta(delta_f, delta_x_all);		  //non metto err perchè tutti uguali
-		est[i].coeff_ango_all = b_angolare(delta_f, delta_x_all);		  //
-		est[i].intercetta_acc = a_intercetta(delta_f, delta_x_acc);		  //non metto err perchè tutti uguali
-		est[i].coeff_ango_acc = b_angolare(delta_f, delta_x_acc);		  //
-		est[i].err_intercetta_all = sigma_a_y_uguali(delta_f, errori[0]); //attenzione al double
-		est[i].err_coeff_ango_all = sigma_b_y_uguali(delta_f, errori[0]); //
-		est[i].err_intercetta_acc = sigma_a_y_uguali(delta_f, errori[0]); //attenzione al double
-		est[i].err_coeff_ango_acc = sigma_b_y_uguali(delta_f, errori[0]); //
-		est[i].err_diametro = 0;										  //completare
+		est[i].intercetta_all = a_intercetta(delta_f, delta_x_all);		   //non metto err perchè tutti uguali
+		est[i].coeff_ango_all = b_angolare(delta_f, delta_x_all);		   //
+		est[i].intercetta_acc = a_intercetta(delta_f, delta_x_acc);		   //non metto err perchè tutti uguali
+		est[i].coeff_ango_acc = b_angolare(delta_f, delta_x_acc);		   //
+		est[i].err_intercetta_all = sigma_a_y_uguali(delta_f, errori[0]);  //attenzione al double
+		est[i].err_coeff_ango_all = sigma_b_y_uguali(delta_f, errori[0]);  //
+		est[i].err_intercetta_acc = sigma_a_y_uguali(delta_f, errori[0]);  //attenzione al double
+		est[i].err_coeff_ango_acc = sigma_b_y_uguali(delta_f, errori[0]);  //
+		est[i].err_diametro = est[i].err_diametro_perce * est[i].diametro; //completare
 	}
 
 	for (int i = 0; i < est.size(); i++) //scorro vettore est
@@ -137,9 +137,9 @@ int main()
 
 		est[i].k_medio = media_ponderata(k_alto_basso, err_k_alto_basso);
 		est[i].err_k_medio = errore_media_ponderata(err_k_alto_basso);
-		est[i].sezione = M_PI * pow(((est[i].diametro) / 2), 2);
+		est[i].sezione = M_PI * pow(((est[i].diametro) / 2.0), 2.0);
 
-		ofstream gout("../Grafici_2/est_" + to_string(est[i].n_est) + ".txt");	 //STAMPA PER FARE PLOT E RIEPILOGO
+		ofstream gout("../Grafici_2/est_" + to_string(est[i].n_est) + ".txt");   //STAMPA PER FARE PLOT E RIEPILOGO
 		ofstream hout("../Latex/riepilogo_" + to_string(est[i].n_est) + ".txt"); //RIEPILOGO PER LATEX
 
 		hout << "Numero:\t" << est[i].n_est << endl;
@@ -155,32 +155,36 @@ int main()
 
 		for (int k = 0; k < est[i].accorciamento.size(); k++) //per ogni valore di all e acc stampami i dati
 		{
-			gout << delta_f[k] << "\t" << est[i].allungamento[k] << "\t" << errori[k] << "\t" << est[i].accorciamento[k] << "\t" << errori[k] << endl;
+			gout << delta_f[k] << "\t" << est[i].allungamento[k] - est[i].allungamento[0] << "\t" << sqrt(2) * errori[k] << "\t" << est[i].accorciamento[k] - est[i].accorciamento[0] << "\t" << sqrt(2) * errori[k] << endl;
 		}
 
 		//VERIFICA DI LEGGE DI YOUNG: se stessa sezione plotta la lunghezza e il relativo k (solo acciaio)
 		//Genera i vettori su cui archiviare i dati per il plot fuori dal ciclo
 
-		if (est[i].diametro == 0.279) //se stesso diametro plotta la lunghezza
+		if (est[i].diametro == 279) //se stesso diametro plotta la lunghezza
 		{
-			lunghezza_l.push_back(est[i].lunghezza * 1e3); //convertito in micron
+			lunghezza_l.push_back(est[i].lunghezza);
 			k_medio_l.push_back(est[i].k_medio);
 			err_k_medio_l.push_back(est[i].err_k_medio);
-			rapporto.push_back(est[i].k_medio / (est[i].lunghezza * 1e3));
-			err_rapporto.push_back(sqrt(pow((est[i].err_k_medio / (est[i].lunghezza * 1e3)), 2) + pow(((est[i].k_medio * (est[i].err_lunghezza * 1e3)) / pow((est[i].lunghezza * 1e3), 2)), 2)));
+			rapporto.push_back(est[i].k_medio / est[i].lunghezza );
+			err_rapporto.push_back(sqrt(pow((est[i].err_k_medio / est[i].lunghezza), 2) + pow(((est[i].k_medio * est[i].err_lunghezza ) / pow(est[i].lunghezza, 2)), 2)));
 			//MANCA DEFINIRE IN STRUTTURA ERRORE SU LUNGHEZZA E DIAMETRO
 		}
 
-		if (est[i].lunghezza == 950) //se stessa lunghezza plotta il reciproco della sezione
+		if (est[i].lunghezza == 950000) //se stessa lunghezza plotta il reciproco della sezione
 		{
-			reciproco_sezione.push_back(1 / (est[i].sezione * 1e3));
-			diametro_quadrato.push_back(est[i].diametro * est[i].diametro * 1e6); //diametro quadrato in micron
+			reciproco_sezione.push_back(1 / est[i].sezione );
+			diametro_quadrato.push_back(est[i].diametro * est[i].diametro); //diametro quadrato in micron
 			k_medio_s.push_back(est[i].k_medio);
 			err_k_medio_s.push_back(est[i].err_k_medio);
-			prodotto.push_back(est[i].k_medio * pow((est[i].diametro * 1e3), 2));
-			err_prodotto.push_back(sqrt(pow(pow((est[i].diametro * 1e3), 2) * est[i].err_k_medio, 2) + (pow((2 * est[i].k_medio * (est[i].diametro * 1e3)), 2) * pow((est[i].err_diametro * 1e3), 2))));
+			prodotto.push_back(est[i].k_medio * pow(est[i].diametro , 2));
+			err_prodotto.push_back(sqrt(pow(pow(est[i].diametro, 2) * est[i].err_k_medio, 2) + (pow((2 * est[i].k_medio * est[i].diametro ), 2) * pow(est[i].err_diametro, 2))));
 		}
 	}
+
+	ofstream kout("../Grafici_2/k_ponderati.txt");
+	for (int i = 0; i < est.size(); i++)
+		kout << est[i].k_medio << endl;
 
 	//STAMPA VERIFICA LEGGE YOUNG
 	ofstream scost("../Grafici_2/a_sez_cost.txt");
@@ -217,52 +221,64 @@ int main()
 	ofstream eout2("../CalcoloE/secondo_metodo.txt");
 	ofstream eout3("../CalcoloE/terzo_metodo.txt");
 
-	//Primo Metodo
-	for(int i=0;i<10;i++)
+	//Primo Metodo (calcolo E per ogni estensimentro facendo media ponderata su E_all e E acc)
+	for (int i = 0; i < est.size(); i++)
 	{
-		young_i.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].coeff_ango_all*1e-6));
-		young_i.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].coeff_ango_acc*1e-6));
-		err_young_i.push_back(young_i[0]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_coeff_ango_all/est[i].coeff_ango_all),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
-		err_young_i.push_back(young_i[1]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_coeff_ango_acc/est[i].coeff_ango_acc),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
-		young1.push_back(media_ponderata(young_i,err_young_i));
+		young_i.push_back(4 * est[i].lunghezza / (M_PI * pow(est[i].diametro , 2) * est[i].coeff_ango_all));
+		young_i.push_back(4 * est[i].lunghezza  / (M_PI * pow(est[i].diametro , 2) * est[i].coeff_ango_acc));
+		err_young_i.push_back(young_i[0] * sqrt(pow((est[i].err_lunghezza / est[i].lunghezza), 2) + pow((est[i].err_coeff_ango_all / est[i].coeff_ango_all), 2) + 4 * pow((est[i].err_diametro / est[i].diametro), 2)));
+		err_young_i.push_back(young_i[1] * sqrt(pow((est[i].err_lunghezza / est[i].lunghezza), 2) + pow((est[i].err_coeff_ango_acc / est[i].coeff_ango_acc), 2) + 4 * pow((est[i].err_diametro / est[i].diametro), 2)));
+		young1.push_back(media_ponderata(young_i, err_young_i));
 		err_young1.push_back(errore_media_ponderata(err_young_i));
 		young_i.pop_back();
 		young_i.pop_back();
 		err_young_i.pop_back();
 		err_young_i.pop_back();
 	}
-	//Secondo Metodo
-	for(int i=0;i<9;i++)
+	//Secondo Metodo (calcolo di E per ogni est partendo dalla meia dei K già fatta in Acc e All)
+	for (int i = 0; i < est.size(); i++)
 	{
-		young2.push_back(4*est[i].lunghezza*1e-3/(M_PI*pow(est[i].diametro*1e-3,2)*est[i].k_medio*1e-6));
-		err_young2.push_back(young2[i]*sqrt(pow((est[i].err_lunghezza/est[i].lunghezza),2)+pow((est[i].err_k_medio/est[i].k_medio),2)+4*pow((est[i].err_diametro/est[i].diametro),2)));
+		young2.push_back(4 * est[i].lunghezza  / (M_PI * pow(est[i].diametro, 2) * est[i].k_medio));
+		err_young2.push_back(young2[i] * sqrt(pow((est[i].err_lunghezza / est[i].lunghezza), 2) + pow((est[i].err_k_medio / est[i].k_medio), 2) + 4 * pow((est[i].err_diametro / est[i].diametro), 2)));
 	}
-	for(int i=0;i<9;i++){
-		eout1<<young1[i]<<" +/- "<<err_young1[i]<<endl;
-		eout2<<young2[i]<<" +/- "<<err_young2[i]<<endl;
+	eout1<<"#E[N/micron^2]\t#ErrE[N/micron^2]"<<endl;
+	eout2<<"#E[N/micron^2]\t#ErrE[N/micron^2]"<<endl;
+	eout3<<"#E[N/micron^2]\t#ErrE[N/micron^2]"<<endl;
+	for (int i = 0; i < est.size(); i++)
+	{
+		eout1 << young1[i] << " +/- " << err_young1[i] << endl;
+		eout2 << young2[i] << " +/- " << err_young2[i] << endl;
 	}
 	//Terzo Metodo
-	for(int i=0;i<9;i++){
-		for(int j=0;j<5;j++){
-			est[i].k_no_cons_all.push_back((est[i].allungamento[2*j]-est[i].allungamento[2*j+1])/(400*9.806));
-			est[i].k_no_cons_acc.push_back((est[i].accorciamento[2*j]-est[i].accorciamento[2*j+1])/(400*9.806));
-			est[i].err_k_no_cons_all.push_back(sqrt(pow(est[i].allungamento[2*j],2)+pow(est[i].allungamento[2*j+1],2)));
-			est[i].err_k_no_cons_acc.push_back(sqrt(pow(est[i].accorciamento[2*j],2)+pow(est[i].accorciamento[2*j+1],2)));
-			k_all_3metodo.push_back(media_ponderata(est[i].k_no_cons_all,est[i].err_k_no_cons_all));
-			k_acc_3metodo.push_back(media_ponderata(est[i].k_no_cons_acc,est[i].err_k_no_cons_acc));
-			err_k_all_3metodo.push_back(est[i].err_k_no_cons_all[j]/sqrt(5));
-			err_k_acc_3metodo.push_back(est[i].err_k_no_cons_acc[j]/sqrt(5));
-		}
-		young3_all_acc.push_back(est[i].lunghezza/(k_all_3metodo[i]*est[i].sezione));
-		young3_all_acc.push_back(est[i].lunghezza/(k_acc_3metodo[i]*est[i].sezione));
-		//err_young3_all_acc.push_back();
-		//err_young3_all_acc.push_back();
-		//young3.push_back(media_ponderata(young3_all_acc[i],err_young3_all_acc.[i]));
-		//err_young3.push_back(errore_media_ponderata(err_young3_all_acc.[i]));
-	}
-
+	//for (int i = 0; i < est.size(); i++)
+	//{
+	//	vector<double> young3_all_acc;
+	//	vector<double> err_young3_all_acc;
+	//	for (int j = 0; j < est[i].allungamento.size(); j++)
+	//	{
+	//		est[i].k_no_cons_all.push_back((abs(est[i].allungamento[2 * j] - est[i].allungamento[2 * j + 1])) / (0.4 * 9.806));
+	//		est[i].k_no_cons_acc.push_back((abs(est[i].accorciamento[2 * j] - est[i].accorciamento[2 * j + 1])) / (0.4 * 9.806));
+	//		//est[i].err_k_no_cons_all.push_back(sqrt(pow(est[i].err_allungamento[2*j],2)+pow(est[i].err_allungamento[2*j+1],2)));
+	//		//est[i].err_k_no_cons_acc.push_back(sqrt(pow(est[i].err_accorciamento[2*j],2)+pow(est[i].err_accorciamento[2*j+1],2)));
+	//	}
+	//	k_all_3metodo.push_back(media(est[i].k_no_cons_all)); 
+	//	cout << media(est[i].k_no_cons_all) << endl;
+	//	k_acc_3metodo.push_back(media(est[i].k_no_cons_acc)); 
+	//	cout << media(est[i].k_no_cons_acc) << endl;
+	//	err_k_all_3metodo.push_back(dstd_media(est[i].k_no_cons_all)); 
+	//	err_k_acc_3metodo.push_back(dstd_media(est[i].k_no_cons_acc)); 
+//
+	//	young3_all_acc.push_back(est[i].lunghezza / (k_all_3metodo[i] * est[i].sezione));
+	//	err_young3_all_acc.push_back(1); //young3_all_acc[i] * sqrt(pow((est[i].err_lunghezza / est[i].lunghezza), 2) + pow((err_k_all_3metodo[i] / k_all_3metodo[i]), 2) + 4 * pow((est[i].err_diametro / est[i].diametro), 2)));
+	//	young3_all_acc.push_back(est[i].lunghezza / (k_acc_3metodo[i] * est[i].sezione));
+	//	err_young3_all_acc.push_back(1);		 //young3_all_acc[i] * sqrt(pow((est[i].err_lunghezza / est[i].lunghezza), 2) + pow((err_k_acc_3metodo[i] / k_acc_3metodo[i]), 2) + 4 * pow((est[i].err_diametro / est[i].diametro), 2)));
+	//	young3.push_back(media(young3_all_acc)); //media_ponderata(young3_all_acc, err_young3_all_acc));
+	//	err_young3.push_back(0);				 //errore_media_ponderata(err_young3_all_acc));
+	//}
+	//for (int i = 0; i < young3.size(); i++)
+	//{
+	//	eout3 << young3[i] << " +/- " << err_young3[i] << endl;
+	//}
 
 	return 0;
 }
-
-
