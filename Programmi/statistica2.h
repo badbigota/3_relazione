@@ -32,6 +32,33 @@ double media(vector<double> dati, int inizio = 0, int fine = 0)
         return media_;
     }
 }
+//Deviazione standard per popolazione (N-1 a denominatore)
+double dstd(vector<double> dati, int inizio = 0, int fine = 0, string log = "")
+{
+    double dstd_camp;
+    double media_camp;
+    double somma_camp;
+    int counter = 0;
+    media_camp = media(dati, inizio, fine);
+        for (auto c : dati)
+        {
+            somma_camp = somma_camp + (media_camp - c) * (media_camp - c);
+        }
+        counter = dati.size();
+        dstd_camp = sqrt(somma_camp / (counter - 1));
+        
+    return dstd_camp;
+}
+
+//Deviazione standard della media
+double dstd_media(vector<double> dati)
+{
+    double dstd_media_;
+    
+        dstd_media_ = dstd(dati) / sqrt(dati.size());
+    
+    return dstd_media_;
+}
 
 //Errore distribuzione triangolare
 double sigma_dist_tri(double ptl, double coeff_aff)
