@@ -191,3 +191,25 @@ double errore_media_ponderata(vector<double> errori)
     }
     return (1 / sqrt(sum));
 }
+//Sigma y a posteriori
+double sigma_y_posteriori(vector<double> dati_x, vector<double> dati_y)
+{
+    double sigma_y;
+    double a, b;
+    int size = 0;
+    double numeratore = 0;
+    if (dati_x.size() != dati_y.size())
+    {
+        cout << "Vettori forniti non della stessa dimensione" << endl;
+    }
+
+    a = a_intercetta(dati_x, dati_y);
+    b = b_angolare(dati_x, dati_y);
+    size = dati_x.size();
+    for (int i = 0; i < dati_x.size(); i++)
+    {
+        numeratore = numeratore + pow((dati_y.at(i) - a - b * dati_x.at(i)), 2);
+    }
+    sigma_y = sqrt(numeratore / (size - 2));
+    return sigma_y;
+}
