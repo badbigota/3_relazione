@@ -6,7 +6,10 @@
 #include "statistica1.h"
 using namespace std;
 
-double kgpeso_to_newton(double kg_peso);
+double kgpeso_to_newton(double kg_peso)
+{
+    return 9.806 * kg_peso;
+}
 
 int main()
 {
@@ -44,7 +47,7 @@ int main()
         dstd_1_acq.push_back(dstd_media(dati_file));
     }
 
-    for (int i = 0; i < dstd_1_acq.size(); i++) //Se l'errore è più piccolo della distrib triangolare, sostituire la dev std con quella della triangolare. Previene avere errori nulli
+    for (int i = 0; i < dstd_1_acq.size(); i++)
     {
         if (dstd_1_acq[i] < sigma_dist_uni(10, 10))
         {
@@ -52,26 +55,38 @@ int main()
         }
     }
 
+    cout << "POST\tERR_NS\tDIST_UNI" << endl;
+    for (int i = 0; i < dstd_1_acq.size(); i++)
+    {
+        cout << sigma_y_posteriori(delta_forza_newton, media_1_acq) << "\t" << dstd_1_acq[i] << endl;
+    }
+    vector<double> errori_y(dstd_1_acq.size(), sigma_y_posteriori(delta_forza_newton, media_1_acq));
+
     //Output dati grafico
     ofstream fout("../Grafici/1ac_all_acc/grafico_" + sub_dir + ".txt");
-    ofstream dout("comp_1ac.txt", ios::app);
+    ofstream dout("comp_1ac_correz_dist_uni.txt", ios::app);
+    ofstream sout("comp_1ac_sigma_post.txt", ios::app);
+
     if (!fout)
     {
         cout << "Errore scrittura";
         return 1;
     }
-    fout << "#DeltaForza[N]\tDelta_x[1e-6m]\tDstd[1e-6m]" << endl; //Stampa descrizione colonne per rendere migliore la lettura del file all'utilizzatore finale
-    for (int i = 0; i < media_1_acq.size(); i++)
+    fout << "#DeltaForza[N]\tDelta_x[1e-6m]\tDstd(y_post)[1e-6m]" << endl; //Stampa descrizione colonne per rendere migliore la lettura del file all'utilizzatore finale
+    for (int i = 0; i < media_1_acq.size(); i++)                           //usiamo sigma post perchè più gramde di dev std (anche dopo confronto con dist uni)
     {
-        //cout << delta_forza_newton[i] << "\t" << media_1_acq[i] << "\t" << dstd_1_acq[i] << endl;
-        fout << delta_forza_newton[i] << "\t" << media_1_acq[i] << "\t" << dstd_1_acq[i] << endl;
+        fout << delta_forza_newton[i] << "\t" << media_1_acq[i] << "\t" << sigma_y_posteriori(delta_forza_newton, media_1_acq) << endl;
     }
-
     //Primo approccio calcolo di K (tramite interpolazione)
-    cout << "Coeff ang:\t" << b_angolare(delta_forza_newton, media_1_acq, dstd_1_acq) << " +/- " << sigma_b(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
-    cout << "Intercetta:\t" << a_intercetta(delta_forza_newton, media_1_acq, dstd_1_acq) << " +/- " << sigma_a(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
-    dout<< b_angolare(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t" << sigma_b(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t"<<a_intercetta(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t" << sigma_a(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
+    cout << "Err.Piccoli (sottostima) Coeff ang:\t" << b_angolare(delta_forza_newton, media_1_acq, dstd_1_acq) << " +/- " << sigma_b(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
+    cout << "Sig. Post. (funzioni senza err) Coeff ang:\t" << b_angolare(delta_forza_newton, media_1_acq) << " +/- " << sigma_b(delta_forza_newton, media_1_acq) << endl;
 
+    cout << "Err.Piccoli (sottosti Intercetta:\t" << a_intercetta(delta_forza_newton, media_1_acq, dstd_1_acq) << " +/- " << sigma_a(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
+    cout << "Sig. Post. (funzioni  Intercetta:\t" << a_intercetta(delta_forza_newton, media_1_acq) << " +/- " << sigma_a(delta_forza_newton, media_1_acq) << endl;
+
+    //Stampa K quando sosttostimato e quando non sottostimato con la sigma posteriori
+    dout << b_angolare(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t" << sigma_b(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t" << a_intercetta(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t" << sigma_a(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
+    sout << b_angolare(delta_forza_newton, media_1_acq) << "\t" << sigma_b(delta_forza_newton, media_1_acq) << "\t" << a_intercetta(delta_forza_newton, media_1_acq) << "\t" << sigma_a(delta_forza_newton, media_1_acq) << endl;
 
     //Secondo approccio sbagliato (campione K consecutivi)
     //vector<double> delta_allungamento;
@@ -95,9 +110,4 @@ int main()
     //cout << "K NON consec:\t" << media(k_non_consecutivi) << "+/-" << dstd_media(k_non_consecutivi) << endl;
 
     return 0;
-}
-
-double kgpeso_to_newton(double kg_peso)
-{
-    return 9.806 * kg_peso;
 }
