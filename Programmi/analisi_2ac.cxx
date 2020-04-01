@@ -69,7 +69,7 @@ int main()
       }
     }
     double delta_forza = kgpeso_to_newton((d.gp - 200.0) * 4 / 1000);
-    double sigma_delta_forza = sigma_dist_uni(((300.0 * 100) / (11 * 1000)) * (4 * 9.806 / 1000), 1);
+    double sigma_delta_forza = sigma_dist_uni(((300.0 * 100.0) / (11.0 * 1000.0)) * (4.0 * 9.806 / 1000.0), 1.0);
     d.media = media(d.media_2_acq);
     d.dstd_media = dstd_media(d.media_2_acq);
     d.kappa = d.media / delta_forza;
