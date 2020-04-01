@@ -1,11 +1,11 @@
 *.ini
 *.exe
 *.o
-.vscode/*
 *.png
+*.txt
 *test*.cxx
-Grafici_2/*
-
-Grafici/*
 *.pdf
+.vscode/*
+Grafici_2/*
+Grafici/*
 Latex/*
