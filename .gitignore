@@ -5,7 +5,7 @@
 *.png
 *test*.cxx
 Grafici_2/*
-CalcoloE/*
+
 Grafici/*
 *.pdf
 Latex/*
