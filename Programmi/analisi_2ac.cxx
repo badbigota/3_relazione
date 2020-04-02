@@ -131,17 +131,17 @@ int main()
   //media ponderata valori di k alto e errore con errore media ponderata
   double media_ponderata_k_alto = media_ponderata(k_alto, sigma_k_alto); //valori k
   k.push_back(media_ponderata_k_alto);
-
   double sigma_media_ponderata_k_alto = errore_media_ponderata(sigma_k_alto); //errori k
   sigma_k.push_back(sigma_media_ponderata_k_alto);
   cout << media_ponderata_k_alto << "+/-" << sigma_media_ponderata_k_alto << endl;
+
   //media ponderata valori di k basso e errore con errore media ponderata
   double media_ponderata_k_basso = media_ponderata(k_basso, sigma_k_basso);
   k.push_back(media_ponderata_k_basso);
-
   double sigma_media_ponderata_k_basso = errore_media_ponderata(sigma_k_basso);
   sigma_k.push_back(sigma_media_ponderata_k_basso);
   cout << media_ponderata_k_basso << " +/- " << sigma_media_ponderata_k_basso << endl;
+  
   //media ponderata delle medie ponderate
   double valore_k = media_ponderata(k, sigma_k);
   double sigma_valore_k = errore_media_ponderata(sigma_k);

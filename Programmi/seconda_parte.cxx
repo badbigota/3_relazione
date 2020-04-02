@@ -96,15 +96,15 @@ int main()
 		count++;
 	}
 
-	for (int i = 0; i < est.size(); i++) //la sigma aposteriori è molto maggiore della dist uniforme-> 4 vs. 80/100
-	{
-		//for (int j = 0; j < est[i].allungamento.size(); j++)
-		//{
-		//	est[i].err_delta_x_all.push_back(sqrt(2) * sigma_dist_uni(10.0, 1));
-		//	est[i].err_delta_x_acc.push_back(sqrt(2) * sigma_dist_uni(10.0, 1));
-		//}
-	}
-	//FINE LETTURA
+	//for (int i = 0; i < est.size(); i++) //la sigma aposteriori è molto maggiore della dist uniforme-> 4 vs. 80/100
+	//////{
+	//////		for (int j = 0; j < est[i].allungamento.size(); j++)
+	//////		{
+	////			est[i].err_delta_x_all.push_back(sqrt(2) * sigma_dist_uni(5.0, 1));
+	////			est[i].err_delta_x_acc.push_back(sqrt(2) * sigma_dist_uni(5.0, 1));
+	////		}
+	////		
+	//}//FINE LETTURA
 
 	for (int j = 0; j < est[0].allungamento.size(); j++)
 	{
@@ -123,6 +123,8 @@ int main()
 		}
 		double sigma_post_all = sigma_y_posteriori(delta_f, est[i].delta_x_all);
 		double sigma_post_acc = sigma_y_posteriori(delta_f, est[i].delta_x_acc);
+		
+		cout<<est[i].n_est<<"\t"<<sigma_post_all<<"\t"<<sigma_post_acc<<"\t"<<sqrt(2) * sigma_dist_uni(5.0, 1)<<"\t"<<sqrt(2) * sigma_dist_uni(10.0, 1)<<endl;
 
 		for (int j = 0; j < est[i].allungamento.size(); j++)
 		{
@@ -228,6 +230,7 @@ int main()
 
 	nos_est.k_medio = media_ponderata(k_alto_basso_nos, err_k_alto_basso_nos);
 	nos_est.err_k_medio = errore_media_ponderata(err_k_alto_basso_nos);
+	cout<<nos_est.n_est<<"\t"<<nos_est.err_delta_x_all[0]<<"\t"<<nos_est.err_delta_x_acc[0]<<endl;
 
 	est.push_back(nos_est); //Inserimento nostro estensiemtro in est [il kracken arriva =) ]
 
@@ -360,10 +363,10 @@ int main()
 		//cout << young3_all << "\t" << sigma_young_3_all << "\t" << young3_acc << "\t" << sigma_young_3_acc << endl; //Stampa modulo young in all e acc
 		young3_all_acc.push_back(media_ponderata(young3, err_young3));
 		err_young3_all_acc.push_back(errore_media_ponderata(err_young3));
-		for (int i; i < young3_all_acc.size(); i++)
+		for (int k=0; k < young3_all_acc.size(); k++)
 		{
 			//cout << young3_all_acc[i] << "\t" << err_young3_all_acc[i] << endl;
-			eout3 << young3_all_acc[i] << "\t" << err_young3_all_acc[i] << endl;
+			eout3 << young3_all_acc[k] << "\t" << err_young3_all_acc[k] << endl;
 		}
 	}
 	return 0;
