@@ -86,16 +86,17 @@ int main()
       k_basso.push_back(d.kappa);
       sigma_k_basso.push_back(d.sigma_kappa);
     }
+    cout << d.gp << "\t" << d.media << "\t" << d.dstd_media << endl;
   }
 
   //ERRORE DE SALVATOR
   double delta_1000 = abs(campioni[3].media - campioni[2].media);
   double delta_400 = abs(campioni[0].media - campioni[1].media);
-  double delta_f = kgpeso_to_newton((1000.0 - 400.0) / 1000.0);
+  double delta_f = kgpeso_to_newton((1000.0 - 400.0)*4 / 1000.0);
   double errore_desalva = (delta_1000 - delta_400) / delta_f;
   double num = campioni[3].media - campioni[1].media + campioni[2].media - campioni[0].media;
   double sigma_errore_desalva = sqrt(pow(1 / delta_f, 2) * (pow(campioni[0].dstd_media, 2) + pow(campioni[1].dstd_media, 2) + pow(campioni[2].dstd_media, 2) + pow(campioni[3].dstd_media, 2)) + 2 * pow(num * sigma_delta_forza / pow(delta_f, 2), 2));
-  cout << "Errore DeSalvador: " << errore_desalva<<"+/-"<<sigma_errore_desalva << "micron/Newton" << endl;
+  cout << "Errore DeSalvador: " << errore_desalva << "+/-" << sigma_errore_desalva << "micron/Newton" << endl;
 
   //for(auto d:campioni)
   //{
