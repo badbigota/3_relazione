@@ -19,6 +19,7 @@ struct container
   double kappa;
   double sigma_kappa;
   double gp = 0;
+  double sigma_kappa_2;
 };
 vector<container> campioni(4);
 
@@ -73,7 +74,10 @@ int main()
     d.media = media(d.media_2_acq);
     d.dstd_media = dstd_media(d.media_2_acq);
     d.kappa = d.media / delta_forza;
-    d.sigma_kappa = sqrt(pow(1 / delta_forza, 2) * (pow(d.dstd_media, 2)) + pow((d.media / pow(delta_forza, 2)), 2) * pow(sigma_delta_forza, 2));
+    //cout << "->" << d.media << "+/-" << d.dstd_media << endl;
+    //d.sigma_kappa = sqrt(pow(1 / delta_forza, 2) * (pow(d.dstd_media, 2)) + pow((d.media / pow(delta_forza, 2)), 2) * pow(sigma_delta_forza, 2));
+    d.sigma_kappa_2 = sqrt(pow(1 / delta_forza, 2) * (pow(d.dstd_media, 2) + pow(sigma_dist_uni(10, 10), 2)) + 2 * pow(d.media * sigma_delta_forza / pow(delta_forza, 2), 2));
+    cout<<d.sigma_kappa<<"\t"<<d.sigma_kappa_2<<endl;
     if (d.nomefile.find("alto") != std::string::npos)
     {
       k_alto.push_back(d.kappa);
@@ -141,7 +145,7 @@ int main()
   double sigma_media_ponderata_k_basso = errore_media_ponderata(sigma_k_basso);
   sigma_k.push_back(sigma_media_ponderata_k_basso);
   cout << media_ponderata_k_basso << " +/- " << sigma_media_ponderata_k_basso << endl;
-  
+
   //media ponderata delle medie ponderate
   double valore_k = media_ponderata(k, sigma_k);
   double sigma_valore_k = errore_media_ponderata(sigma_k);
@@ -181,8 +185,8 @@ int main()
     sigma_chi_basso.push_back(campioni[2].dstd_2_acq[i]);
     sigma_chi_alto.push_back(campioni[3].dstd_2_acq[i]);
   }
-  cout << endl<< endl;
-       
+
+
   cout << "Angolare Basso:\t" << b_angolare(delta_forza_newton, chi_basso) << " +/- " << sigma_b(delta_forza_newton, chi_basso) << endl;
   cout << "Intercetta Basso:\t" << a_intercetta(delta_forza_newton, chi_basso) << " +/- " << sigma_a(delta_forza_newton, chi_basso) << endl;
 
