@@ -28,7 +28,7 @@ int main()
     vector<double> media_1_acq, dstd_1_acq;
     cout << "Vuoi legge i file di Allungamento o Accorciamento? (all / acc): ";
     cin >> sub_dir;
-
+    ofstream excelout("../operatorimisure.txt", ios::app);
     for (int i = 200; i < 1300; i = i + 100) //legge tutti i file 200->1200
     {
         vector<double> dati_file; // creo un vettore dove immagazzinare i 3 dati per ogni foglio e faccio fare la media con libreria
@@ -45,6 +45,7 @@ int main()
         }
         media_1_acq.push_back(media(dati_file));
         dstd_1_acq.push_back(dstd_media(dati_file));
+        excelout << dati_file[0]<<"\t"<<dati_file[1]<<"\t"<<dati_file[2]<<"\t"<<media(dati_file) << "\t" << dstd(dati_file) << "\t" << dstd_media(dati_file) << endl;
     }
 
     for (int i = 0; i < dstd_1_acq.size(); i++)
@@ -83,6 +84,7 @@ int main()
 
     cout << "Err.Piccoli (sottosti Intercetta:\t" << a_intercetta(delta_forza_newton, media_1_acq, dstd_1_acq) << " +/- " << sigma_a(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
     cout << "Sig. Post. (funzioni  Intercetta:\t" << a_intercetta(delta_forza_newton, media_1_acq) << " +/- " << sigma_a(delta_forza_newton, media_1_acq) << endl;
+    cout<<"COmpatibilità intercetta con origine"<<comp_3(a_intercetta(delta_forza_newton, media_1_acq), 0, sigma_a(delta_forza_newton, media_1_acq), sigma_y_posteriori(delta_forza_newton, media_1_acq))<<endl;
 
     //Stampa K quando sosttostimato e quando non sottostimato con la sigma posteriori
     dout << b_angolare(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t" << sigma_b(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t" << a_intercetta(delta_forza_newton, media_1_acq, dstd_1_acq) << "\t" << sigma_a(delta_forza_newton, media_1_acq, dstd_1_acq) << endl;
