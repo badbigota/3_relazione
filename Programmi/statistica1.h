@@ -235,3 +235,10 @@ double sigma_b(vector<double> dati_x, vector<double> dati_y)
 
     return sigma_b_p;
 }
+
+
+//Compatibilità avendo due valori medi e i sigma relativi
+double comp_3(double a, double b, double sigma_a, double sigma_b)
+{
+    return abs(a - b) / sqrt(pow(sigma_a, 2) + pow(sigma_b, 2));
+}
