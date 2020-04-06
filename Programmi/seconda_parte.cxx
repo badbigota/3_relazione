@@ -26,6 +26,8 @@ struct estensimetri
 	double err_coeff_ango_acc;
 	double k_medio;
 	double err_k_medio;
+	double int_medio;
+	double err_int_medio;
 	double err_intercetta_all_post;
 	double err_intercetta_acc_post;
 	double err_coeff_ango_all_post;
@@ -96,15 +98,15 @@ int main()
 		count++;
 	}
 
-	//for (int i = 0; i < est.size(); i++) //la sigma aposteriori è molto maggiore della dist uniforme-> 4 vs. 80/100
-	//////{
-	//////		for (int j = 0; j < est[i].allungamento.size(); j++)
-	//////		{
-	////			est[i].err_delta_x_all.push_back(sqrt(2) * sigma_dist_uni(5.0, 1));
-	////			est[i].err_delta_x_acc.push_back(sqrt(2) * sigma_dist_uni(5.0, 1));
-	////		}
-	////		
-	//}//FINE LETTURA
+	for (int i = 0; i < est.size(); i++) //calcolo errorevcon distribuzione uniforme solo per fare grafici, commenta questo e decommenta sotto per avere la sigma post
+	{
+		for (int j = 0; j < est[i].allungamento.size(); j++)
+		{
+			est[i].err_delta_x_all.push_back(sqrt(2) * sigma_dist_uni(5.0, 1));
+			est[i].err_delta_x_acc.push_back(sqrt(2) * sigma_dist_uni(5.0, 1));
+		}
+
+	} //FINE LETTURA
 
 	for (int j = 0; j < est[0].allungamento.size(); j++)
 	{
@@ -123,14 +125,14 @@ int main()
 		}
 		double sigma_post_all = sigma_y_posteriori(delta_f, est[i].delta_x_all);
 		double sigma_post_acc = sigma_y_posteriori(delta_f, est[i].delta_x_acc);
-		
-		cout<<est[i].n_est<<"\t"<<sigma_post_all<<"\t"<<sigma_post_acc<<"\t"<<sqrt(2) * sigma_dist_uni(5.0, 1)<<"\t"<<sqrt(2) * sigma_dist_uni(10.0, 1)<<endl;
 
-		for (int j = 0; j < est[i].allungamento.size(); j++)
-		{
-			est[i].err_delta_x_all.push_back(sqrt(2) * sigma_post_all); //CAMBIARE SE VUOI CMbiare gli errori
-			est[i].err_delta_x_acc.push_back(sqrt(2) * sigma_post_acc);
-		}
+		//cout<<est[i].n_est<<"\t"<<sigma_post_all<<"\t"<<sigma_post_acc<<"\t"<<sqrt(2) * sigma_dist_uni(5.0, 1)<<"\t"<<sqrt(2) * sigma_dist_uni(10.0, 1)<<endl;
+
+		//for (int j = 0; j < est[i].allungamento.size(); j++)
+		//{
+		//	est[i].err_delta_x_all.push_back(sqrt(2) * sigma_post_all); //DECOMMENTA SE VUOI AVERE SIGMA A POSTERIORI 
+		//	est[i].err_delta_x_acc.push_back(sqrt(2) * sigma_post_acc);
+		//}
 
 		est[i].intercetta_all = a_intercetta(delta_f, est[i].delta_x_all);				  //non metto err perchè tutti uguali
 		est[i].coeff_ango_all = b_angolare(delta_f, est[i].delta_x_all);				  //
@@ -153,18 +155,27 @@ int main()
 	{
 		vector<double> k_alto_basso;
 		vector<double> err_k_alto_basso;
+		vector<double> int_alto_basso;
+		vector<double> err_int_alto_basso;
 
 		k_alto_basso.push_back(est[i].coeff_ango_acc);
 		k_alto_basso.push_back(est[i].coeff_ango_all);
+		int_alto_basso.push_back(est[i].intercetta_acc);
+		int_alto_basso.push_back(est[i].intercetta_all);
 		err_k_alto_basso.push_back(est[i].err_coeff_ango_acc_post); //se non vuoi post elimina _post e utilizzerà errori piccoli
 		err_k_alto_basso.push_back(est[i].err_coeff_ango_all_post); //
+		err_int_alto_basso.push_back(est[i].err_intercetta_acc_post);
+		err_int_alto_basso.push_back(est[i].err_intercetta_all_post);
 
 		est[i].k_medio = media_ponderata(k_alto_basso, err_k_alto_basso);
 		est[i].err_k_medio = errore_media_ponderata(err_k_alto_basso);
+		est[i].int_medio = media_ponderata(int_alto_basso, err_int_alto_basso);
+		est[i].err_int_medio = errore_media_ponderata(err_int_alto_basso);
 		est[i].sezione = M_PI * pow(((est[i].diametro) / 2.0), 2.0);
 
 		ofstream gout("../Grafici_2/est_" + to_string(est[i].n_est) + ".txt");	 //STAMPA PER FARE PLOT E RIEPILOGO
 		ofstream hout("../Latex/riepilogo_" + to_string(est[i].n_est) + ".txt"); //RIEPILOGO PER LATEX
+		ofstream excelout("../estensimetri_per_excel.txt", ios::app);
 		hout << "Numero:\t" << est[i].n_est << endl;
 		hout << "Diametro:\t" << est[i].diametro << endl;
 		hout << "Lunghezza\t" << est[i].lunghezza << endl;
@@ -173,6 +184,8 @@ int main()
 		hout << "Ang. all.\t" << est[i].coeff_ango_all << "+/- " << est[i].err_coeff_ango_all_post << endl;		//
 		hout << "Interc. all.\t" << est[i].intercetta_all << " +/- " << est[i].err_intercetta_all_post << endl; //
 		hout << "Media Pond \t" << est[i].k_medio << "+/-" << est[i].err_k_medio << endl;
+		// K_acc-K_all-K_pes-Comp_K-Int_acc-Int_all-Comp_Int
+		excelout << est[i].coeff_ango_acc << " +/- " << est[i].err_coeff_ango_acc_post << "\t" << est[i].coeff_ango_all << "+/- " << est[i].err_coeff_ango_all_post << "\t" << est[i].k_medio << "+/-" << est[i].err_k_medio << "\t" << comp_3(est[i].coeff_ango_acc, est[i].coeff_ango_all, est[i].err_coeff_ango_acc_post, est[i].err_coeff_ango_all_post) << "\t" << est[i].intercetta_acc << " +/- " << est[i].err_intercetta_acc_post << "\t" << est[i].intercetta_all << " +/- " << est[i].err_intercetta_all_post << "\t" << est[i].int_medio << " +/- " << est[i].err_int_medio << "\t" << comp_3(est[i].intercetta_acc, est[i].intercetta_all, est[i].err_intercetta_acc_post, est[i].err_intercetta_all_post) << endl;
 
 		gout << "#DeltaF[Newton]\t#All[micron]\t#ErrAll[micron]\t#Acc[micron]\t#ErrAcc[micron]" << endl;
 
@@ -230,7 +243,7 @@ int main()
 
 	nos_est.k_medio = media_ponderata(k_alto_basso_nos, err_k_alto_basso_nos);
 	nos_est.err_k_medio = errore_media_ponderata(err_k_alto_basso_nos);
-	cout<<nos_est.n_est<<"\t"<<nos_est.err_delta_x_all[0]<<"\t"<<nos_est.err_delta_x_acc[0]<<endl;
+	cout << nos_est.n_est << "\t" << nos_est.err_delta_x_all[0] << "\t" << nos_est.err_delta_x_acc[0] << endl;
 
 	est.push_back(nos_est); //Inserimento nostro estensiemtro in est [il kracken arriva =) ]
 
@@ -363,7 +376,7 @@ int main()
 		//cout << young3_all << "\t" << sigma_young_3_all << "\t" << young3_acc << "\t" << sigma_young_3_acc << endl; //Stampa modulo young in all e acc
 		young3_all_acc.push_back(media_ponderata(young3, err_young3));
 		err_young3_all_acc.push_back(errore_media_ponderata(err_young3));
-		for (int k=0; k < young3_all_acc.size(); k++)
+		for (int k = 0; k < young3_all_acc.size(); k++)
 		{
 			//cout << young3_all_acc[i] << "\t" << err_young3_all_acc[i] << endl;
 			eout3 << young3_all_acc[k] << "\t" << err_young3_all_acc[k] << endl;
