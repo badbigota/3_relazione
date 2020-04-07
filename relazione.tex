@@ -24,6 +24,10 @@
 
 
 \graphicspath{{Figure/}}
+\DeclareSIUnit\micronnewton{\micro\metre\per\newton}
+
+
+
 
 \begin{document}
 \input{Front-matter/Frontespizio}
@@ -104,40 +108,41 @@ E' opportuno precisare che l'analisi dei video è stata compiuta singolarmente: 
 %INTRO GENERICA
 Nella prima parte l'analisi si è svolta esclusivamente sull'estensimetro numero 10 riportato in Tabella \ref{tab:caratteristiche_estensimetri}. Nella seconda parte invece si è svolta un'analisi sistematica su tutti gli estensimetri in acciaio.
 
-\subsection{Verifica dell'elasticità meccanica e definizione miglior protocollo di misura}
+\subsection{Verifica dell'elasticità meccanica e definizione miglior protocollo di misura}\label{sec:prima_parte}
 Sono stati impiegati diversi metodi per il calcolo del coefficiente elastico del filo del decimo estensimetro a seconda del metodo di raccolta dati.\\
 
 \subsubsection*{Primo Metodo - Misure in allungamento e accorciamento}
 \begin{table}[h!]
     \centering
-    \begin{tabular}{cc|c|c|c||c|c|c}
-        \toprule
+    \begin{tabular}{|cc|c|c|c||c|c|c|}
+        \hline
         & $F_{letta}$ & $\Delta x_{Op 1}$ & $\Delta x_{Op 2}$ &$ \Delta x_{Op 3}$ &$\overline{ \Delta x}$ & $\sigma_{\Delta x}$ & $\sigma_{\overline{\Delta x}}$\\ 
         & $[\si{gp}]$& $[\SI{e-6}{\meter}] $&$[\SI{e-6}{\meter}] $&$[\SI{e-6}{\meter}] $&$[\SI{e-6}{\meter}] $&$[\SI{e-6}{\meter}] $&$[\SI{e-6}{\meter}] $\\
-        \midrule
-        \multirow{11}{*}{\rotatebox[origin=c]{90}{Allungamento}} & 200&	-2&	-3&	-2&	-2,33333&	0,57735&	0,333333\\
-        &300&	223&	222&	225&	223,333&	1,52753&	0,881917\\
-        &400&	431&	431&	430&	430,667&	0,57735&	0,333333\\
-        &500&	660&	660&	660&	660&	0&	0\\
-        &600&	876&	878&	877&	877&	1&	0,57735\\
-        &700&	1093&	1091&	1092&	1092&	1&	0,57735\\
-        &800&	1310&	1311&	1310&	1310,33&	0,57735&	0,333333\\
-        &900&	1513&	1512&	1512&	1512,33&	0,57735&	0,333333\\
-        &1000&	1749&	1749&	1748&	1748,67&	0,57735&	0,333333\\
-        &1100&	1948&	1949&	1948&	1948,33&	0,57735&	0,333333\\
-        &1200&	2170&	2170&	2170&	2170&	0&	0\\ \hline
-        \multirow{11}{*}{\rotatebox[origin=c]{90}{Allungamento}} & 1200&	2170&	2170&	2170&	2170,0&	0,0&	0,0\\
-        &1100&	1949&	1950&	1950&	1949,7&	0,6&	0,3\\
-        &1000&	1727&	1727&	1727&	1727,0&	0,0&	0,0\\
-        &900&	1514&	1513&	1514&	1513,7&	0,6&	0,3\\
-        &800&	1303&	1303&	1305&	1303,7&	1,2&	0,7\\
-        &700&	1082&	1081&	1082&	1081,7&	0,6&	0,3\\
-        &600&	869&	869&	869&	869,0&	0,0&	0,0\\
-        &500&	655&	655&	655&	655,0&	0,0&	0,0\\
-        &400&	430&	431&	430&	430,3&	0,6&	0,3\\
-        &300&	219&	220&	220&	219,7&	0,6&	0,3\\
-        &200&	2&	1&	2&	1,7&	0,6&	0,3\\
-        \bottomrule
+        \hline
+        \multicolumn{1}{|c|}{\multirow{11}{*}{\rotatebox[origin=c]{90}{Allungamento}}} & {\cellcolor[rgb]{0.85,0.85,0.85}}200&	{\cellcolor[rgb]{0.85,0.85,0.85}}-2&	{\cellcolor[rgb]{0.85,0.85,0.85}}-3&	{\cellcolor[rgb]{0.85,0.85,0.85}}-2&	{\cellcolor[rgb]{0.85,0.85,0.85}}-2,33333&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,57735&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,333333\\
+        \multicolumn{1}{|c|}{}&300&	223&	222&	225&	223,333&	1,52753&	0,881917\\
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}400&	{\cellcolor[rgb]{0.85,0.85,0.85}}431&	{\cellcolor[rgb]{0.85,0.85,0.85}}431&	{\cellcolor[rgb]{0.85,0.85,0.85}}430&	{\cellcolor[rgb]{0.85,0.85,0.85}}430,667&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,57735&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,333333\\
+        \multicolumn{1}{|c|}{}&500&	660&	660&	660&	660&	0&	0\\
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}600&	{\cellcolor[rgb]{0.85,0.85,0.85}}876&	{\cellcolor[rgb]{0.85,0.85,0.85}}878&	{\cellcolor[rgb]{0.85,0.85,0.85}}877&	{\cellcolor[rgb]{0.85,0.85,0.85}}877&	{\cellcolor[rgb]{0.85,0.85,0.85}}1&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,57735\\
+        \multicolumn{1}{|c|}{}&700&	1093&	1091&	1092&	1092&	1&	0,57735\\
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}800&	{\cellcolor[rgb]{0.85,0.85,0.85}}1310&	{\cellcolor[rgb]{0.85,0.85,0.85}}1311&	{\cellcolor[rgb]{0.85,0.85,0.85}}1310&	{\cellcolor[rgb]{0.85,0.85,0.85}}1310,33&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,57735&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,333333\\
+        \multicolumn{1}{|c|}{}&900&	1513&	1512&	1512&	1512,33&	0,57735&	0,333333\\
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}1000&	{\cellcolor[rgb]{0.85,0.85,0.85}}1749&	{\cellcolor[rgb]{0.85,0.85,0.85}}1749&	{\cellcolor[rgb]{0.85,0.85,0.85}}1748&	{\cellcolor[rgb]{0.85,0.85,0.85}}1748,67&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,57735&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,333333\\
+        \multicolumn{1}{|c|}{}&1100&	1948&	1949&	1948&	1948,33&	0,57735&	0,333333\\
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}1200&	{\cellcolor[rgb]{0.85,0.85,0.85}}2170&	{\cellcolor[rgb]{0.85,0.85,0.85}}2170&	{\cellcolor[rgb]{0.85,0.85,0.85}}2170&	{\cellcolor[rgb]{0.85,0.85,0.85}}2170&	{\cellcolor[rgb]{0.85,0.85,0.85}}0&	{\cellcolor[rgb]{0.85,0.85,0.85}}0\\ 
+        \hline\hline
+        \multicolumn{1}{|c|}{\multirow{11}{*}{\rotatebox[origin=c]{90}{Allungamento}}} & {\cellcolor[rgb]{0.85,0.85,0.85}}1200&	{\cellcolor[rgb]{0.85,0.85,0.85}}2170&	{\cellcolor[rgb]{0.85,0.85,0.85}}2170&	{\cellcolor[rgb]{0.85,0.85,0.85}}2170&	{\cellcolor[rgb]{0.85,0.85,0.85}}2170,0&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,0&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,0\\
+        \multicolumn{1}{|c|}{}&1100&	1949&	1950&	1950&	1949,7&	0,6&	0,3\\
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}1000&	{\cellcolor[rgb]{0.85,0.85,0.85}}1727&	{\cellcolor[rgb]{0.85,0.85,0.85}}1727&	{\cellcolor[rgb]{0.85,0.85,0.85}}1727&	{\cellcolor[rgb]{0.85,0.85,0.85}}1727,0&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,0&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,0\\
+        \multicolumn{1}{|c|}{}&900&	1514&	1513&	1514&	1513,7&	0,6&	0,3\\
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}800&	{\cellcolor[rgb]{0.85,0.85,0.85}}1303&	{\cellcolor[rgb]{0.85,0.85,0.85}}1303&	{\cellcolor[rgb]{0.85,0.85,0.85}}1305&	{\cellcolor[rgb]{0.85,0.85,0.85}}1303,7&	{\cellcolor[rgb]{0.85,0.85,0.85}}1,2&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,7\\
+        \multicolumn{1}{|c|}{}&700&	1082&	1081&	1082&	1081,7&	0,6&	0,3\\
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}600&	{\cellcolor[rgb]{0.85,0.85,0.85}}869&	{\cellcolor[rgb]{0.85,0.85,0.85}}869&	{\cellcolor[rgb]{0.85,0.85,0.85}}869&	{\cellcolor[rgb]{0.85,0.85,0.85}}869,0&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,0&	{\cellcolor[rgb]{0.85,0.85,0.85}},0\\
+        \multicolumn{1}{|c|}{}&500&	655&	655&	655&	655,0&	0,0&	0,0\\
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}400&	{\cellcolor[rgb]{0.85,0.85,0.85}}430&	{\cellcolor[rgb]{0.85,0.85,0.85}}431&	{\cellcolor[rgb]{0.85,0.85,0.85}}430&	{\cellcolor[rgb]{0.85,0.85,0.85}}430,3&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,6&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,3\\
+        \multicolumn{1}{|c|}{}&300&	219&	220&	220&	219,7&	0,6&	0,3\\
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}200&	{\cellcolor[rgb]{0.85,0.85,0.85}}2&	{\cellcolor[rgb]{0.85,0.85,0.85}}1&	{\cellcolor[rgb]{0.85,0.85,0.85}}2&	{\cellcolor[rgb]{0.85,0.85,0.85}}1,7&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,6&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,3\\
+        \hline
     \end{tabular}
     \caption{Dati Grezzi con $\overline{\Delta x}$, $\sigma_{\Delta x}$, $\sigma_{\overline{\Delta x}}$}
     \label{tab:dati_grezzi_1ac}
@@ -179,11 +184,12 @@ Per dare infine una stima del coefficiente K si è eseguita la media ponderata f
 
 \begin{table}[h!]
     \centering
+    \makebox[\textwidth]{%
     \begin{tabular}{|cc|c|c|c|c|}
         \hline
         &&$K \pm \sigma_{K}$&	$\langle K \rangle \pm \sigma_{\langle K \rangle}$&	$\lambda_{K_{all}, K_{acc.}}$&	$Err.\%$ \\
-        &&$[micron/N]$&$[micron/N]$&$[micron/N]$&\\ \hline
-        \multicolumn{1}{|c|}{\multirow{2}{*}{Dist. uni.}}
+        &&$[\si{\micronnewton}]$&$[\si{\micronnewton}]$&&\\ \hline
+        \multicolumn{1}{|c|}{\multirow{2}{*}{$\sigma_{Dist. uni.}$}}
         &All&	$55.3069 \pm 0.00839204$&
         \multirow{2}{*}{$55,227\pm0,00566895$}&
         \multirow{2}{*}{12.9158}&
@@ -197,6 +203,7 @@ Per dare infine una stima del coefficiente K si è eseguita la media ponderata f
         \multirow{2}{*}{0,06211952396}\\    \cline{2-3} 
         \multicolumn{1}{|c|}{}& Acc&	$55.1695\pm0.0879423$ & & &\\  \hline
     \end{tabular}
+    }
     \caption{Stime dei parametri del fit per il decimo estensimetro}
     \label{tab:parametri_fit_1ac}
 \end{table}
@@ -219,10 +226,9 @@ Per dare infine una stima del coefficiente K si è eseguita la media ponderata f
         \multicolumn{1}{|c|}{}&6&	442&	442&	444&	442,667&	&	0,666667\\
         \multicolumn{1}{|c|}{}&{    \cellcolor[rgb]{0.85,0.85,0.85}}7& {\cellcolor[rgb]{0.85,0.85,0.85}}   431&	{\cellcolor[rgb]{0.85,0.85,0.85}}   431&	{\cellcolor[rgb]{0.85,0.85,0.85}}   432&	{\cellcolor[rgb]{0.85,0.85,0.85}}   431,333&  {\cellcolor[rgb]{0.85,0.85,0.85}}	  &	{\cellcolor[rgb]{0.85,0.85,0.85}}   0,333333\\
         \multicolumn{1}{|c|}{}&8&	432&	432&	432&	432&    &	0,288675\\
-        \multicolumn{1}{|c|}{}& {\cellcolor[rgb]{0.85,0.85,0.85}}   9&	{\cellcolor[rgb]{0.85,0.85,0.85}}   435&	{\cellcolor[rgb]{0.85,0.85,0.85}}   434&	{\cellcolor[rgb]{0.85,0.85,0.85}}   434& {\cellcolor[rgb]{0.85,0.85,0.85}}   434,333&	{\cellcolor[rgb]{0.85,0.85,0.85}}   &	{\cellcolor[rgb]{0.85,0.85,0.85}}   0,333333\\ \cline{3-8}
-        \multicolumn{1}{|c|}{}& &\multicolumn{3}{c|}{} & 436,593& & 1,25435\\ \hline \hline
+        \multicolumn{1}{|c|}{}& {\cellcolor[rgb]{0.85,0.85,0.85}}   9&	{\cellcolor[rgb]{0.85,0.85,0.85}}   435&	{\cellcolor[rgb]{0.85,0.85,0.85}}   434&	{\cellcolor[rgb]{0.85,0.85,0.85}}   434& {\cellcolor[rgb]{0.85,0.85,0.85}}   434,333&	{\cellcolor[rgb]{0.85,0.85,0.85}}   &	{\cellcolor[rgb]{0.85,0.85,0.85}}   0,333333\\  \hline \hline
         
-        \multicolumn{1}{|c|}{\multirow{10}{*}{\rotatebox[origin=c]{90}{\textbf{Misure 400 gp in all.}}}}
+        \multicolumn{1}{|c|}{\multirow{9}{*}{\rotatebox[origin=c]{90}{\textbf{Misure 400 gp in all.}}}}
         &{\cellcolor[rgb]{0.85,0.85,0.85}}1&	{\cellcolor[rgb]{0.85,0.85,0.85}}468&	{\cellcolor[rgb]{0.85,0.85,0.85}}459&	{\cellcolor[rgb]{0.85,0.85,0.85}}458&	{\cellcolor[rgb]{0.85,0.85,0.85}}461,667& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}3,1798\\
         \multicolumn{1}{|c|}{}&2&	456&	453&	455&	454,667&	&	0,881917\\
         \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}3&	{\cellcolor[rgb]{0.85,0.85,0.85}}458&	{\cellcolor[rgb]{0.85,0.85,0.85}}458&	{\cellcolor[rgb]{0.85,0.85,0.85}}458&	{\cellcolor[rgb]{0.85,0.85,0.85}}458&   {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,288675\\
@@ -231,10 +237,9 @@ Per dare infine una stima del coefficiente K si è eseguita la media ponderata f
         \multicolumn{1}{|c|}{}&6&	460&	460&	460&	460&	&	0,288675\\
         \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}7&	{\cellcolor[rgb]{0.85,0.85,0.85}}459&	{\cellcolor[rgb]{0.85,0.85,0.85}}459&	{\cellcolor[rgb]{0.85,0.85,0.85}}460&	{\cellcolor[rgb]{0.85,0.85,0.85}}459,333& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,333333\\
         \multicolumn{1}{|c|}{}&8&	460&	460&	460&	460&	&	0,288675\\
-        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}9&	{\cellcolor[rgb]{0.85,0.85,0.85}}459&	{\cellcolor[rgb]{0.85,0.85,0.85}}459&	{\cellcolor[rgb]{0.85,0.85,0.85}}460&	{\cellcolor[rgb]{0.85,0.85,0.85}}459,333& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,333333\\ \cline{3-8}
-        \multicolumn{1}{|c|}{} &&\multicolumn{3}{c|}{} & 458,741& & 0,726011\\ \hline \hline
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}9&	{\cellcolor[rgb]{0.85,0.85,0.85}}459&	{\cellcolor[rgb]{0.85,0.85,0.85}}459&	{\cellcolor[rgb]{0.85,0.85,0.85}}460&	{\cellcolor[rgb]{0.85,0.85,0.85}}459,333& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,333333\\ \hline \hline
         
-        \multicolumn{1}{|c|}{\multirow{9}{*}{\rotatebox[origin=c]{90}{\textbf{Misure 1000 gp in acc.}}}}
+        \multicolumn{1}{|c|}{\multirow{8}{*}{\rotatebox[origin=c]{90}{\textbf{Misure 1000 gp in acc.}}}}
         &1& 1743&	1745&	1745&	1744,33& 	&	0,666667\\
         \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}2& {\cellcolor[rgb]{0.85,0.85,0.85}}1749&	{\cellcolor[rgb]{0.85,0.85,0.85}}1749&	{\cellcolor[rgb]{0.85,0.85,0.85}}1749&	{\cellcolor[rgb]{0.85,0.85,0.85}}1749& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,288675\\
         \multicolumn{1}{|c|}{}&3& 1748&	1749&	1748&	1748,33& 	&	0,333333\\
@@ -242,10 +247,9 @@ Per dare infine una stima del coefficiente K si è eseguita la media ponderata f
         \multicolumn{1}{|c|}{}&5& 1743&	1744&	1744&	1743,67& 	&	0,333333\\
         \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}6& {\cellcolor[rgb]{0.85,0.85,0.85}}1748&	{\cellcolor[rgb]{0.85,0.85,0.85}}1748&	{\cellcolor[rgb]{0.85,0.85,0.85}}1746&	{\cellcolor[rgb]{0.85,0.85,0.85}}1747,33& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,666667\\
         \multicolumn{1}{|c|}{}&7& 1750&	1750&	1749&	1749,67&	&	0,333333\\
-        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}8& {\cellcolor[rgb]{0.85,0.85,0.85}}1750&	{\cellcolor[rgb]{0.85,0.85,0.85}}1750&	{\cellcolor[rgb]{0.85,0.85,0.85}}1750&	{\cellcolor[rgb]{0.85,0.85,0.85}}1750& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,288675\\ \cline{3-8}
-        \multicolumn{1}{|c|}{}& &\multicolumn{3}{c|}{} & 1746,96& & 0,978818\\ \hline \hline
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}8& {\cellcolor[rgb]{0.85,0.85,0.85}}1750&	{\cellcolor[rgb]{0.85,0.85,0.85}}1750&	{\cellcolor[rgb]{0.85,0.85,0.85}}1750&	{\cellcolor[rgb]{0.85,0.85,0.85}}1750& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,288675\\ \hline \hline
         
-        \multicolumn{1}{|c|}{\multirow{9}{*}{\rotatebox[origin=c]{90}{\textbf{Misure 1000 gp in all.}}}}
+        \multicolumn{1}{|c|}{\multirow{8}{*}{\rotatebox[origin=c]{90}{\textbf{Misure 1000 gp in all.}}}}
         &1& 1751&	1762&	1752&	1755& 	&	3,51188\\
         \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}2& {\cellcolor[rgb]{0.85,0.85,0.85}}1762&	{\cellcolor[rgb]{0.85,0.85,0.85}}1768&	{\cellcolor[rgb]{0.85,0.85,0.85}}1762&	{\cellcolor[rgb]{0.85,0.85,0.85}}1764& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}2\\
         \multicolumn{1}{|c|}{}&3& 1768&	1764&	1767&	1766,33& 	&	1,20185\\
@@ -253,8 +257,7 @@ Per dare infine una stima del coefficiente K si è eseguita la media ponderata f
         \multicolumn{1}{|c|}{}&5& 1765&	1767&	1765&	1765,67&	&	0,666667\\
         \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}6& {\cellcolor[rgb]{0.85,0.85,0.85}}1764&	{\cellcolor[rgb]{0.85,0.85,0.85}}1763&	{\cellcolor[rgb]{0.85,0.85,0.85}}1766&	{\cellcolor[rgb]{0.85,0.85,0.85}}1764,33& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,881917\\
         \multicolumn{1}{|c|}{}&7& 1762&	1762&	1762&	1762&	&	0,288675\\
-        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}8& {\cellcolor[rgb]{0.85,0.85,0.85}}1762&	{\cellcolor[rgb]{0.85,0.85,0.85}}1762&	{\cellcolor[rgb]{0.85,0.85,0.85}}1762&	{\cellcolor[rgb]{0.85,0.85,0.85}}1762& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,288675\\ \cline{3-8}
-        \multicolumn{1}{|c|}{}& &\multicolumn{3}{c|}{} & 1763,04& & 1,27466\\ \hline
+        \multicolumn{1}{|c|}{}&{\cellcolor[rgb]{0.85,0.85,0.85}}8& {\cellcolor[rgb]{0.85,0.85,0.85}}1762&	{\cellcolor[rgb]{0.85,0.85,0.85}}1762&	{\cellcolor[rgb]{0.85,0.85,0.85}}1762&	{\cellcolor[rgb]{0.85,0.85,0.85}}1762& {\cellcolor[rgb]{0.85,0.85,0.85}}	&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,288675\\ \hline
     \end{tabular}
     \caption{Misure ripetute}
     \label{tab:misure_ripetute}
@@ -314,7 +317,7 @@ Per la valutazione dell'errore sistematico del quale sono affette tutte le misur
 
 In cui $x_{1000 / 400}^{all / acc}$ corrisponde a $\overline{\Delta x}^\ast$, $\sigma_{x}$ è $\sigma_{\overline{\Delta x}^\ast}$ e $\Delta F$ la variazione della forza tra $\SI{1000}{gp}$ e $\SI{400}{gp}$
 
-I calcoli restituiscono un errore sistematico di $\delta_{K} = (-0.2577 \pm 0.225742) micron/Newton$. 
+I calcoli restituiscono un errore sistematico di $\delta_{K} = (-0.2577 \pm 0.225742) \si{\micronnewton}$. 
 
 
 
@@ -324,25 +327,26 @@ I calcoli restituiscono un errore sistematico di $\delta_{K} = (-0.2577 \pm 0.22
 \subsection{Analisi sistematica di tutti gli estensimetri}
 \subsubsection*{Stime di $K$}
 Dai dati forniti, si sono calcolati i $\Delta x$ come differenza in modulo tra le misure $x_i$ e $x_0$ separatamente per allungamento e accorciamento, corrispondenti ad una $\Delta F_{app} =\left | F_{i, app} - F_{0, app} \right |$. A ciascun valore di x si è associato un errore derivante dalla distribuzione uniforme con ptl pari a 5 micron e coefficiente di affidabilità pari a 1, e conseguentemente tramite la propagazione degli errori casuali si è calcolato l'errore di  $\Delta x$. L'errore associato a $\Delta F$ è stato derivato dalla distribuzione triangolare con i parametri descritti precedentemente.\\
-Similmente a quanto descritto nella prima acquisizione, dopo una rappresentazione grafica delle coppie $(\Delta F, \Delta x)$, si sono calcolati i $K_{all}$ e i $K_{acc}$ e le intercette per tutti gli estensimetri dotati di filo in acciaio tramite il metodo del $\chi^2$. I relativi errori sono stati calcolati  tramite la formula di propagazione degli errori tramite la $\sigma_{post}$.\\
+Similmente a quanto descritto nella Sezione \ref{sec:prima_parte}, dopo una rappresentazione grafica delle coppie $(\Delta F, \Delta x)$, si sono calcolati i $K_{all}$ e i $K_{acc}$ e le intercette per tutti gli estensimetri dotati di filo in acciaio tramite il metodo del $\chi^2$. I relativi errori sono stati calcolati  tramite la formula di propagazione degli errori tramite la $\sigma_{post}$.\\
 Si è poi calcolata la compatibilità fra $K_{all}$ e $K_{acc}$ e fra $Intercetta_{all}$ e $Intercetta_{acc}$ e la media ponderata tra i $K_{all}$ e $K_{acc}$ come stima del ${\langle K \rangle }\pm \sigma_{{\langle K\rangle }}$ per ciascun estensimetro come viene esposto nella Tabella \ref{tab:K_est}.
 
 \begin{table}[h!]
     \begin{center}
+\makebox[\textwidth]{%
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
         \hline
         Estens. &  1&    2&	3&	4&	5&	6&	7&	8&	9\\ \hline
-        $K_{all}$	[N/$\mu m$]&	$59\pm2$&	$50\pm3$&	$48\pm2$&	$70\pm3$&	$29\pm3$&	$37\pm2$&	$78\pm2$&	$53\pm2$&	$70\pm3$\\
-        $K_{acc}$	[N/$\mu m$]&	$58\pm2$&	$50\pm3$&	$48\pm1$&	$71\pm3$&	$28\pm3$&	$37\pm2$&	$78\pm2$&	$52\pm2$&	$71\pm3$\\
-        $\langle K\rangle$ [N/$\mu m$]&	$58\pm2$&	$50\pm2$&	$48\pm1$&	$71\pm2$&	$28\pm2$&	$37\pm1$&	$78\pm1$&	$53\pm1$&   $70\pm2$\\
+        $K_{all}$	$[\si{\micronnewton}]$&	$59\pm2$&	$50\pm3$&	$48\pm2$&	$70\pm3$&	$29\pm3$&	$37\pm2$&	$78\pm2$&	$53\pm2$&	$70\pm3$\\
+        $K_{acc}$	$[\si{\micronnewton}]$&	$58\pm2$&	$50\pm3$&	$48\pm1$&	$71\pm3$&	$28\pm3$&	$37\pm2$&	$78\pm2$&	$52\pm2$&	$71\pm3$\\
+        $\langle K\rangle$ $[\si{\micronnewton}]$&	$58\pm2$&	$50\pm2$&	$48\pm1$&	$71\pm2$&	$28\pm2$&	$37\pm1$&	$78\pm1$&	$53\pm1$&   $70\pm2$\\
         $\lambda_K$& $0,2$&	$0,03$&	$0,2$& $0,2$&	$0,2$&	$0,09$&	$0,02$&	$0,2$&	$0,3$ \\
         \hline
-        $Int_{acc}   [\mu]$&	$7\pm50$&	$19\pm62$&	-$19\pm35$&	-$13\pm58$&    $77\pm59$&	$11\pm42$&	-$53\pm41$&	-$16\pm40$&	$4\pm62$\\
-        $Int_{all}	[\mu]$ &  $26\pm 51$&	$25\pm 62$&	-$5\pm30$&	-$57 \pm53$&	$69\pm55$&	-$6\pm42$&	-$66\pm43$&	-$21\pm47$&	-$32\pm60$\\
-        $\langle Int\rangle [\mu]$&	$16\pm36$&	$22\pm44$&	-$11\pm23$&	-$38 \pm39$&	$73\pm40$&	$3\pm30$&	-$60\pm30$&	-$18\pm31$&	-$14\pm43$\\
+        $Int_{acc}   [\si{\micro\meter}]$&	$7\pm50$&	$19\pm62$&	-$19\pm35$&	-$13\pm58$&    $77\pm59$&	$11\pm42$&	-$53\pm41$&	-$16\pm40$&	$4\pm62$\\
+        $Int_{all}	[\si{\micro\meter}]$ &  $26\pm 51$&	$25\pm 62$&	-$5\pm30$&	-$57 \pm53$&	$69\pm55$&	-$6\pm42$&	-$66\pm43$&	-$21\pm47$&	-$32\pm60$\\
+        $\langle Int\rangle [\si{\micro\meter}]$&	$16\pm36$&	$22\pm44$&	-$11\pm23$&	-$38 \pm39$&	$73\pm40$&	$3\pm30$&	-$60\pm30$&	-$18\pm31$&	-$14\pm43$\\
         $\lambda_I$&    $0,3$&	$0,07$&	$0,3$&	$0,6$&	$0,1$&	$0,3$&	$0,2$&	$0,07$&	$0,4$\\
         \hline
-    \end{tabular}
+    \end{tabular}}
     \caption{K e intercette estensimetri}
     \label{tab:K_est}
     \end{center}
@@ -350,6 +354,7 @@ Si è poi calcolata la compatibilità fra $K_{all}$ e $K_{acc}$ e fra $Intercett
 
 \begin{figure}[H]
     \centering
+    
     \subfloat[Estensimetro 1]{
         \label{fig:1_estensimetro}
         \includegraphics[width=0.5\textwidth]{1_estensimetro_a_priori.png}
@@ -410,15 +415,13 @@ I metodi impiegati consistono nel verificare la proporzionalità dei parametri p
     \item valutare la costanza del prodotto $P={ \langle K \rangle} D^2 $, per tutti gli estensimetri aventi la stessa $x_{0}$, indipendentemente da $S$
 \end{enumerate}
 
-Per la verifica della legge tramite il primo metodo (Grafico \ref{fig:a_sezione_cost}) si sono scelti i 4  estensimetri aventi la medesima sezione, e dunque lo stesso diametro, pari a \SI{279}{\micron}. Tramite il calcolo dei $\langle K \rangle$ dei vari estensimetri selezionati, precedentemente effettuato, ed avendo a disposizione la lunghezza a riposo di ciascun filo, è stato elaborato un grafico avente sull'asse delle ascisse la lunghezza a riposo espressa in $mm$ e sull'asse delle ordinate il valore di K in $\micron$, associandone adeguatamente l'errore che era stato già calcolato nelle sezioni precedenti.
+Per la verifica della legge tramite il primo metodo (Grafico \ref{fig:a_sezione_cost}) si sono scelti i 4  estensimetri aventi la medesima sezione, e dunque lo stesso diametro, pari a \SI{279}{\micron}. Tramite il calcolo dei $\langle K \rangle$ dei vari estensimetri selezionati, precedentemente effettuato, ed avendo a disposizione la lunghezza a riposo di ciascun filo, è stato elaborato un grafico avente sull'asse delle ascisse la lunghezza a riposo espressa in $mm$ e sull'asse delle ordinate il valore di K in $\si{\micro\meter}$, associandone adeguatamente l'errore che era stato già calcolato nelle sezioni precedenti.
 
 \begin{figure}[h!]
     \centering
-
         \label{fig:a_sezione_cost}
         \includegraphics[width=9cm]{a_sez_cost.png}
         \caption{Verifica diretta proporzionalità tra K e $x_0$}
-        
 \end{figure}
 Per la verifica del secondo metodo (Grafico \ref{fig:a_lunghezza_cost}) sono stati selezionati invece gli estensimetri aventi lunghezza del filo d'acciaio pari a $\SI{950}{mm}$. E' stato realizzato un grafico avente sull'asse delle ascisse il valore di 1/S  calcolato per ogni estensimetro e sull'asse delle ordinate il valore di $\langle K \rangle$ dello stesso, associandone il relativo errore precedentemente calcolato. Si è inoltre determinata una retta interpolante i dati rappresentata nel grafico con una retta tratteggiata di colore blu chiaro.\\
 A causa dell'incongruenza tra il valore rappresentato in blu sul grafico e gli altri dati, si è deciso di eseguire una seconda analisi più accurata, questa volta eliminando il dato considerato e determinando una nuova retta interpolante, rappresentata in rosso nel grafico. L'eliminazione è stata effettuata calcolando le frequenze di ottenere un dato valore in una regione ben delineata di grafico, ovvero tra la nuova retta interpolante e una parallela, ottenuta aumentando l'intercetta dell'interpolante di un valore arbitrariamente scelto. Anche tenendo conto dell'errore del quale risulta affetto il dato eliminato, si è riscontrato che la probabilità di ottenere lo stesso dato nella regione prima determinata è molto inferiore rispetto a quella calcolata per gli altri dati.
@@ -427,17 +430,38 @@ A causa dell'incongruenza tra il valore rappresentato in blu sul grafico e gli a
 
 \begin{figure}[h!]
     \centering
-    
+        \subfloat[Verifica diretta proporzionalità tra K e $\frac{1}{S}$]{
         \label{fig:a_lunghezza_cost}
         \includegraphics[width=9cm]{a_lung_cost .png}
-        \caption{Verifica diretta proporzionalità tra K e 1/S}
+        }
+        \subfloat[Tabella]{
+            \begin{table}[h!]
+                \centering
+                \label{tab:my_label}
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    Reciproco Sezione & K & Coeff. Ango\\
+                    $\SI{[1/micron]}$ & $\SI{[micron/N]}$ & $\SI{[micron/N]}$\\
+                    \hline
+                    $1.16918e-05$&	$58.3841\pm1.70367$&  \\
+                    $1.00464e-05$&	$49.7143\pm2.09313$&    \\
+                    $8.77122e-06$&	$48.0777\pm1.0878$& \\
+                    $1.36871e-05$&	$70.6296\pm1.8732$& Intercetta\\
+                    $1.41471e-05$&	$28.1656\pm1.92003$&\\
+                    $7.95775e-06$&	$37.1282\pm1.42788$&    \\
+                    $1.63569e-05$&	$78.1232\pm1.41543$&    \\
+                    \hline
+                \end{tabular}
+            \end{table}
+        }
 \end{figure}
 
 
 
-Per quanto riguarda il calcolo del rapporto R, come per i metodi precedenti, si sono selezionati solo alcuni estensimetri,ovvero quelli aventi la stessa sezione ed è stato eseguito il calcolo per ognuno di essi del rapporto R tramite la seguente formula: $R=\frac{K}{x_{0}}$. Ad esso è stato associato un errore calcolato tramite la propagazione degli errori, ovvero 
+
+Per quanto riguarda il calcolo del rapporto R, come per i metodi precedenti, si sono selezionati solo alcuni estensimetri,ovvero quelli aventi la stessa sezione ed è stato eseguito il calcolo per ognuno di essi del rapporto R tramite la seguente formula: $R=\frac{\langle K \rangle}{x_{0}}$. Ad esso è stato associato un errore calcolato tramite la propagazione degli errori, ovvero 
 \begin{equation*}
-    \sigma_R \approx \sqrt{\left ( \frac{\partial R }{\partial K} \right )^2 \cdot \left ( \sigma_K \right )^2 + \left ( \frac{\partial R }{\partial x_0} \right )^2 \cdot \left ( \sigma_{x_0} \right )^2 }
+    \sigma_R \approx \sqrt{\left ( \frac{\partial R }{\partial K} \right )^2 \cdot  \sigma_{K}^2 + \left ( \frac{\partial R }{\partial x_0} \right )^2 \cdot \sigma_{x_0}^2 }
 \end{equation*}
 
 In seguito è stato generato un grafico contenete i valori calcolati, nello specifico sull'asse delle ascisse sono stati posizionati i valori delle lunghezze a riposo degli estensimetri presi in considerazione e sull'asse delle ordinate il valore di R calcolato. E' stata poi determinata una retta interpolante i 4 dati rappresentati sul grafico.
@@ -491,52 +515,52 @@ Gli errori associati sono stati calcolati tramite propagazione. Per far ciò è 
 \newpage
 
 \section{Discussione dei risultati}
-
-\subsection{Prima parte}
-\subsubsection*{Primo metodo misurazione}
-Sin da una prima analisi sui dati presi dagli operatori risulta che la $\sigma_{\overline{\Delta x}}$, quando le misure risultavano tra loro identiche, è pari a zero. Per prevenire questa condizione è stato eseguito un confronto per tutte le misure tra la$\sigma_{\overline{\Delta x}}$ e la $\sigma_{dist. uni.}$ al fine di non sottostimare l'errore. I parametri associati a tale errore risultano ptl di 10 micron, in quanto ogni tacca incisa rappresenta 10 micrometri, ed un coefficiente di affidabilità pari a 10. Questa scelta è motivata dal fatto che la capacità visiva dei vari operatori risultava tale da apprezzare una variazione della posizione della lancetta di un micrometro. Si è optato per la distribuzione uniforme al posto della triangolare in quanto rappresenta più difficilmente una sottostima dell'errore.\\
+\subsection{Verifica dell'elasticità meccanica e definizione del miglio protocollo di misura}
+\subsubsection*{Primo Metodo - Misure in allungamento e accorciamento}
+Sin da una prima analisi sui dati presi dagli operatori risulta che la $\sigma_{\overline{\Delta x}}$, quando le misure risultavano tra loro identiche, è pari a zero. Per prevenire questa condizione è stato eseguito un confronto per tutte le misure tra la $\sigma_{\overline{\Delta x}}$ e la $\sigma_{dist. uni.}$ al fine di non sottostimare l'errore. I parametri associati a tale errore risultano ptl di 10 micron, in quanto ogni tacca incisa rappresenta 10 micrometri, ed un coefficiente di affidabilità pari a 10. Questa scelta è motivata dal fatto che la capacità visiva dei vari operatori risultava tale da apprezzare una variazione della posizione della lancetta di un micrometro. Si è optato per la distribuzione uniforme al posto della triangolare in quanto rappresenta più difficilmente una sottostima dell'errore.\\
 Per l'incertezza su $\Delta F$ invece si è scelto come ptl il doppio dello spessore della tacca incisa in quanto si è assunto come errore massimo possibile dovuto ad un eventuale disallineamento tra indicatore e tacche incise nel dinamometro da parte dell'operatore.\\
-
-
 
 Come già descritto nell'analisi si è operata una differenza tra le varie misurazioni di allungamento e accorciamento con la prima di queste ultime così da ricavare l'effettivo allungamento $\Delta x=| x_{i}-x_{0}|$. A ciascuna misura $\Delta x$ è stata attribuita come incertezza la propagazione degli errori ottenuta a partire dalla formula precedente.\\
 
-Ottenuti i parametri del chi quadro sull'allungamento e sull'accorciamento con le $\sigma_{\Delta x}$ precedentemente ottenute, si sono rieseguiti i calcoli utilizzando la sigma a posteriori. Sin da una prima analisi $\sigma_{post} \approx \SI{7.0}{micron}$ è di circa un ordine di grandezza più grande rispetto a $\sigma_{\Delta x}$.
+Ottenuti i parametri del ${\chi}^2$ sull'allungamento e sull'accorciamento con le $\sigma_{\Delta x}$ precedentemente ottenute, si sono rieseguiti i calcoli utilizzando la sigma a posteriori. Sin da una prima analisi $\sigma_{post} \approx \SI{7.0}{micron}$ è di circa un ordine di grandezza più grande rispetto a $\sigma_{\Delta x}$.
 
 Questo controllo, pur avendo aumentato l'errore casuale sui parametri del fit, ha permesso di ottenere delle stime più attendibili e verosimili (Tabella \ref{tab:parametri_fit_1ac}). Infatti, le compatibilità fra parametri in allungamento e accorciamento con la $\sigma_{\Delta x}$ risultano incompatibili sia per il coefficiente angolare sia per l'intercetta, mentre utilizzando $\sigma_{post}$ risultano ottime.
 
-
-Ipotizziamo che l'incompatibilità è relazionata ad una possibile sottostima di $\sigma_{\Delta x}$, tale da aumentare drasticamente il calcolo di  $\lambda$, fenomeno che suggerisce la veridicità dell'ipotesi e il conseguente impiego di $\sigma_{post}$. In questo modo i parametri delle misure in allungamento e di quelle in accorciamento risultano pienamente compatibili.
-
+Ipotizziamo che l'incompatibilità è relazionata ad una possibile sottostima di $\sigma_{\Delta x}$, tale da aumentare drasticamente il calcolo di $\lambda$, fenomeno che suggerisce la veridicità dell'ipotesi e il conseguente impiego di $\sigma_{post}$. In questo modo i parametri delle misure in allungamento e di quelle in accorciamento risultano pienamente compatibili.
 
 Il confronto fra i due coefficienti angolari delle rette interpolanti i dati di allungamento e accorciamento mette in evidenza il comportamento elastico del filo. La compatibilità ottima infatti conferma un comportamento pressoché identico nelle differenti fasi di sollecitazione. Va però osservato che in allungamento il coefficiente elastico risulta leggermente maggiore. Si ipotizza che questa differenza sia dovuta ad un differente comportamento elastico a seconda del procedimento meccanico a cui il filo è sottoposto.\\
-Il confronto tra i valori delle intercette, pur generando tra loro valori compatibili. Questo comportamento è ricondotto ad un errore di natura sconosciuta, probabilmente dovuto all'andamento generale dei dati. Ci si aspetta infatti che l'intercetta corrisponda all'origine degli assi. Tuttavia si evidenza che la compatibilità dell'intercetta con l'origine ($0\pm \sigma_{\Delta x, pos}$) è ottima ($\approx \num{0.5}$).\\
-Poiché il comportamento del filo è elastico, si può stimare il valore di $\langle K \rangle \pm \sigma_{\langle K \rangle}$ e considerarlo come coefficiente di elasticità rappresentativo per il filo.
 
-\subsubsection*{Secondo metodo misurazione}
-% - ERRORE DI DESALVADOR
+Il confronto tra i valori delle intercette, genera tra loro valori compatibili. Questo comportamento è ricondotto ad un errore di natura sconosciuta, probabilmente dovuto all'andamento generale dei dati. Ci si aspetta infatti che l'intercetta corrisponda all'origine degli assi. Tuttavia si evidenza che la compatibilità dell'intercetta con l'origine ($0\pm \sigma_{\Delta x, pos}$) è ottima ($\approx \num{0.5}$).\\
+
+Poiché il comportamento del filo è ritenuto elastico, essendo la compatibilità ottima, si può stimare il valore di $\langle K \rangle \pm \sigma_{\langle K \rangle}$ e considerarlo come coefficiente di elasticità rappresentativo per il filo.\\
+
+
+\subsubsection*{Secondo Metodo - Misure ripetute}
+\begin{figure}[h!]
+    \centering
+    \subfloat[Andamento misure a $\SI{400}{gp}$]{
+        \includegraphics[width=0.5\textwidth]{tutto_400.png}
+        \label{fig:tutto_400}
+        }
+    \subfloat[Andamento misure a $\SI{1000}{gp}$]{
+        \includegraphics[width=0.5\textwidth]{tutto_1000.png}
+        \label{fig:tutto_1000}
+        }
+\end{figure}
+
+La possibilità di compiere misure ripetute mette in evidenza le differenze che intercorrono tra le misurazioni raccolte durante la fase di allungamento e di accorciamento. I Grafici \ref{fig:tutto_400} e \ref{fig:tutto_1000} infatti mostrano sia le dispersioni (barre di errori del grafico) dovute alle diverse letture degli operatori o alla distribuzione uniforme talora le dispersioni degli operatori fossero nulle, sia la tendenza delle misure prese in accorciamento ad essere maggiori di quelle prese in allungamento, sia per $F_{lett}=\SI{400}{gp}$ che per $F_{lett}=\SI{1000}{gp}$.
+
+Appare infatti che aumentando il numero consecutivo della misurazione ci sia un graduale aumento sistematico della variazione di lunghezza misurata sul minimetro, come evidenziato dalle rette a coefficiente angolare positivo del fit. Si ipotizza pertanto che un ripetuto allungamento e accorciamento del filo vada ad alterarne il comportamento.
+
+Si osserva tuttavia un'eccezione alla retta nel Grafico \ref{fig:tutto_400} relativa alle misure in allungamento. La pendenza negativa è probabilmente attribuibile soltanto alle ultime tre misure, da considerare forse affette da errore sistematico subentrato in questi ultimi tre casi.
+In generale tuttavia, l'ipotesi di un sistematico aumento nell'allungamento trova fondamento nella specularità degli andamenti delle misure appartenenti ai processi di distensione e contrazione, comportamento forse attribuibile ad un processo di isteresi meccanica.\\
+A seguito di queste considerazioni si sono assunti come valori rappresentativi dei campioni di misure $\{ \Delta x \}$ in allungamento e accorciamento, sia a 400 che a 1000, la media $\overline{\Delta x}$ e la deviazione standard sulla media degli stessi $\sigma_{\overline{\Delta x}}$ nonostante si osservi un sistematico aumento dei $\Delta x$ con la misurazione consecutiva.\\
+$\overline{\Delta x} \pm \sigma_{\overline{\Delta x}}$ sono stati impiegati per il calcolo dei K. Si noti che si sono tenute separate le misure eseguite in allungamento e accorciamento il più possibile, fino a quando non si è eseguita la media ponderata  fra $K_{acc}$ e $K_{all}$. Questa accortezza è il risultato di una scelta arbitraria compiuta a priori nel processo di analisi dati, in modo da risultare coerente con l'obiettivo di mostrare una possibile componente di errore sistematico.
+%AGGGIUNGERE ERRORE SISTEMATICO DE SALAVDOR
 
 
 \subsubsection*{Definizione miglior protocollo misura}
 
-
-\begin{figure}[h!]
-    \centering
-    \subfloat[Andamento misure a $\SI{400}{gp}$]{
-        \label{fig:a_lunghezza_cost}
-        \includegraphics[width=0.5\textwidth]{tutto_400.png}
-        }
-    \subfloat[Andamento misure a $\SI{1000}{gp}$]{
-        \label{fig:a_lunghezza_cost}
-        \includegraphics[width=0.5\textwidth]{tutto_1000.png}
-        }
-\end{figure}
-
-La possibilità di compiere misure ripetute mette in evidenza la differenza che intercorre tra le misurazioni in allungamento e in accorciamento. I Grafici \ref{fig:GRAFICO ISTERESI1 e GRAFICO ISTERESI 2} infatti mostrano sia le dispersioni dovute alle diverse letture degli operatori e alla distribuzione uniforme (analogamente a quanto discusso per l'acquisizione precedente) sia la tendenza delle misure prese in allungamento ad essere maggiori di quelle prese in accorciamento, per $F_{400}$ e per $F_{1000}$.
-Appare inoltre che aumentando il numero consecutivo della misurazione ci sia un lieve aumento della lunghezza misurata sul minimetro, come evidenziato dalle rette a coefficiente angolare positivo del fit. Si ipotizza pertanto che un ripetuto allungamento e accorciamento del filo vada ad alterarne il comportamento. 
-Si osserva tuttavia un'eccezione alla retta in \ref{fig: QUELLA DEL 400} relativa alle misure in accorciamento. La pendenza negativa è probabilmente attribuibile alle ultime tre misure, da considerare forse affette da errore sistematico subentrato solo in questi ultimi tre casi. Quanto affermato trova fondamento nella specularità degli andamenti delle misure in allungamento e accorciamento, comportamento forse attribuibile ad un processo di isteresi meccanica.\\
-A seguito di queste considerazioni si sono assunti come valori rappresentativi dei campioni di misure in allungamento e accorciamento, sia a 400 che a 1000, la media e la deviazione sulla media degli stessi.
-Questi valori sono stati poi impiegati per il calcolo dei K. Si noti che si sono tenute separate le misure eseguite in allungamento e accorciamento il più possibile, fino a quando non si è eseguita la media ponderata  fra $K_{acc}$ e $K_{all}$. Questa accortezza è il risultato di una scelta arbitraria compiuta a priori nel processo di analisi dati, in modo da risultare coerente con l'obiettivo di mostrare una possibile componente di errore sistematico.%AGGGIUNGERE ERRORE SISTEMATICO DE SALAVDOR
 
 
 \subsection{Seconda parte}
