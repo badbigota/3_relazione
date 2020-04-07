@@ -206,7 +206,7 @@ Per dare infine una stima del coefficiente K si è eseguita la media ponderata f
     \centering
     \begin{tabular}{|cc|c|c|c|c|c|c|}
         \hline 
-        & \# & Operatore 1&	Operatore 2&	Operatore 3&	Media&	$\sigma$&	$\overline{\sigma}$\\
+        & \# & Operatore 1&	Operatore 2&	Operatore 3&	$\overline{\Delta x}$&	$\sigma$&	$\sigma_{\overline{\Delta x}}$\\
         &   &$[\SI{e-6}{\meter}] $&$[\SI{e-6}{\meter}] $&$[\SI{e-6}{\meter}] $&$[\SI{e-6}{\meter}] $&$[\SI{e-6}{\meter}] $&$[\SI{e-6}{\meter}] $\\
         \hline
         
@@ -264,27 +264,26 @@ Per dare infine una stima del coefficiente K si è eseguita la media ponderata f
     \centering
     \begin{tabular}{|c|c|c|c|c|}
         \hline
-          \multicolumn{2}{|c|}{\multirow{2}{*}{}} & Media& $\sigma$ & $\overline{\sigma}$\\
+          \multicolumn{2}{|c|}{\multirow{2}{*}{}} & ${\overline{\Delta x}}^\ast$& $\sigma$ & $\sigma_{{\overline{\Delta x}}^\ast}$\\
           \multicolumn{2}{|c|}{} & $[\SI{e-6}{\meter}]$ & $[\SI{e-6}{\meter}]$ & $[\SI{e-6}{\meter}]$\\ 
           \hline
-          \multirow{2}{*}{\textbf{400 gp}}& {\cellcolor[rgb]{0.85,0.85,0.85}}alto & {\cellcolor[rgb]{0.85,0.85,0.85}}436,593&	{\cellcolor[rgb]{0.85,0.85,0.85}}3,76305&	{\cellcolor[rgb]{0.85,0.85,0.85}}1,25435\\ \cline{2-5}
-          &basso&   458,741&	2,178033&	0,726011\\
+          \multirow{2}{*}{\textbf{400 gp}}& {\cellcolor[rgb]{0.85,0.85,0.85}}Alto & {\cellcolor[rgb]{0.85,0.85,0.85}}436,593&	{\cellcolor[rgb]{0.85,0.85,0.85}}3,76305&	{\cellcolor[rgb]{0.85,0.85,0.85}}1,25435\\ \cline{2-5}
+          &Basso&   458,741&	2,178033&	0,726011\\
           \hline
-          \multirow{2}{*}{\textbf{1000 gp}}& {\cellcolor[rgb]{0.85,0.85,0.85}}alto & {\cellcolor[rgb]{0.85,0.85,0.85}}1746,96&	{\cellcolor[rgb]{0.85,0.85,0.85}}2,768515381&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,978818\\ \cline{2-5}
-          &basso&   1763,04&	3,605282919&	1,27466\\
+          \multirow{2}{*}{\textbf{1000 gp}}& {\cellcolor[rgb]{0.85,0.85,0.85}}Alto & {\cellcolor[rgb]{0.85,0.85,0.85}}1746,96&	{\cellcolor[rgb]{0.85,0.85,0.85}}2,768515381&	{\cellcolor[rgb]{0.85,0.85,0.85}}0,978818\\ \cline{2-5}
+          &Basso&   1763,04&	3,605282919&	1,27466\\
          \hline
     \end{tabular}
     \caption{Medie e dev Misure Ripetute}
     \label{tab:medie_misure_ripetute}
 \end{table}{}
-
-%AGGIUNGERE TABELLA RIASSUNTIVA DELLE MEDIE DELLE MEDIE (UKTIMA RIGA SPAIATA)
+\paragraph{Primo procedimento}
 Per il calcolo di K tramite misure ripetute sono stati utilizzati due procedimenti differenti.\\
-Nel primo caso, al fine di apprezzare eventuali evidenze sperimentali celate dal metodo precedente, si è optato per il calcolo del coefficiente di elasticità direttamente mediante la legge di Hooke, calcolando $\overline{\Delta x}$ per ogni campione di misurazioni.\\ 
+Nel primo caso, al fine di apprezzare eventuali evidenze sperimentali celate dal metodo precedente, si è optato per il calcolo del coefficiente di elasticità direttamente mediante la legge di Hooke.\\% calcolando $\overline{\Delta x}$ per ogni campione di misurazioni.\\ 
 
-In primo luogo si è proceduto con il calcolo delle medie delle misurazioni di ogni operatore, nello specifico per le misure di allungamento e accorciamento per $F_{letta}$ pari a $\SI{400}gp$ e $\SI{1000}gp$ aumentando o diminuendo la forza dal dinamometro di $\SI{200}{gp}$ dalla tacca prescelta. Di ogni campione di lunghezze $\{ {\Delta x} \}_{400, all}$,$\{ {\Delta x} \}_{400, acc}$,$\{ {\Delta x} \}_{1000, all}$,$\{ {\Delta x} \}_{1000, acc}$ si è calcolata la media, associandovi come errore la relativa $\sigma_{\overline{\Delta x}}$ (Tabella \ref{tab:misure_ripetute} e Tabella \ref{tab: TABELLA ANCORA DA REALIZZARE CON MISURE SPAIATE}).\\
+In primo luogo si è proceduto con il calcolo delle medie delle misurazioni di ogni operatore, nello specifico per le misure di allungamento e accorciamento per $F_{letta}$ pari a $\SI{400}gp$ e $\SI{1000}gp$ aumentando o diminuendo la forza dal dinamometro di $\SI{200}{gp}$ dalla tacca prescelta (Tabella \ref{tab:misure_ripetute}). Di ogni campione di lunghezze $\{ {\Delta x} \}_{400, all}$, $\{ {\Delta x} \}_{400, acc}$, $\{ {\Delta x} \}_{1000, all}$ e $\{ {\Delta x} \}_{1000, acc}$ si è calcolata la media ${\overline{\Delta x}}^\ast$, associandovi come errore la relativa $\sigma_{\overline{\Delta x}^\ast}$ (Tabella \ref{tab:medie_misure_ripetute}).\\
 
-Per ogni campione, utilizzando la legge di Hooke, si sono ottenuti 4 valori differenti di coefficiente elastico ottenendo $K_{400, all}$, $K_{400, acc}$, $K_{1000, all}$ e $K_{1000, acc}$ impiegando come $\Delta x$ i valori appena ricavati e come $\Delta F$ il valore ottenuto dalla differenza tra $\SI{400}{gp}$ oppure $\SI{1000}{gp} $ e $ \SI{200}{gp}$. L'errore di ogni K è stato calcolato utilizzando la propagazione degli errori tramite la seguente:
+Per ogni campione, utilizzando la legge di Hooke, si sono ottenuti 4 valori differenti di coefficiente elastico ottenendo $K_{400, all}$, $K_{400, acc}$, $K_{1000, all}$ e $K_{1000, acc}$ impiegando come  allungamento ${\overline{\Delta x}}^\ast$ e come $\Delta F$ il valore ottenuto dalla differenza tra $\SI{400}{gp}$ oppure $\SI{1000}{gp} $ e $ \SI{200}{gp}$. L'errore di ogni K è stato calcolato utilizzando la propagazione degli errori tramite la seguente:
 \begin{equation*}
 \sigma_K \approx \sqrt{\left ( \frac{\partial K }{\partial F_i} \right )^2 \cdot  \sigma_{ F_i}^2 +
 \left (\frac{\partial K }{\partial F_0} \right )^2 \cdot  \sigma_{ F_0}^2 +
@@ -293,25 +292,18 @@ Per ogni campione, utilizzando la legge di Hooke, si sono ottenuti 4 valori diff
 
 \end{equation*}
 
+E' stata poi effettuata la media ponderata dei due coefficienti elastici in allungamento ($K_{400, all}$ e $K_{1000, all}$) e dei due in accorciamento ($K_{400, acc}$ e $K_{1000, acc}$) sempre associandovi il relativo errore e valutando la compatibilità fra ${\langle K \rangle}_{all}$ e ${\langle K \rangle}_{acc}$. Infine per restituire un valore unico $\langle K \rangle \pm \sigma_{\langle K \rangle}$ si è nuovamente calcolata la media ponderata fra questi due ultimi valori. Tutti i dati citati sono riportati in Tabella \ref{tab: TABELLA DATI K SECONDO METODO con COMPATIBILITÀ}.\\%MANCA TABELLA 2 ACQ MISURE RIPETUTE PRIMO METODO.XLSX
 
-
-
-
-
-
-E' stata poi effettuata la media ponderata dei due coefficienti elastici in allungamento ($K_{400, all}$ e $K_{1000, all}$) e dei due in accorciamento ($K_{400, acc}$ e $K_{1000, acc}$) sempre associandovi il relativo errore e valutando la compatibilità fra ${\langle K \rangle}_{all}$ e ${\langle K \rangle}_{acc}$. Infine per restituire un valore unico $\langle K \rangle \pm \sigma_{\langle K \rangle}$ si è nuovamente calcolata la media ponderata fra questi due ultimi valori. Tutti i dati citati sono riportati in Tabella \ref{tab: TABELLA DATI K SECONDO METODO con COMPATIBILITÀ}.\\%MANCA TABELLA 2 ACQ
-
-
-
+\paragraph{Secondo procedimento}
 Il secondo procedimento utilizzato per il calcolo di K tramite le misure ripetute è consistito nel calcolo del $\chi^2$ su tutte le misure ottenute a $\SI{400}gp$ e $\SI{1000}gp$ con l'accortezza di distinguere i dati presi in allungamento ed in accorciamento. Operando secondo questo schema si sono ottenute due rette di interpolazione, una per i dati delle misure "in allungamento" ed una per quelli "in accorciamento". I due coefficienti angolari rappresentano i coefficienti rispettivamente di allungamento e di accorciamento e da essi si è calcolata la compatibilità fra ${K}_{acc}$ e ${K}_{all}$ e ricavata la media ponderata, rappresentativa della costante elastica dell'estensimetro in esame. Vengono riportati i dati qui citati in Tabella \ref{tab: TABELLA SECONDO METODO SECONDA ACQUISIZIONE}%I PARAMETRI DEL FIT
 
 % METODO DE SALVADOR
+\subsubsection{Errore sistematico}
 Per la valutazione dell'errore sistematico del quale sono affette tutte le misurazioni effettuate è stato utilizzato un metodo che valuta i dati ottenuti dalle misurazioni ripetute. Si è considerato errore sistematico la differenza fra $K_{all}$ e $K_{acc}$ e per valutarla si è impiegata la seguente:
-\begin{gather*}
+\begin{gather*}%IMPAGINARE PERCHè ESCONO
     
-    \delta_{k} = \frac{x^{Acc}_{1000}-x^{Acc}_{400}}{\Delta_F}-\frac{x^{All}_{1000}-x^{All}_{400}}{\Delta_F} \\
-    
-    
+    \delta_{K} = K_{acc}- K_{all}=\frac{x^{Acc}_{1000}-x^{Acc}_{400}}{\Delta F}-\frac{x^{All}_{1000}-x^{All}_{400}}{\Delta F} \\
+
     \sigma_{\delta_K}\approx \sqrt{
 \left ( \frac{\partial \delta_K }{\partial x^{Acc}_{1000}} \right )^2\cdot  \sigma_{x^{Acc}_{1000}} ^2+
 \left ( \frac{\partial \delta_K}{\partial x^{Acc}_{400}} \right )^2\cdot  \sigma_{x^{Acc}_{400}} ^2+
@@ -320,27 +312,20 @@ Per la valutazione dell'errore sistematico del quale sono affette tutte le misur
 \left ( \frac{\partial \delta_K}{\partial F_i} \right )^2\cdot  \sigma_{F_i} ^2}
 \end{gather*}
 
-\begin{equation*}
-\small \sigma_{\delta_K}\approx \sqrt{ \left ( \frac{\partial \delta_K }{\partial x^{Acc}_{1000}} \right )^2\cdot \sigma_{x^{Acc}_{1000}} ^2+ \left ( \frac{\partial \delta_K}{\partial x^{Acc}_{400}} \right )^2\cdot \sigma_{x^{Acc}_{400}} ^2+ \left ( \frac{\partial \delta_K }{\partial x^{All}_{1000}} \right )^2\cdot \sigma_{x^{All}_{1000}} ^2+ \left ( \frac{\partial \delta_K }{\partial x^{Acc}_{400}} \right )^2\cdot \sigma_{x^{Acc}_{400}} ^2+ \left ( \frac{\partial \delta_K}{\partial F_i} \right )^2\cdot \sigma_{F_i} ^2+ \left ( \frac{\partial \delta_K }{\partial F_0} \right )^2\cdot \sigma_{F_0} ^2 }
-\end{equation*}
+In cui $x_{1000 / 400}^{all / acc}$ corrisponde a $\overline{\Delta x}^\ast$, $\sigma_{x}$ è $\sigma_{\overline{\Delta x}^\ast}$ e $\Delta F$ la variazione della forza tra $\SI{1000}{gp}$ e $\SI{400}{gp}$
 
-I calcoli restituiscono un errore di $-1.0308 \pm 3.31908 micron/Newton$. 
+I calcoli restituiscono un errore sistematico di $\delta_{K} = (-0.2577 \pm 0.225742) micron/Newton$. 
 
 
-%MISURAZIONI DI 100 IN 100
-% -CHI QUADRO
-% ////-CAMPIONI DI K (NON SONO STATI FATTI)
-%CONSECUTIVE
-% -
-%PROTOCOLLO DI MISURA
-% - I GRAFICI CHE SERVON PER DIMOSTRARE POI< PARLANE E METTILI
 
-\subsection{Analisi sistematica degli estensimetri}
+%TABELLA CONFRONTO DUE METODI PER PROTOCOLLO MISURA E ALCUNI RIGHE PER DIRE COSA CE IN TABELLA
+
+
+\subsection{Analisi sistematica di tutti gli estensimetri}
 \subsubsection*{Stime di $K$}
-Dai dati forniti, si sono calcolati i $\Delta x$ come differenza tra le misure $x_n$ e $x_0$ separatamente per allungamento e accorciamento, corrispondenti ad una $\Delta F_{app} =\left | F_{x, app} - F_{0, app} \right |$ e, conseguentemente, si sono valutati i $\Delta x$.
-Similmente a quanto descritto nella prima acquisizione, dopo una rappresentazione grafica dei dati, si sono calcolati i $K_{all}$ e i $K_{acc}$ ed i relativi errori per tutti gli estensimetri dotati di filo in acciaio tramite il metodo del $\chi^2$
-Per associare la giusta incertezza ai parametri del fit lineare si sono confrontati gli errori $\sigma_{\Delta x}$ e $\sigma_{\Delta x, posteriori}$, scegliendo tra queste l'errore che apportava il contributo maggiore.
-Si è poi calcolata la media ponderata tra i $K_{all}$ e $K_{acc}$ come stima del ${\langle K \rangle }\pm \sigma_{{\langle K\rangle }}$ e la compatibilità fra $K_{all}$ e $K_{acc}$ e fra $Intercetta_{all}$ e $Intercetta_{acc}$ per ciascun estensimetro come viene esposto nella Tabella \ref{tab:K_est}.
+Dai dati forniti, si sono calcolati i $\Delta x$ come differenza in modulo tra le misure $x_i$ e $x_0$ separatamente per allungamento e accorciamento, corrispondenti ad una $\Delta F_{app} =\left | F_{i, app} - F_{0, app} \right |$. A ciascun valore di x si è associato un errore derivante dalla distribuzione uniforme con ptl pari a 5 micron e coefficiente di affidabilità pari a 1, e conseguentemente tramite la propagazione degli errori casuali si è calcolato l'errore di  $\Delta x$. L'errore associato a $\Delta F$ è stato derivato dalla distribuzione triangolare con i parametri descritti precedentemente.\\
+Similmente a quanto descritto nella prima acquisizione, dopo una rappresentazione grafica delle coppie $(\Delta F, \Delta x)$, si sono calcolati i $K_{all}$ e i $K_{acc}$ e le intercette per tutti gli estensimetri dotati di filo in acciaio tramite il metodo del $\chi^2$. I relativi errori sono stati calcolati  tramite la formula di propagazione degli errori tramite la $\sigma_{post}$.\\
+Si è poi calcolata la compatibilità fra $K_{all}$ e $K_{acc}$ e fra $Intercetta_{all}$ e $Intercetta_{acc}$ e la media ponderata tra i $K_{all}$ e $K_{acc}$ come stima del ${\langle K \rangle }\pm \sigma_{{\langle K\rangle }}$ per ciascun estensimetro come viene esposto nella Tabella \ref{tab:K_est}.
 
 \begin{table}[h!]
     \begin{center}
@@ -419,12 +404,13 @@ Tramite l'analisi incrociata di diversi metodi è stata verificata la seguente l
 \end{equation*}
 I metodi impiegati consistono nel verificare la proporzionalità dei parametri presenti nell'equazione sfruttandone la dipendenza lineare. Le varie verifiche della legge che sono state eseguite sono le seguenti:
 \begin{enumerate}
-    \item verificare la diretta proporzionalità tra K e la lunghezza di ogni estensimetro, $x_0$, di tutti gli estensimetri aventi stessa sezione $S$.
-    \item verificare la diretta proporzionalità tra K e il rapporto della sezione $1/S$ di tutti gli estensimetri aventi stessa lunghezza a riposo $x_{0}$.
-    \item calcolare il rapporto $R=\frac{K}{x_{0}}$, per tutti gli estensimetri con la stessa $S$, indipendentemente da $x_{0}$
-    \item calcolare il prodotto $P= KD^2 $, per tutti gli estensimetri aventi la stessa $x_{0}$, indipendentemente da $S$
+    \item verificare la diretta proporzionalità tra $\langle K \rangle$ e la lunghezza del filo a riposo $x_0$, di tutti gli estensimetri aventi stessa sezione $S$.
+    \item verificare la diretta proporzionalità tra $\langle K \rangle$ e il rapporto della sezione $1/S$ di tutti gli estensimetri aventi stessa lunghezza a riposo $x_{0}$.
+    \item valutare la costanza del rapporto $R=\frac{\langle K \rangle}{x_{0}}$, per tutti gli estensimetri con la stessa $S$, indipendentemente da $x_{0}$
+    \item valutare la costanza del prodotto $P={ \langle K \rangle} D^2 $, per tutti gli estensimetri aventi la stessa $x_{0}$, indipendentemente da $S$
 \end{enumerate}
-Per la verifica della legge tramite il primo metodo si sono scelti i 4  estensimetri aventi la medesima sezione, e dunque lo stesso diametro, pari a \SI{279}{\micron}. Tramite il calcolo dei K dei vari estensimetri selezionati, precedentemente effettuato, ed avendo a disposizione la lunghezza a riposo di ciascun filo, è stato elaborato un grafico avente sull'asse delle ascisse la lunghezza a riposo espressa in $mm$ e sull'asse delle ordinate il valore di K in $\micron$, associandone adeguatamente l'errore che era stato già calcolato nelle sezioni precedenti.
+
+Per la verifica della legge tramite il primo metodo (Grafico \ref{fig:a_sezione_cost}) si sono scelti i 4  estensimetri aventi la medesima sezione, e dunque lo stesso diametro, pari a \SI{279}{\micron}. Tramite il calcolo dei $\langle K \rangle$ dei vari estensimetri selezionati, precedentemente effettuato, ed avendo a disposizione la lunghezza a riposo di ciascun filo, è stato elaborato un grafico avente sull'asse delle ascisse la lunghezza a riposo espressa in $mm$ e sull'asse delle ordinate il valore di K in $\micron$, associandone adeguatamente l'errore che era stato già calcolato nelle sezioni precedenti.
 
 \begin{figure}[h!]
     \centering
@@ -434,10 +420,9 @@ Per la verifica della legge tramite il primo metodo si sono scelti i 4  estensim
         \caption{Verifica diretta proporzionalità tra K e $x_0$}
         
 \end{figure}
-Per la verifica del secondo metodo (Grafico \ref{fig:a_lunghezza_cost}) sono stati selezionati invece gli estensimetri aventi lunghezza del filo d'acciaio pari a $\SI{950}{mm}$. E' stato realizzato un grafico avente sull'asse delle ascisse il valore di 1/S  calcolato per ogni estensimetro e sull'asse delle ordinate il valore di K dello stesso, associandone il relativo errore precedentemente calcolato.Si è inoltre calcolata una retta interpolante i dati rappresentata nel grafico con una retta tratteggiata di colore blu chiaro.\\
-A causa dell'incongruenza tra il valore rappresentato in blu sul grafico e gli altri dati, si è deciso di eseguire una seconda analisi più accurata dei valori ottenuti, questa volta reiettando il dato considerato, e determinando una nuova retta interpolante,rappresentata in rosso nel grafico.
-La reiezione è stata effettuata calcolando le probabilità di ottenere un dato valore in una regione ben delineata di grafico, ovvero tra la nuova retta interpolante e una parallela, ottenuta aumentando l'intercetta dell' interpolante di un valore arbitrariamente scelto. Anche tenendo conto dell'errore del quale risulta affetto il dato reiettato, si è riscontrato che la probabilità di riottenere lo stesso è molto inferiore rispetto a quella calcolata degli altri dati.
-%bisogna specificare nella discussione tutto quello che è stato fatto, occhio alla distinzione tra analisi e discusisione 
+Per la verifica del secondo metodo (Grafico \ref{fig:a_lunghezza_cost}) sono stati selezionati invece gli estensimetri aventi lunghezza del filo d'acciaio pari a $\SI{950}{mm}$. E' stato realizzato un grafico avente sull'asse delle ascisse il valore di 1/S  calcolato per ogni estensimetro e sull'asse delle ordinate il valore di $\langle K \rangle$ dello stesso, associandone il relativo errore precedentemente calcolato. Si è inoltre determinata una retta interpolante i dati rappresentata nel grafico con una retta tratteggiata di colore blu chiaro.\\
+A causa dell'incongruenza tra il valore rappresentato in blu sul grafico e gli altri dati, si è deciso di eseguire una seconda analisi più accurata, questa volta eliminando il dato considerato e determinando una nuova retta interpolante, rappresentata in rosso nel grafico. L'eliminazione è stata effettuata calcolando le frequenze di ottenere un dato valore in una regione ben delineata di grafico, ovvero tra la nuova retta interpolante e una parallela, ottenuta aumentando l'intercetta dell'interpolante di un valore arbitrariamente scelto. Anche tenendo conto dell'errore del quale risulta affetto il dato eliminato, si è riscontrato che la probabilità di ottenere lo stesso dato nella regione prima determinata è molto inferiore rispetto a quella calcolata per gli altri dati.
+%bisogna specificare nella discussione tutto quello che è stato fatto, occhio alla distinzione tra analisi e discussisione 
 
 
 \begin{figure}[h!]
