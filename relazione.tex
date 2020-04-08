@@ -66,7 +66,7 @@ Nel complesso sono stati impiegati 12 estensimetri diversi, dei quali vengono ri
 	\centering
 	\begin{tabular}{|l|c|c|c|}  
 \hline
-		    Materiale & \#& \multicolumn{1}{l}{Lunghezza}        & \multicolumn{1}{l}{Diametro}\\ 
+		    Materiale & \#& \multicolumn{1}{l|}{Lunghezza}        & \multicolumn{1}{l|}{Diametro}\\ 
 		    &&$[\si{mm}] \pm\SI{2}{mm}$&$[\si{mm}] \pm\SI{1}{\percent}$\\  
 \hline
 \multirow{9}{*}{Acciaio} & {\cellcolor[rgb]{0.753,0.753,0.753}}1  & {\cellcolor[rgb]{0.753,0.753,0.753}}950  & {\cellcolor[rgb]{0.753,0.753,0.753}}0.33   \\
@@ -189,14 +189,14 @@ Per dare infine una stima del coefficiente K si è eseguita la media ponderata f
         &&$K \pm \sigma_{K}$&	$\langle K \rangle \pm \sigma_{\langle K \rangle}$&	$\lambda_{K_{all}, K_{acc.}}$&	$Err.\%$ \\
         &&$[\si{\micronnewton}]$&$[\si{\micronnewton}]$&&\\ \hline
         \multicolumn{1}{|c|}{\multirow{2}{*}{$\sigma_{Dist. uni.}$}}
-        &All&	$55.3069 \pm 0.00839204$&
+        &{\cellcolor[rgb]{0.85,0.85,0.85}}All&	{\cellcolor[rgb]{0.85,0.85,0.85}}$55.3069 \pm 0.00839204$&
         \multirow{2}{*}{$55,227\pm0,00566895$}&
         \multirow{2}{*}{12.9158}&
         \multirow{2}{*}{0,01026481612}\\    \cline{2-3}
         \multicolumn{1}{|c|}{}& Acc&	$55.1599 \pm 0.00768832$ & & &\\  
         \hline
         \multicolumn{1}{|c|}{\multirow{2}{*}{$\sigma_{post}$}}
-        &All&	$55.2854 \pm 0.171475$&
+        &{\cellcolor[rgb]{0.85,0.85,0.85}}All&	{\cellcolor[rgb]{0.85,0.85,0.85}}$55.2854 \pm 0.171475$&
         \multirow{2}{*}{$55,1973\pm0,0342883$}&
         \multirow{2}{*}{0.601419}&
         \multirow{2}{*}{0,06211952396}\\    \cline{2-3} 
@@ -298,16 +298,18 @@ Per ogni campione, utilizzando la legge di Hooke, si sono ottenuti 4 valori diff
 E' stata poi effettuata la media ponderata dei due coefficienti elastici in allungamento ($K_{400, all}$ e $K_{1000, all}$) e dei due in accorciamento ($K_{400, acc}$ e $K_{1000, acc}$) sempre associandovi il relativo errore e valutando la compatibilità fra ${\langle K \rangle}_{all}$ e ${\langle K \rangle}_{acc}$. Infine per restituire un valore unico $\langle K \rangle \pm \sigma_{\langle K \rangle}$ si è nuovamente calcolata la media ponderata fra questi due ultimi valori. Tutti i dati citati sono riportati in Tabella \ref{tab:2ac_1metodo}.\\%MANCA TABELLA 2 ACQ MISURE RIPETUTE PRIMO METODO.XLSX
 
 
-\begin{table}[]
-\caption{}
+\begin{table}[h!]
+\centering
 \label{tab:2ac_1metodo}
-\begin{tabular}{llllllll}
-                       &      & K Sigma_K &           & Comp 400 1000             & K pond 400 100                         & Comp alto basso          & K pond alto basso                      \\
-\multirow{2}{*}{Basso} & 400  & 58.5284   & 0.328268  & \multirow{2}{*}{6.9225}   & \multirow{2}{*}{56.3189 +/- 0.0767176} & \multirow{4}{*}{5.94145} & \multirow{4}{*}{55.9947 +/- 0.0539212} \\
-                       & 1000 & 56.1913   & 0.0789026 &                           &                                        &                          &                                        \\
-\multirow{2}{*}{Alto}  & 400  & 55.5287   & 0.311734  & \multirow{2}{*}{0.494304} & \multirow{2}{*}{55.6781+/- 0.0758027}  &                          &                                        \\
-                       & 1000 & 55.6875   & 0.0781483 &                           &                                        &                          &                                       
-\end{tabular}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        \multicolumn{2}{|c|}{}  & K &  $\lambda_{400\_1000}$ & $K_{pond_{400\_1000}}$ & $\lambda_{alto\_basso}$  & $K_{pond_{alto\_basso}}$ \\\hline
+        \multirow{2}{*}{Basso} & {\cellcolor[rgb]{0.85,0.85,0.85}}400  & {\cellcolor[rgb]{0.85,0.85,0.85}}$58.5\pm0.3$  & \multirow{2}{*}{6.9225}   & \multirow{2}{*}{$56.32\pm0.08$} & \multirow{4}{*}{5.94145} & \multirow{4}{*}{$55.99\pm0.05$} \\\cline{2-3}
+        & 1000 & $56.19\pm0.08$ &  &  &  & \\\cline{1-5}
+        \multirow{2}{*}{Alto}  & {\cellcolor[rgb]{0.85,0.85,0.85}}400  & {\cellcolor[rgb]{0.85,0.85,0.85}}$55.5\pm0.3$  & \multirow{2}{*}{0.494304} & \multirow{2}{*}{$55.68\pm0.08$} & & \\\cline{2-3}
+        & 1000 & $55.69\pm0.08$ &  &  &  &\\ \hline 
+    \end{tabular}
+\caption{Seconda acquisizione - Primo metodo}
 \end{table}
 
 
@@ -315,17 +317,16 @@ E' stata poi effettuata la media ponderata dei due coefficienti elastici in allu
 \paragraph{Secondo procedimento}
 Il secondo procedimento utilizzato per il calcolo di K tramite le misure ripetute è consistito nel calcolo del $\chi^2$ su tutte le misure ottenute a $\SI{400}{gp}$ e $\SI{1000}{gp}$ con l'accortezza di distinguere i dati presi in allungamento ed in accorciamento. Operando secondo questo schema si sono ottenute due rette di interpolazione, una per i dati delle misure "in allungamento" ed una per quelli "in accorciamento". I due coefficienti angolari rappresentano i coefficienti rispettivamente di allungamento e di accorciamento e da essi si è calcolata la compatibilità fra ${K}_{acc}$ e ${K}_{all}$ e ricavata la media ponderata, rappresentativa della costante elastica dell'estensimetro in esame. Vengono riportati i dati qui citati in Tabella \ref{tab:2ac_2met}%I PARAMETRI DEL FIT
 
-\begin{table}[]
-\caption{}
+\begin{table}[h!]
+\centering
 \label{tab:2ac_2met}
-\begin{tabular}{llll}
-      & K con chi quadro      & Compa                    & K pond                                 \\
-Basso & 55.421 +/- 0.0605338  & \multirow{2}{*}{2.8103}  & \multirow{2}{*}{55.5333 +/- 0.0454696} \\
-Alto  & 55.6787 +/- 0.0688788 &                          &                                        \\
-      & Intercetta chi quadro & Compa                    & Int pond                               \\
-Basso & 23.9738 +/- 1.34808   & \multirow{2}{*}{11.8356} & \multirow{2}{*}{13.441+/-0.0454696}    \\
-Alto  & -0.195988 +/- 1.53392 &                          &                                       
+\begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    & K_{\chi^2} & \lambda & K_{pond} & Intercetta_{\chi^2} & \lambda & Intercetta_{pond}\\ \hline
+    Basso & $55.42\pm0.06$  & \multirow{2}{*}{2.8}  & \multirow{2}{*}{$55.53\pm0.05$} & $24\pm1$   &   \multirow{2}{*}{12} & \multirow{2}{*}{$13.44\pm0.05$}   \\ \cline{1-2} \cline{5-5}
+    Alto  & $55.68\pm0.07$ & & & $-0.2\pm1.5$ & & \\ \hline
 \end{tabular}
+\caption{Seconda acquisizione - Secondo Metodo}
 \end{table}
 
 
@@ -454,7 +455,7 @@ I metodi impiegati consistono nel verificare la proporzionalità dei parametri p
     \item valutare la regolarità del rapporto $R=\frac{\langle K \rangle}{x_{0}}$, per tutti gli estensimetri con la stessa $S$, indipendentemente da $x_{0}$
     \item valutare la regolarità del prodotto $P={ \langle K \rangle} D^2 $, per tutti gli estensimetri aventi la stessa $x_{0}$, indipendentemente da $S$
 \end{enumerate}
-
+\paragraph{Primo Metodo}
 Per la verifica della legge tramite il primo metodo (Grafico \ref{fig:a_sezione_cost}) si sono scelti i 4  estensimetri aventi la medesima sezione, e dunque lo stesso diametro, pari a \SI{279}{\micro\meter}. Tramite il calcolo dei $\langle K \rangle$ dei vari estensimetri selezionati, precedentemente effettuato, ed avendo a disposizione la lunghezza a riposo di ciascun filo, è stato elaborato un grafico avente sull'asse delle ascisse la lunghezza a riposo espressa in $\si{\milli\meter}$ e sull'asse delle ordinate il valore di K in $\si{\micronnewton}$, associandone adeguatamente l'errore che era stato già calcolato nelle sezioni precedenti.
 
 \begin{figure}[h!]
@@ -480,7 +481,7 @@ Per la verifica della legge tramite il primo metodo (Grafico \ref{fig:a_sezione_
     }
 \end{figure}
 
-
+\paragraph{secondo Metodo}
 Per la verifica del secondo metodo (Grafico \ref{fig:a_lunghezza_cost}) sono stati selezionati invece gli estensimetri aventi lunghezza del filo d'acciaio pari a $\SI{950}{\milli\meter}$. E' stato realizzato un grafico avente sull'asse delle ascisse il valore di 1/S  calcolato per ogni estensimetro e sull'asse delle ordinate il valore di $\langle K \rangle$ dello stesso, associandone il relativo errore precedentemente calcolato. Si è inoltre determinata una retta interpolante i dati rappresentata nel grafico con una retta tratteggiata di colore blu chiaro.\\
 A causa dell'incongruenza tra il valore rappresentato in blu sul grafico e gli altri dati, si è deciso di eseguire una seconda analisi più accurata, questa volta eliminando il dato considerato e determinando una nuova retta interpolante, rappresentata in rosso nel grafico. L'eliminazione è stata effettuata calcolando le frequenze di ottenere un dato valore in una regione ben delineata di grafico, ovvero tra la nuova retta interpolante e una parallela, ottenuta aumentando l'intercetta dell'interpolante di un valore arbitrariamente scelto. Anche tenendo conto dell'errore del quale risulta affetto il dato eliminato, si è riscontrato che la probabilità di ottenere lo stesso dato nella regione prima determinata è molto inferiore rispetto a quella calcolata per gli altri dati.
 %bisogna specificare nella discussione tutto quello che è stato fatto, occhio alla distinzione tra analisi e discussisione 
@@ -515,7 +516,7 @@ A causa dell'incongruenza tra il valore rappresentato in blu sul grafico e gli a
 
 
 
-
+\paragraph{Terzo Metodo}
 Per quanto riguarda il calcolo del rapporto R, come per i metodi precedenti, si sono selezionati solo alcuni estensimetri,ovvero quelli aventi la stessa sezione ed è stato eseguito il calcolo per ognuno di essi del rapporto R tramite la seguente formula: $R=\frac{\langle K \rangle}{x_{0}}$. Ad esso è stato associato un errore calcolato tramite la propagazione degli errori, ovvero 
 \begin{equation*}
     \sigma_R \approx \sqrt{ \frac{\partial R }{\partial K}\Big|_{\ast}^2 \cdot  \sigma_{K}^2 +  \frac{\partial R }{\partial x_0}\Big|_{\ast}^2 \cdot \sigma_{x_0}^2 }
@@ -548,7 +549,7 @@ In seguito è stato generato un grafico contenete i valori calcolati, nello spec
     }
 \end{figure}
 
-
+\paragraph{Quarto Metodo}
 Infine per il quarto metodo, consistente nel calcolo del prodotto P, sono stati selezionati gli estensimetri aventi la stessa lunghezza a riposo ed è stato calcolato per ognuno di essi il quadrato del diametro. Conseguentemente è stato ricavato P tramite la seguente: $P= K \cdot D^2 $, e ad esso è stato attribuito l'errore ricavato dalla propagazione degli errori, ovvero 
 
 \begin{equation*}
@@ -571,7 +572,7 @@ Poiché si dubitava della veridicità del dato rappresentato in blu nel grafico,
             \begin{tabular}{|c|c|c|}
                 \hline
                 \textbf{D}^{2} & \textbf{Prodotto} &\textbf{CoeffAngo}\\
-                \si{[micron^2]} & $10^{6}\cdot$[micron^3/N] & $10_{6}$[micron^3/N]\\
+                $[\si{\micro\meter}^2]$ & $10^{6}\cdot$[micron^3/N] & $10^{6}$[micron^3/N]\\
                 \hline
                 {\cellcolor[rgb]{0.85,0.85,0.85}}$77841$&	{\cellcolor[rgb]{0.85,0.85,0.85}}$6.1\pm0.2$&\multirow{3}{*}{$3.0\pm0.2$}\\
                 $90000$&	$2.5\pm0.2$&\\
@@ -580,13 +581,6 @@ Poiché si dubitava della veridicità del dato rappresentato in blu nel grafico,
                 {\cellcolor[rgb]{0.85,0.85,0.85}}$126736$&	{\cellcolor[rgb]{0.85,0.85,0.85}}$6.3\pm0.3$&  [micron^3/N]\\  \cline{3-3}
                 $145161$&	$7.0\pm0.2$&\multirow{2}{*}{$17\pm3$}\\
                 {\cellcolor[rgb]{0.85,0.85,0.85}}$160000$&	{\cellcolor[rgb]{0.85,0.85,0.85}}$5.9\pm0.3$&\\
-                
-                
-                
-                
-                
-                
-                
                 
                 \hline
             \end{tabular}
@@ -597,31 +591,70 @@ Poiché si dubitava della veridicità del dato rappresentato in blu nel grafico,
 \subsubsection*{Stime di $E$}
 Per la stima del modulo di Young sono stati impiegati e confrontati 3 metodi differenti.
 
-\paragraph{Primo Metodo} Nel primo metodo si è calcolato E come media ponderata di $E_{all}$ e $E_{acc}$ calcolati singolarmente tramite la legge \ref{equation:legge_e}. Gli errori associati a $E_{all}$ e $E_{acc}$ sono stati ottenuti dalla seguente equazione:
+\paragraph{Primo Metodo}
+Per ciascun estensimetro si 1e calcolata la media ponderata $\langle E \rangle $ fra $E_{all}$ e $E_{acc}$, ciascuno di questi ultimi calcolato tramite la formula \ref{equation:legge_e} del paragrafo precedente. Gli errori su $\langle E \rangle$ sono stati propagati con la seguente:
 \begin{equation}
     \label{eq:propagazione_particolare}
-    \sigma_{E} \approx E\sqrt{\frac{\sigma_{x_{0}}}{x_{0}}\Big|_{\ast}^2+\frac{\sigma_{K}}{K}\Big|_{\ast}^2+4\frac{\sigma_{D}}{D}\Big|_{\ast}^2}
+    \sigma_{E_{acc, all}} \approx E\sqrt{\frac{\sigma_{x_{0}}}{x_{0}}\Big|_{\ast}^2+\frac{\sigma_{K}}{K}\Big|_{\ast}^2+4\frac{\sigma_{D}}{D}\Big|_{\ast}^2}
 \end{equation}
-L'errore associato alla E invece è stato calcolato come errore della media ponderata.
+L'errore associato alla $\langle E \rangle $ invece è stato calcolato come errore della media ponderata.
 
-\paragraph{Secondo Metodo} Inversamente a quanto fatto precedentemente, nel secondo metodo è stato calcolato K come media ponderata di $K_{all}$ e $K_{acc}$ e a partire da esso è stato ricavato E e l'errore $\sigma_{E}$ grazie rispettivamente alle relazioni \ref{equation:legge_e} e \ref{eq:propagazione_particolare}.
+\paragraph{Secondo Metodo}
+Nel secondo metodo, per ciascun estensimetro, è stato calcolato $\langle K \rangle $ come media ponderata di $K_{all}$ e $K_{acc}$ e a partire da esso è stato ricavato $E_{pes}$ e l'errore $\sigma_{E_{pes}}$.
 
-\paragraph{Terzo Metodo} Nell'ultimo metodo si è deciso di utilizzare campioni di $K_{all}$ e $K_{acc}$ ottenuti a partire da $\Delta x$  non consecutivi e statisticamente indipendenti come 
-\begin{equation*}
-    \biggl\{ K_{all} = \frac{|\Delta x_{all}|}{|\Delta F_{app}|}\biggr\}_{all}
-    \hspace{1cm} e \hspace{1cm}
-    \biggl\{ K_{acc} = \frac{|\Delta x_{acc}|}{|\Delta F_{app}|}\biggr\}_{acc}
-\end{equation*}
-Gli errori associati sono stati calcolati tramite propagazione. Per far ciò è stato necessario inoltre calcolare $\sigma F$ dalla distribuzione uniforme ponendo come più piccola tacca di misura $\approx \SI{0.1}{N}$ e coefficiente di affidabilità 1. Successivamente si sono calcolate separatamente $E_{all}$ e $E_{acc}$ con i relativi errori come fatto per il metodo 2 e facendone la media ponderata si è ottenuta la stima di E.
+\paragraph{Terzo Metodo}
+Nell'ultimo metodo si sono usate le stime di $\overline{K_{all}} \pm \sigma_{\overline{K}}$ e $\overline{K_{acc}} \pm \sigma_{\overline{K}}$ derivanti dalle medie e dalle deviazioni standard sulla media di campioni $\{ K_{all} \}_i$ e $\{ K_{acc}\}_i $ ottenuti da misure di $\Delta x$ non consecutive, così da risultare statisticamente indipendenti. Analogamente al primo metodo si sono calcolati $E_{all}$ e $E_{acc}$ dei quali si è infine ricavata la media ponderata $\overline{E}$.
 
-%Compatibilità tra le E?
+Vengono riportati i valori ottenuti nella Tabella \ref{tab:valori_e}\\
 
-\newpage
+%AGGIUNGERE GRAFICO DEGLI E DEI 3 METODI
+
+Osservando l'andamento generale dei moduli di Young per ciascuno dei 3 metodi, si è notata la presenza di una misurazione poco coerente con l'andamento atteso, come si vede nel Grafico \ref{GRAFICO ANDAMNEOT 3 E}.
+Si è eseguita un a reiezione a $3\sigma$ per eliminare il dato e con i nuovi $E$ si è calcolata la media ponderata $E^{\ast}$ per ciascun metodo, riportata in Tabella \ref{tab:valori_e}. Si sono infine calcolate le compatibilità $\lambda$ reciproche fra le varie $E^{\ast}$, riportate in Tabella \ref{tab:compatibilità_e_star}.
+
+\begin{table}[]
+\caption{}
+\label{tab:valori_e}
+\begin{tabular}{llll}
+\hline
+Estensimetro                       & Primo metodo $\langle E \rangle$            & Secondo metodo $E_{pes}$          & Terzo metodo $\overline{E}$           \\ \hline
+                          & E con err               & E con err               & E con err               \\
+1                         & $0.190234 \pm 0.0083041$ & $0.190244 \pm 0.0067420$ & $0.2020 \pm 0.019278 $ \\
+2                         & $0.191977 \pm 0.0117524$ & $0.191978 \pm 0.0089576$ & $0.2354 \pm 0.041316$\\
+3                         & $0.173286 \pm 0.0060790$ & $0.173316 \pm 0.0052465$ & $0.1901 \pm 0.025307 $ \\
+4                         & $0.184092 \pm 0.0073890$ & $0.184097 \pm 0.0061274$ & $0.2263 \pm 0.025912 $ \\
+5*                         & $0.476946 \pm 0.0464791$ & $0.477169 \pm 0.0339142$ & $0.5047 \pm 0.079067 $ \\
+6                         & $0.203608 \pm 0.0114461$ & $0.203615 \pm 0.0088366$ & $0.2322 \pm 0.058042 $ \\
+7                         & $0.198906 \pm 0.0058301$ & $0.198905 \pm 0.0053840$ & $0.1792 \pm 0.017071 $ \\
+8                         & $0.185625 \pm 0.0077376$ & $0.185621 \pm 0.0063614$ & $0.2085 \pm 0.035764 $ \\
+9                         & $0.185676 \pm 0.0080968$ & $0.185714 \pm 0.0065795$ & $0.2368 \pm 0.040300 $ \\
+10                        & $0.207321 \pm 0.0030309$ & $0.207448 \pm 0.004201 $ & $0.2085 \pm 0.0040857$ \\
+                          &                         &                         &                         \\
+$E^{\ast}$ & 0.196407+/-0.00202038  & 0.192125+/-0.00200324   & 0.207418+/-0.00374301   \\ \hline
+\end{tabular}
+\end{table}
+
+
+%GRAFICO ANDAMENTOBDIBE
+
+
+\begin{table}[]
+\caption{}
+\label{tab:compatibilità_e_star}
+\begin{tabular}{lll}
+compatibilità fra I 3 metodi (usando medie ponderate reiettate) &  & err\%      \\
+                                                                &    &     \\
+Comp 1 2                                                        & 1.50501& 1.02\\
+Comp 1 3                                                        & 2.58878 & 1.04\\
+Comp 2 3                                                        & 3.60235&1.44
+\end{tabular}
+\end{table}
+
 
 \section{Discussione dei risultati}
 \subsection{Verifica dell'elasticità meccanica e definizione del miglio protocollo di misura}\label{sec:discussione_prima_parte}
 \subsubsection*{Primo Metodo - Misure in allungamento e accorciamento}
-Sin da una prima analisi sui dati presi dagli operatori risulta che la $\sigma_{\overline{\Delta x}}$, quando le misure risultavano tra loro identiche, è pari a zero. Per prevenire questa condizione è stato eseguito un confronto per tutte le misure tra la $\sigma_{\overline{\Delta x}}$ e la $\sigma_{dist. uni.}$ al fine di non sottostimare l'errore. I parametri associati a tale errore risultano ptl di 10 micron, in quanto ogni tacca incisa rappresenta 10 micrometri, ed un coefficiente di affidabilità pari a 10. Questa scelta è motivata dal fatto che la capacità visiva dei vari operatori risultava tale da apprezzare una variazione della posizione della lancetta di un micrometro. Si è optato per la distribuzione uniforme al posto della triangolare in quanto rappresenta più difficilmente una sottostima dell'errore.\\
+Sin da una prima analisi sui dati presi dagli operatori risulta che la $\sigma_{\overline{\Delta x}}$, quando le misure risultavano tra loro identiche, è pari a zero. Per prevenire questa condizione è stato eseguito un confronto per tutte le misure tra la $\sigma_{\overline{\Delta x}}$ e la $\sigma_{Dist. uni.}$ al fine di non sottostimare l'errore. I parametri associati a tale errore risultano ptl di 10 micron, in quanto ogni tacca incisa rappresenta 10 micrometri, ed un coefficiente di affidabilità pari a 10. Questa scelta è motivata dal fatto che la capacità visiva dei vari operatori risultava tale da apprezzare una variazione della posizione della lancetta di un micrometro. Si è optato per la distribuzione uniforme al posto della triangolare in quanto rappresenta più difficilmente una sottostima dell'errore.\\
 Per l'incertezza su $\Delta F$ invece si è scelto come ptl il doppio dello spessore della tacca incisa in quanto si è assunto come errore massimo possibile dovuto ad un eventuale disallineamento tra indicatore e tacche incise nel dinamometro da parte dell'operatore.\\
 
 Come già descritto nell'analisi si è operata una differenza tra le varie misurazioni di allungamento e accorciamento con la prima di queste ultime così da ricavare l'effettivo allungamento $\Delta x=| x_{i}-x_{0}|$. A ciascuna misura $\Delta x$ è stata attribuita come incertezza la propagazione degli errori ottenuta a partire dalla formula precedente.\\
@@ -632,7 +665,7 @@ Questo controllo, pur avendo aumentato l'errore casuale sui parametri del fit, h
 
 Ipotizziamo che l'incompatibilità è relazionata ad una possibile sottostima di $\sigma_{\Delta x}$, tale da aumentare drasticamente il calcolo di $\lambda$, fenomeno che suggerisce la veridicità dell'ipotesi e il conseguente impiego di $\sigma_{post}$. In questo modo i parametri delle misure in allungamento e di quelle in accorciamento risultano pienamente compatibili.
 
-Il confronto fra i due coefficienti angolari delle rette interpolanti dei dati in allungamento e accorciamento, mette in evidenza il comportamento elastico del filo. La compatibilità ottima infatti conferma un comportamento pressoché identico nelle differenti fasi di sollecitazione dello stesso. Va però osservato che in allungamento il coefficiente elastico risulta leggermente maggiore. Si ipotizza che questa differenza sia dovuta ad un differente comportamento elastico a seconda del procedimento meccanico a cui il filo è sottoposto.\\
+Il confronto fra i due coefficienti angolari delle rette interpolanti dei dati in allungamento e accorciamento, mette in evidenza il comportamento elastico del filo. La compatibilità ottima infatti conferma un comportamento pressoché identico nelle differenti fasi di sollecitazione dello stesso. Va però osservato che in allungamento il coefficiente elastico risulta leggermente maggiore. Si ipotizza che questa differenza sia dovuta ad un differente comportamento elastico a seconda della sollecitazione che subisce il filo.\\
 
 I valori delle intercette risultano tra loro compatibili ma la loro presenza è ricondotta ad un errore di natura sconosciuta, probabilmente dovuto all'andamento generale dei dati o all'errore sistematico dei quali sono affetti i dati. Ci si aspetta infatti che l'intercetta corrisponda all'origine degli assi. Tuttavia si evidenza che la compatibilità dell'intercetta con l'origine ($0\pm \sigma_{\Delta x, pos}$) è ottima ($\approx \num{0.5}$).\\
 
@@ -691,7 +724,7 @@ Come già descritto nell'analisi si è operata una differenza tra le varie misur
 L'errore sulle singole $x_i$ invece è stato derivato dalla distribuzione uniforme utilizzando come ptl 5 $\si{\micro\meter}$ e come coefficiente di affidabilità 1. Confrontando la retta interpolante generata dal $\chi^2$ si è osservato un andamento dei dati piuttosto disperso e ciò ha suggerito di valutare l'errore $\sigma_{\Delta x, post}$. Il calcolo di quest'ultimo ha infatti fatto emergere una sottostima dell'errore dei singoli $\Delta x$, poi sostituiti con la stima a posteriori. $\sigma_{\Delta x, post}$ risultava $\approx 20$ volte superiore alla stima dell'errore precedentemente usata. (Tabella \ref{tab:confronto_sigma_posteriori})
 
 %TABELLA DA METTERE TUTTA A FIANCO
-\begin{wraptable}{l}{5cm}
+\begin{wraptable}{l}{6cm}
 \centering
 \caption{Confronto tra $\sigma_{post}$}
 \label{tab:confronto_sigma_posteriori}
@@ -720,21 +753,47 @@ Si è valutata poi la compatibilità che intercorre tra i valori delle intercett
 
 \subsection{Verifica della legge}
 I metodi definiti per dimostrare la validità della legge utilizzata nel paragrafo \S \textit{ Stima di E} ha evidenziato una concordanza tra la teoria e i dati presi, tranne in alcuni casi dove è stato necessario approfondire l'analisi dati.\\
-Per il primo metodo infatti risulta che il coefficiente angolare della retta di interpolazione dati risulta essere positivo,e ciò dimostra la diretta dipendenza dei parametri k e $x_0$ presenti nella formula riportata nell'analisi.Supponiamo però che la nostra valutazione non sia accurata, data la dimensione ridotta del campione.
-Bisogna sottolineare che il punto avente $\sigma_K$ minore rappresenta l'estensimetro di cui si è eseguita manualmente l'analisi dati, avente lunghezza a riposo di $700\si{mm}$.
+Per il primo metodo infatti risulta che il coefficiente angolare della retta di interpolazione dati risulta essere positivo, e ciò dimostra la diretta dipendenza dei parametri K e $x_0$ presenti nella formula riportata nell'analisi. Si suppone però che la valutazione non sia accurata, data la dimensione ridotta del campione.
+Bisogna sottolineare che il punto avente $\sigma_K$ minore rappresenta l'estensimetro 10, i cui dati sono stati presi manualmente come descritto nella prima parte della relazione, avente lunghezza a riposo di $700\si{mm}$.
 
 
-Per il secondo metodo, analogamente al primo, si è dimostrata la diretta proporzionalità tra i parametri valutando la positività del coefficiente angolare della seconda retta interpolante, rappresentata in tosso. Il motivo della reiezione del dato, come descritto ampiamente nell'analisi è da ricercarsi 
+Per il secondo metodo, analogamente al primo, si è dimostrata la diretta proporzionalità tra i parametri K e 1/S  valutando la positività del coefficiente angolare della seconda retta interpolante, rappresentata in rosso. Il motivo della reiezione del dato, come descritto ampiamente nell'analisi, è da ricercarsi nelle caratteristiche intrinseche del filo, siano esse i parametri che lo descrivono o la presa dati.
+Dalla tabella dei dati grezzi si identifica infatti un anomalo comportamento dell'estensimetro numero 5 le cui caratteristiche sono descritte in Tabella \ref{tab:caratteristiche_estensimetri}. Con l'aumentare della forza applicata si osserva che l'allungamento del filo risulta essere visivamente minore rispetto all'andamento delle misurazioni in estensimetri aventi $x_{0}$ e sezione simili. 
+Si ipotizza pertanto che ci sia un errore o nei parametri o nelle misure di allungamento ed accorciamento o addirittura in entrambi. L'errore nei parametri potrebbe essere riconducibile ad un errore di trascrizione nelle tabelle, mentre l'errore nelle misurazioni potrebbe essere causato da un malfunzionamento del minimetro.\\
 
 
+Il terzo metodo consiste nel verificare se il calcolo del rapporto R rimane costante per estensimetri aventi la stessa sezione, al variare della lunghezza a riposo di ciascun filo. La legge risulta essere pienamente verificata in quanto il valore del coefficiente angolare è $\approx 0$, ma anche in questo caso la dimensione del campione, ovvero di 4 dati rende impossibile poter verificare con certezza tale affermazione.\\
 
 
+Per il calcolo del prodotto P invece è stato utilizzato un campione di dati più grande e anche in questo caso si è dimostrata la validità della legge analizzando il valore del coefficiente angolare della retta interpolante i valori ottenuti(MANCA IL VALORE). Nel campione di dati però compare un dato anomalo che, in modo analogo a quanto precedentemente descritto, è stato reiettato. Il dato infatti corrisponde all'estensimetro 5, lo stesso estensimetro scartato nella verifica della diretta proporzionalità fra K e $x_{0}$.\\
 
 \subsubsection*{Stima di E}
+Le stime de modulo di Young sono state effettuate, come ampiamente descritto nell'analisi, con l'utilizzo di tre metodi differenti. Ciò permette di valutare eventuali contributi di errore derivanti dall'utilizzo di un unica metodologia per il calcolo di E ed inoltre permette di analizzare e comparare i dati ottenuti da i diversi metodi tra di loro. Il computo di E con diversi metodi ha fatto emergere una comune incongruenza di un dato, infatti come accennato nel Grafico \ref{fig:GRAFICO ANDAMNETO E STAR} si è resa necessaria una reiezione a $3\sigma$ in quanto un dato non rispettava l'andamento generale. Il dato reiettato è riferito allo stesso estensimetro eliminato dai fit nei grafici precedenti, il numero 5.\\
+La differenza sostanziale fra i due metodi viene evidenziata dall'errore del quale sono affette le misure del terzo metodo. Gli errori calcolati con quest'ultimo metodo sono molto maggiori rispetto ai primi due metodi. Ciò accade in quanto $\sigma_k$ è maggiore che negli altri metodi. Questo si verifica perché essa deriva dalla $\sigma_{\overline{K}}$ sui campioni di K non consecutivi che a loro volta sono molto dispersi perché derivanti da misure molto disperse attorno alla retta interpolante. Questa ultima affermazione è un'ulteriore prova della dispersione dei dati per i primi 9 estensimetri. Infatti il decimo estensimetro presenta errori comparabili per tutti e tre i metodi di stima di $E^{\ast}$ in quanto la dispersione dei $\Delta x$ di allungamento e accorciamento è significativamente inferiore a quella degli altri estensimetri analizzati.\\
+A seguito di questa considerazione il metodo peggiore per stimare $E^\ast$ star risulta essere il terzo in quanto più fortemente influenzato dalle misurazioni dei $\Delta x$. GLi altri due metodi infatti si avvalgono di una stima derivata dai contributi di tutte le stime, ovvero con il chi quadro. A dimostrazione di ciò si confrontino le compatibilità fra i 3 metodi. lambda 13 e lambda 2 3 che risultano pessima ed incompatibile. lamnda 1 2 invece è discreta. A parità di efficacia si sceglie il metodo che genera errore \% minore sul modulo di Young. Primo e secondo metodo hanno errori minori e tra oro differenti a meno dello 0.02\%. Pertanto si possono considerare come metodi per la stima del modulo di Young del tutto equivalenti.
+
+
+
+%CON TEST CHI QUADRO VEDERE BONTA, SU E STAR CON REIEZIONE
+%COMPATIBILITA TRA TUTTI E TRE I CAMOPIONI E VEDERE QUALè è IL MIGLIORE
+
+
+
+
+
+
+
+
 
 
 
 \section{Margini di miglioramento}
+Durante l'analisi e la discussione dell'esperienza si sono individuati alcuni margini di miglioramento al fine di ridurre gli errori nelle misurazioni e ottenere risultati più accurati e precisi.
+\paragraph{Strumentazione}
+Lo strumento del minimetro analogico potrebbe essere una causa rilevante di errore in quanto su quelle misurazioni si è basata tutta l'esperienza. L'utilizzo di uno strumento digitale, con un errore molto inferiore su ogni singola misurazione avrebbe di certo minimizzato l'errore casuale di ogni singola misurazione.
+\paragraph{Grandezza dei campioni analizzati}
+L'analisi dei dati, nella maggioro parte di casi, non ha dimostrato appieno ciò che la teoria suggeriva a causa del numero ristretto di valori analizzati. Si suppone che un campione più grande di estensimetri avrebbe determinato maggiore precisione nella stima finale del modulo di Young, e anche che campioni più grandi di dati nella seconda acquisizione avrebbe determinato una 
+
 
 \section{Conclusione}
 
@@ -794,5 +853,8 @@ E' stato utilizzato il simbolo $\approx$ in quanto si è scelto di troncare al p
 \end{equation*}\\
 
 \subsection{Codice sorgente}
+\begin{lstlisting}[language=C++, label=lst:statistica.h, caption=statistica.h]
+\end{lstlisting}
+
 
 \end{document}*
