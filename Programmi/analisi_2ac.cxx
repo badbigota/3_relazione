@@ -70,8 +70,8 @@ int main()
       }
     }
     double delta_forza = kgpeso_to_newton((d.gp - 200.0) * 4 / 1000);
-    d.media = media(d.media_2_acq);
-    d.dstd_media = dstd_media(d.media_2_acq);
+    d.media = media_ponderata(d.media_2_acq, d.dstd_2_acq);
+    d.dstd_media = errore_media_ponderata(d.dstd_2_acq);
     d.kappa = d.media / delta_forza;
     //cout << "->" << d.media << "+/-" << d.dstd_media << endl;
     //d.sigma_kappa = sqrt(pow(1 / delta_forza, 2) * (pow(d.dstd_media, 2)) + pow((d.media / pow(delta_forza, 2)), 2) * pow(sigma_delta_forza, 2));//senza opportuna propagazione
@@ -80,19 +80,23 @@ int main()
     {
       k_alto.push_back(d.kappa);
       sigma_k_alto.push_back(d.sigma_kappa);
+      cout << "Alto"
+           << "\t" << d.kappa << "\t" << d.sigma_kappa << "\t" << d.nomefile << endl;
     }
     else if (d.nomefile.find("basso") != std::string::npos)
     {
       k_basso.push_back(d.kappa);
       sigma_k_basso.push_back(d.sigma_kappa);
+      cout << "Basso"
+           << "\t" << d.kappa << "\t" << d.sigma_kappa << "\t" << d.nomefile << endl;
     }
-    cout << d.gp << "\t" << d.media << "\t" << d.dstd_media << endl;
+    //cout << d.gp << "\t" << d.nomefile << "\t" << d.kappa << "\t" << d.sigma_kappa << endl;
   }
 
   //ERRORE DE SALVATOR
   double delta_1000 = abs(campioni[3].media - campioni[2].media);
   double delta_400 = abs(campioni[0].media - campioni[1].media);
-  double delta_f = kgpeso_to_newton((1000.0 - 400.0)*4 / 1000.0);
+  double delta_f = kgpeso_to_newton((1000.0 - 400.0) * 4 / 1000.0);
   double errore_desalva = (delta_1000 - delta_400) / delta_f;
   double num = campioni[3].media - campioni[1].media + campioni[2].media - campioni[0].media;
   double sigma_errore_desalva = sqrt(pow(1 / delta_f, 2) * (pow(campioni[0].dstd_media, 2) + pow(campioni[1].dstd_media, 2) + pow(campioni[2].dstd_media, 2) + pow(campioni[3].dstd_media, 2)) + 2 * pow(num * sigma_delta_forza / pow(delta_f, 2), 2));
@@ -145,6 +149,8 @@ int main()
   k.push_back(media_ponderata_k_alto);
   double sigma_media_ponderata_k_alto = errore_media_ponderata(sigma_k_alto); //errori k
   sigma_k.push_back(sigma_media_ponderata_k_alto);
+  double compatib = abs(k_alto[0] - k_alto[1]) / sqrt(pow(sigma_k_alto[0], 2) + pow(sigma_k_alto[1], 2));
+  cout << "K_alto: " << compatib << "\t" << media_ponderata_k_alto << "\t" << sigma_media_ponderata_k_alto << endl;
   //cout << media_ponderata_k_alto << " +/-" << sigma_media_ponderata_k_alto << endl;
 
   //media ponderata valori di k basso e errore con errore media ponderata
@@ -152,6 +158,8 @@ int main()
   k.push_back(media_ponderata_k_basso);
   double sigma_media_ponderata_k_basso = errore_media_ponderata(sigma_k_basso);
   sigma_k.push_back(sigma_media_ponderata_k_basso);
+  double compatib2 = abs(k_basso[0] - k_basso[1]) / sqrt(pow(sigma_k_basso[0], 2) + pow(sigma_k_basso[1], 2));
+  cout << "K_basso: " << compatib2 << "\t" << media_ponderata_k_basso << "\t" << sigma_media_ponderata_k_basso << endl;
   //cout << media_ponderata_k_basso << " +/- " << sigma_media_ponderata_k_basso << endl;
 
   //media ponderata delle medie ponderate
@@ -162,7 +170,7 @@ int main()
   cout << "Compatibilità K all e K acc tramite i singoli K: " << comp_3(media_ponderata_k_alto, media_ponderata_k_basso, sigma_media_ponderata_k_alto, sigma_media_ponderata_k_basso) << endl;
 
   //SECONDO METODO CALCOLO DI K con 2 chi quadri fra tutti gli 8 punti
-
+  cout << "SECONDO METODO CON CHI " << endl;
   vector<double> chi_basso; //ho messo nel vettore 8 punti di 400basso
   vector<double> chi_alto;  //unifico 2 vettori per alto
   vector<double> sigma_chi_basso;
@@ -199,16 +207,25 @@ int main()
   cout << "Angolare Alto:\t" << b_angolare(delta_forza_newton, chi_alto) << " +/- " << sigma_b(delta_forza_newton, chi_alto) << endl;
   cout << "Intercetta Alto:\t" << a_intercetta(delta_forza_newton, chi_alto) << " +/- " << sigma_a(delta_forza_newton, chi_alto) << endl;
   vector<double> chi;
+  vector<double> intercetta;
   chi.push_back(b_angolare(delta_forza_newton, chi_basso));
   chi.push_back(b_angolare(delta_forza_newton, chi_alto));
+  intercetta.push_back(a_intercetta(delta_forza_newton, chi_alto));
+  intercetta.push_back(a_intercetta(delta_forza_newton, chi_basso));
 
   vector<double> sigma_chi;
+  vector<double> sigma_intercetta;
+
   sigma_chi.push_back(sigma_b(delta_forza_newton, chi_basso));
   sigma_chi.push_back(sigma_b(delta_forza_newton, chi_alto));
+  sigma_intercetta.push_back(sigma_b(delta_forza_newton, chi_alto));
+  sigma_intercetta.push_back(sigma_b(delta_forza_newton, chi_basso));
 
-  cout << "Compatibi K alto e k basso tramite chi quadro:" << comp_3(chi[0], chi[1], sigma_chi[0], sigma_chi[1]) << endl;
+  cout << "Compatibi K alto e k basso tramite chi quadro: " << comp_3(chi[0], chi[1], sigma_chi[0], sigma_chi[1]) << endl;
+  cout << "Comp intercette: " << comp_3(a_intercetta(delta_forza_newton, chi_basso), a_intercetta(delta_forza_newton, chi_alto), sigma_a(delta_forza_newton, chi_basso), sigma_a(delta_forza_newton, chi_alto)) << endl;
   //Media ponderata tra k basso e k alto
-  cout << "K con chi quadro tramite intepolazione 8 punti media pon k Lato e K basso):\t" << media_ponderata(chi, sigma_chi) << " +/- " << errore_media_ponderata(sigma_chi) << endl;
+  cout << "K con chi quadro tramite intepolazione 8 punti media pon k alto e K basso):\t" << media_ponderata(chi, sigma_chi) << " +/- " << errore_media_ponderata(sigma_chi) << endl;
+  cout << "Intercetta pond: " << media_ponderata(intercetta, sigma_intercetta) << "+/-" << errore_media_ponderata(sigma_intercetta) << endl;
 
   return 0;
 }
