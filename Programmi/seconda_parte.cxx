@@ -70,6 +70,12 @@ int main()
 	vector<double> err_young2;
 	vector<double> young3_all_acc;
 	vector<double> err_young3_all_acc;
+	vector<double> e_1_metodo;
+	vector<double> e_2_metodo;
+	vector<double> e_3_metodo;
+	vector<double> err_e_1_metodo;
+	vector<double> err_e_2_metodo;
+	vector<double> err_e_3_metodo;
 
 	ifstream fin("set_dati.txt");
 	if (!fin)
@@ -98,15 +104,15 @@ int main()
 		count++;
 	}
 
-	for (int i = 0; i < est.size(); i++) //calcolo errorevcon distribuzione uniforme solo per fare grafici, commenta questo e decommenta sotto per avere la sigma post
-	{
-		for (int j = 0; j < est[i].allungamento.size(); j++)
-		{
-			est[i].err_delta_x_all.push_back(sqrt(2) * sigma_dist_uni(5.0, 1));
-			est[i].err_delta_x_acc.push_back(sqrt(2) * sigma_dist_uni(5.0, 1));
-		}
-
-	} //FINE LETTURA
+	//for (int i = 0; i < est.size(); i++) //calcolo errorevcon distribuzione uniforme solo per fare grafici, commenta questo e decommenta sotto per avere la sigma post
+	//{
+	//	for (int j = 0; j < est[i].allungamento.size(); j++)
+	//	{
+	//		est[i].err_delta_x_all.push_back(sqrt(2) * sigma_dist_uni(5.0, 1));
+	//		est[i].err_delta_x_acc.push_back(sqrt(2) * sigma_dist_uni(5.0, 1));
+	//	}
+//
+	//} //FINE LETTURA
 
 	for (int j = 0; j < est[0].allungamento.size(); j++)
 	{
@@ -128,11 +134,11 @@ int main()
 
 		//cout<<est[i].n_est<<"\t"<<sigma_post_all<<"\t"<<sigma_post_acc<<"\t"<<sqrt(2) * sigma_dist_uni(5.0, 1)<<"\t"<<sqrt(2) * sigma_dist_uni(10.0, 1)<<endl;
 
-		//for (int j = 0; j < est[i].allungamento.size(); j++)
-		//{
-		//	est[i].err_delta_x_all.push_back(sqrt(2) * sigma_post_all); //DECOMMENTA SE VUOI AVERE SIGMA A POSTERIORI 
-		//	est[i].err_delta_x_acc.push_back(sqrt(2) * sigma_post_acc);
-		//}
+		for (int j = 0; j < est[i].allungamento.size(); j++)
+		{
+			est[i].err_delta_x_all.push_back(sqrt(2) * sigma_post_all); //DECOMMENTA SE VUOI AVERE SIGMA A POSTERIORI
+			est[i].err_delta_x_acc.push_back(sqrt(2) * sigma_post_acc);
+		}
 
 		est[i].intercetta_all = a_intercetta(delta_f, est[i].delta_x_all);				  //non metto err perchè tutti uguali
 		est[i].coeff_ango_all = b_angolare(delta_f, est[i].delta_x_all);				  //
@@ -150,6 +156,8 @@ int main()
 		est[i].compa_coeff_ango = comp_3(est[i].coeff_ango_acc, est[i].coeff_ango_all, est[i].err_coeff_ango_acc_post, est[i].err_coeff_ango_all_post); //
 		est[i].compa_intercetta = comp_3(est[i].intercetta_acc, est[i].intercetta_all, est[i].err_intercetta_acc_post, est[i].err_intercetta_all_post);
 	}
+	//cout << "POST ACC:" << sigma_y_posteriori(delta_f, est[1].delta_x_acc) << endl;
+	//cout << "POST ALL:" << sigma_y_posteriori(delta_f, est[1].delta_x_all) << endl;
 
 	for (int i = 0; i < est.size(); i++) //scorro vettore est
 	{
@@ -187,11 +195,12 @@ int main()
 		// K_acc-K_all-K_pes-Comp_K-Int_acc-Int_all-Comp_Int
 		excelout << est[i].coeff_ango_acc << " +/- " << est[i].err_coeff_ango_acc_post << "\t" << est[i].coeff_ango_all << "+/- " << est[i].err_coeff_ango_all_post << "\t" << est[i].k_medio << "+/-" << est[i].err_k_medio << "\t" << comp_3(est[i].coeff_ango_acc, est[i].coeff_ango_all, est[i].err_coeff_ango_acc_post, est[i].err_coeff_ango_all_post) << "\t" << est[i].intercetta_acc << " +/- " << est[i].err_intercetta_acc_post << "\t" << est[i].intercetta_all << " +/- " << est[i].err_intercetta_all_post << "\t" << est[i].int_medio << " +/- " << est[i].err_int_medio << "\t" << comp_3(est[i].intercetta_acc, est[i].intercetta_all, est[i].err_intercetta_acc_post, est[i].err_intercetta_all_post) << endl;
 
-		gout << "#DeltaF[Newton]\t#All[micron]\t#ErrAll[micron]\t#Acc[micron]\t#ErrAcc[micron]" << endl;
+		gout << "#DeltaF[Newton]\t#All[micron]\t#ErrAll[micron]\t#Acc[micron]\t#ErrAcc[micron]\tsigma_post_ALL\tsigma_post_ACC" << endl;
 
 		for (int k = 0; k < est[i].accorciamento.size(); k++) //per ogni valore di all e acc stampami i dati
 		{													  //usa già la sigm a posteriori
-			gout << delta_f[k] << "\t" << est[i].delta_x_all[k] << "\t" << est[i].err_delta_x_all[k] << "\t" << est[i].delta_x_acc[k] << "\t" << est[i].err_delta_x_acc[k] << endl;
+
+			gout << delta_f[k] << "\t" << est[i].delta_x_all[k] << "\t" << est[i].err_delta_x_all[k] << "\t" << est[i].delta_x_acc[k] << "\t" << est[i].err_delta_x_acc[k] << "\t" << sigma_y_posteriori(delta_f, est[i].delta_x_all) << "\t" << sigma_y_posteriori(delta_f, est[i].delta_x_acc) << endl;
 		}
 	}
 	estensimetri nos_est; //viene aggiunto il nostro estensimetro
@@ -280,6 +289,7 @@ int main()
 	//NON UNIRE I DUE CICLI PERCHÈ HANNO UN RANGE DI ESECUZIONE DIVERSO A SECONDA DEL NUMERO DI EST CHE RICADONO NELLA CASISTICA
 	//sez costante
 	cout << "A SEZ COST (lunghezza in asse x)" << endl;
+	//cout<<"ERR SEZIONE:"<<(8/(M_PI*))
 	cout << "Coeff. ango.\t" << b_angolare(lunghezza_l, k_medio_l) << " +/- " << sigma_b_y_uguali(lunghezza_l, err_k_medio_l[0]) << endl;
 	cout << "Intercetta\t" << a_intercetta(lunghezza_l, k_medio_l) << " +/- " << sigma_a_y_uguali(lunghezza_l, err_k_medio_l[0]) << endl;
 	scost << "#LunghezzaEst[mm]\t#K[micron/N]\t#Err[micron/N]" << endl;
@@ -298,7 +308,7 @@ int main()
 	pcost << "#DiametroQuadrato[micron^2]\t#Prodotto[micron^3/N]\t#Err[micron^3/N]" << endl;
 	for (int o = 0; o < reciproco_sezione.size(); o++)
 	{
-		lcost << reciproco_sezione[o] << "\t" << k_medio_s[o] << "\t" << err_k_medio_s[o] << endl;
+		lcost << reciproco_sezione[o] << "\t" << k_medio_s[o] << "\t" << err_k_medio_s[o] << "\t" << endl;
 		pcost << diametro_quadrato[o] << "\t" << prodotto[o] << "\t" << err_prodotto[o] << endl;
 	}
 	//FINE STAMPA PER VERIFICA MODUÒLO DI YOUNG
@@ -317,7 +327,7 @@ int main()
 		young_i.push_back(4 * est[i].lunghezza / (M_PI * pow(est[i].diametro, 2) * est[i].coeff_ango_acc));
 		err_young_i.push_back(young_i[0] * sqrt(pow((est[i].err_lunghezza / est[i].lunghezza), 2) + pow((est[i].err_coeff_ango_all / est[i].coeff_ango_all), 2) + 4 * pow((est[i].err_diametro / est[i].diametro), 2))); //CONTROLLARE
 		err_young_i.push_back(young_i[1] * sqrt(pow((est[i].err_lunghezza / est[i].lunghezza), 2) + pow((est[i].err_coeff_ango_acc / est[i].coeff_ango_acc), 2) + 4 * pow((est[i].err_diametro / est[i].diametro), 2)));
-		young1.push_back(media_ponderata(young_i, err_young_i)); //CAMBIARE CON MEDIA?????? È UN VECTOR DI TUTTI I MODULI DI YOUNG
+		young1.push_back(media_ponderata(young_i, err_young_i)); 
 		err_young1.push_back(errore_media_ponderata(err_young_i));
 	}
 	//Secondo Metodo (calcolo di E per ogni est partendo dalla meia dei K già fatta in Acc e All)
@@ -326,13 +336,20 @@ int main()
 		young2.push_back(4 * est[i].lunghezza / (M_PI * pow(est[i].diametro, 2) * est[i].k_medio));
 		err_young2.push_back(young2[i] * sqrt(pow((est[i].err_lunghezza / est[i].lunghezza), 2) + pow((est[i].err_k_medio / est[i].k_medio), 2) + 4 * pow((est[i].err_diametro / est[i].diametro), 2)));
 	}
-	eout1 << "#E[N/micron^2]\t#ErrE[N/micron^2]" << endl;
-	eout2 << "#E[N/micron^2]\t#ErrE[N/micron^2]" << endl;
-	eout3 << "#E[N/micron^2]\t#ErrE[N/micron^2]" << endl;
+	eout1 << "#Nest\t#E[N/micron^2]\t#ErrE[N/micron^2]" << endl;
+	eout2 << "#Nest\t#E[N/micron^2]\t#ErrE[N/micron^2]" << endl;
+	eout3 << "#Nest\t#E[N/micron^2]\t#ErrE[N/micron^2]" << endl;
 	for (int i = 0; i < est.size(); i++)
 	{
-		eout1 << young1[i] << " +/- " << err_young1[i] << endl;
-		eout2 << young2[i] << " +/- " << err_young2[i] << endl;
+		eout1 <<est[i].n_est<<"\t"<< young1[i] << "\t" << err_young1[i] << endl;
+		eout2 <<est[i].n_est<<"\t"<< young2[i] << "\t" << err_young2[i] << endl;
+		if (young1[i] < 0.3) //ATTENZIONE CASO SPECIFICO PER REIEZIONE AD OCCHIO
+		{
+			e_1_metodo.push_back(young1[i]);
+			err_e_1_metodo.push_back(err_young1[i]);
+			e_2_metodo.push_back(young2[i]);
+			err_e_2_metodo.push_back(err_young2[i]);
+		}
 	}
 	//Terzo Metodo
 	for (int i = 0; i < est.size(); i++)
@@ -376,11 +393,35 @@ int main()
 		//cout << young3_all << "\t" << sigma_young_3_all << "\t" << young3_acc << "\t" << sigma_young_3_acc << endl; //Stampa modulo young in all e acc
 		young3_all_acc.push_back(media_ponderata(young3, err_young3));
 		err_young3_all_acc.push_back(errore_media_ponderata(err_young3));
-		for (int k = 0; k < young3_all_acc.size(); k++)
+	}
+	for (int k = 0; k < young3_all_acc.size(); k++)
+	{
+		//cout << young3_all_acc[i] << "\t" << err_young3_all_acc[i] << endl;
+		eout3 <<est[k].n_est<<"\t"<< young3_all_acc[k] << "\t" << err_young3_all_acc[k] << endl;
+		if (young3_all_acc[k] < 0.3) //CASO SPECIFICO REIEZIONIE AD OCCHIO
 		{
-			//cout << young3_all_acc[i] << "\t" << err_young3_all_acc[i] << endl;
-			eout3 << young3_all_acc[k] << "\t" << err_young3_all_acc[k] << endl;
+			e_3_metodo.push_back(young3_all_acc[k]);
+			err_e_3_metodo.push_back(err_young3_all_acc[k]);
 		}
 	}
+
+	//for (int i = 0; i < est.size() - 1; i++)
+	//{
+	//	cout << est[i].n_est << "\t" << sigma_y_posteriori(delta_f, est[i].delta_x_all) << "\t" << sigma_y_posteriori(delta_f, est[i].delta_x_acc) << endl;
+	//}
+	//cout << est[9].n_est << "\t" << sigma_y_posteriori(delta_f_nos, est[9].delta_x_all) << "\t" << sigma_y_posteriori(delta_f_nos, est[9].delta_x_acc) << endl;
+	double m_1_met = media_ponderata(e_1_metodo, err_e_1_metodo);
+	double m_2_met = media_ponderata(e_2_metodo, err_e_2_metodo);
+	double m_3_met = media_ponderata(e_3_metodo, err_e_3_metodo);
+	double err_m_1_met = errore_media_ponderata(err_e_1_metodo);
+	double err_m_2_met = errore_media_ponderata(err_e_2_metodo);
+	double err_m_3_met = errore_media_ponderata(err_e_3_metodo);
+	cout << "Media pond 1 metodo reiettati: " << media_ponderata(e_1_metodo, err_e_1_metodo) << "+/-" << errore_media_ponderata(err_e_1_metodo) << endl;
+	cout << "Media pond 2 metodo reiettati: " << media_ponderata(e_2_metodo, err_e_2_metodo) << "+/-" << errore_media_ponderata(err_e_2_metodo) << endl;
+	cout << "Media pond 3 metodo reiettati: " << media_ponderata(e_3_metodo, err_e_3_metodo) << "+/-" << errore_media_ponderata(err_e_3_metodo) << endl;
+	cout << "Comp 1 2: " << comp_3(m_1_met, m_2_met, err_m_1_met, err_m_2_met)<<endl;
+	cout << "Comp 1 3: " << comp_3(m_1_met, m_3_met, err_m_1_met, err_m_3_met)<<endl;
+	cout << "Comp 2 3: " << comp_3(m_3_met, m_2_met, err_m_3_met, err_m_2_met)<<endl;
+
 	return 0;
 }
