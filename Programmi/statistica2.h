@@ -6,7 +6,6 @@
 #include <cctype>
 using namespace std;
 
-
 //media
 double media(vector<double> dati, int inizio = 0, int fine = 0)
 {
@@ -24,7 +23,7 @@ double media(vector<double> dati, int inizio = 0, int fine = 0)
     else if (fine == 0)
     {
         double media_, sum = 0;
-        for (auto& c : dati)
+        for (auto &c : dati)
         {
             sum = sum + c;
         }
@@ -40,13 +39,13 @@ double dstd(vector<double> dati, int inizio = 0, int fine = 0, string log = "")
     double somma_camp;
     int counter = 0;
     media_camp = media(dati, inizio, fine);
-        for (auto c : dati)
-        {
-            somma_camp = somma_camp + (media_camp - c) * (media_camp - c);
-        }
-        counter = dati.size();
-        dstd_camp = sqrt(somma_camp / (counter - 1));
-        
+    for (auto c : dati)
+    {
+        somma_camp = somma_camp + (media_camp - c) * (media_camp - c);
+    }
+    counter = dati.size();
+    dstd_camp = sqrt(somma_camp / (counter - 1));
+
     return dstd_camp;
 }
 
@@ -54,9 +53,9 @@ double dstd(vector<double> dati, int inizio = 0, int fine = 0, string log = "")
 double dstd_media(vector<double> dati)
 {
     double dstd_media_;
-    
-        dstd_media_ = dstd(dati) / sqrt(dati.size());
-    
+
+    dstd_media_ = dstd(dati) / sqrt(dati.size());
+
     return dstd_media_;
 }
 
@@ -75,12 +74,12 @@ double sigma_dist_uni(double ptl, double coeff_aff)
 //Delta (chi-quadro) [errori tutti uguali o del tutto assenti]
 double delta(vector<double> dati_x)
 {
-    double delta_=0;
+    double delta_ = 0;
     double size = 0;
     double sum_1 = 0, sum_2 = 0;
 
     size = dati_x.size();
-    for (auto& d : dati_x)
+    for (auto &d : dati_x)
     {
         sum_1 = sum_1 + pow(d, 2);
         sum_2 = sum_2 + d;
@@ -135,8 +134,8 @@ double media_ponderata(vector<double> valori, vector<double> errori, int inizio 
 //Coefficiente a di y=a+bx (intercetta)
 double a_intercetta(vector<double> dati_x, vector<double> dati_y)
 {
-    double coeff_a=0;
-    double delta_=0;
+    double coeff_a = 0;
+    double delta_ = 0;
     double sum_1 = 0, sum_2 = 0, sum_3 = 0, sum_4 = 0;
     if (dati_y.size() != dati_x.size())
     {
@@ -159,8 +158,8 @@ double a_intercetta(vector<double> dati_x, vector<double> dati_y)
 //Coefficiente b di y=a+bx (coeff. angolare)
 double b_angolare(vector<double> dati_x, vector<double> dati_y)
 {
-    double coeff_b=0;
-    double delta_=0;
+    double coeff_b = 0;
+    double delta_ = 0;
     int size = 0;
     double sum_1 = 0, sum_2 = 0, sum_3 = 0;
     if (dati_y.size() != dati_x.size())
@@ -185,7 +184,7 @@ double b_angolare(vector<double> dati_x, vector<double> dati_y)
 double errore_media_ponderata(vector<double> errori)
 {
     double sum = 0;
-    for (auto& d : errori)
+    for (auto &d : errori)
     {
         sum += pow((1 / d), 2);
     }
@@ -214,9 +213,23 @@ double sigma_y_posteriori(vector<double> dati_x, vector<double> dati_y)
     return sigma_y;
 }
 
-
 //Compatibilità avendo due valori medi e i sigma relativi
 double comp_3(double a, double b, double sigma_a, double sigma_b)
 {
     return abs(a - b) / sqrt(pow(sigma_a, 2) + pow(sigma_b, 2));
+}
+
+//CHI QUADRO per test
+void chi_quadro(vector<double> dati_x, vector<double> dati_y, vector<double> err_y)
+{
+    double a_ = a_intercetta(dati_x, dati_y);
+    double b_ = b_angolare(dati_x, dati_y);
+    double sum = 0;
+
+    for (int i; i < dati_x.size(); i++)
+    {
+        cout << pow((((a_intercetta(dati_x, dati_y) + b_angolare(dati_x, dati_y) * dati_x[i]) - dati_y[i])) / err_y[i], 2);
+    }
+
+    return;
 }

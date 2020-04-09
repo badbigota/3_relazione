@@ -207,7 +207,7 @@ double delta(vector<double> dati_x, vector<double> errori_y)
         sum_2 = sum_2 + (pow(dati_x[i], 2) / pow(errori_y[i], 2));
         sum_3 = sum_3 + (dati_x[i] / pow(errori_y[i], 2));
     }
-    delta_d_ = sum_1 * sum_2 - pow(sum_3,2);
+    delta_d_ = sum_1 * sum_2 - pow(sum_3, 2);
     return delta_d_;
 }
 
@@ -328,9 +328,7 @@ double sigma_b(vector<double> dati_x, vector<double> dati_y, vector<double> erro
 INIZIO CHI QUADRO CON ERRORI ERRORI ASSENTI< VIENE USATA LA SIGMA POSTERIORI
 */
 
-
-
-//Coefficiente a di y=a+bx (intercetta) 
+//Coefficiente a di y=a+bx (intercetta)
 double a_intercetta(vector<double> dati_x, vector<double> dati_y, int inizio = 0, int fine = 0, string log = "")
 {
     double coeff_a;
@@ -576,4 +574,16 @@ double sigma_dist_tri(double ptl, double coeff_aff)
 double sigma_dist_uni(double ptl, double coeff_aff)
 {
     return abs(ptl / coeff_aff) / sqrt(12); //ptl con il suo coeff aff è il doppio di err max
+}
+
+//CHI QUADRO per test
+double chi_quadro(vector<double> dati_x, vector<double> dati_y)
+{
+    double sum = 0;
+    for (int i; i < dati_x.size(); i++)
+    {
+        sum = sum + pow(((a_intercetta(dati_x, dati_y) + b_angolare(dati_x, dati_y) * dati_x[i]) - dati_y[i]),2);
+    }
+
+    return sum;
 }
